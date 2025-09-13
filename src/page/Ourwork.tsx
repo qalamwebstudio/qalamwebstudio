@@ -49,8 +49,12 @@ export const Ourwork = () => {
             </div>
             <div className="w-full h-[1px] bg-gray-400 mb-8"></div>
 
-            {/* Floating project label */}
-            <div className="project-label fixed inset-0 pointer-events-none flex items-center justify-center z-50">
+
+            {/* Floating project label - only show on desktop */}
+            <div
+                className="project-label fixed inset-0 pointer-events-none flex items-center justify-center z-50"
+                style={{ display: typeof window !== 'undefined' && window.innerWidth <= 768 ? 'none' : 'flex' }}
+            >
                 <h2 className="text-[120px] font-bold text-black/10">
                     {hoveredProject}
                 </h2>
