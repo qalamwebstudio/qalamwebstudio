@@ -1,12 +1,12 @@
 'use client'
 import {useEffect} from 'react';
 import {Navbar} from "@/components/Navbar";
-import {Hero} from "@/components/Hero";
+import {Hero} from "@/page/Hero";
 import {Marquee} from "@/components/Marquee";
-import {About} from "@/components/About";
-import {Showcase} from "@/components/Showcase";
-import {Ourwork} from "@/components/Ourwork";
-import {Clientsreviews} from "@/components/Clientsreviews";
+import {About} from "@/page/About";
+import {Showcase} from "@/page/Showcase";
+import {Ourwork} from "@/page/Ourwork";
+import {Clientsreviews} from "@/page/Clientsreviews";
 
 export default function Home() {
 

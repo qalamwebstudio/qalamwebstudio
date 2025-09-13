@@ -1,5 +1,5 @@
 import React, {useRef} from 'react';
-import EyesFollowCursor from './EyesFollowCursor';
+import EyesFollowCursor from '@/components/EyesFollowCursor';
 import {useGSAP} from '@gsap/react';
 import gsap from 'gsap';
 import SplitText from 'gsap/SplitText';
