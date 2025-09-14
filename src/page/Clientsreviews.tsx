@@ -10,7 +10,8 @@ export const Clientsreviews = () => {
                 <h1 className="text-[40px] md:text-[48px] lg:text-[52px] py-4">Clients’ reviews</h1>
             </div>
             <div className="w-full h-[1px] bg-gray-400 mb-8"></div>
-            <div className="w-full items-center  ">
+
+            <div className="w-full items-center  h-[80vh] flex flex-col md:flex-row gap-8">
                 
             </div>
 
