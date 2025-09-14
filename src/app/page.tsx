@@ -7,6 +7,7 @@ import {About} from "@/page/About";
 import {Showcase} from "@/page/Showcase";
 import {Ourwork} from "@/page/Ourwork";
 import {Clientsreviews} from "@/page/Clientsreviews";
+import {Modelprice} from "@/page/Modelprice";
 
 export default function Home() {
 
@@ -31,6 +32,7 @@ export default function Home() {
             <Showcase/>
             <Ourwork/>
             <Clientsreviews/>
+            <Modelprice/>
         </main>
     );
 }
