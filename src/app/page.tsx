@@ -24,7 +24,7 @@ export default function Home() {
     }, []);
 
     return (
-        <main className='w-full min-h-screen overflow-x-hidden overflow-y-scroll scrollbar-hide h-screen'>
+        <main className='w-full min-h-screen overflow-x-hidden overflow-y-scroll scrollbar-hide h-screen text-[#212121] '>
             <Navbar/>
             <Hero/>
             <Marquee/>
