@@ -101,26 +101,42 @@ export const Modelprice = React.memo(() => {
   const activeData = memoPricingData[activeTab];
 
   return (
-    <div className="min-h-screen font-Neue">
+    <div className="min-h-screen font-Neue px-2">
       <div className="container mx-auto px-4 py-12 md:py-20">
         <header className="text-center max-w-3xl mx-auto mb-12">
           <h1 className="text-4xl md:text-5xl mb-4 tracking-tight">eMTrix Pricing Model</h1>
           <p className="text-lg text-slate-600">Flexible solutions for every stage of your business.</p>
         </header>
 
+        {/* Tabs: dropdown on mobile, horizontal on desktop */}
         <div className="flex justify-center mb-12">
-          <div className="bg-white p-2 rounded-xl shadow-md border border-slate-200 flex space-x-2">
-            {tabs.map(tab => (
-              <button
-                key={tab.id}
-                onClick={() => setActiveTab(tab.id as typeof activeTab)}
-                className={`px-4 cursor-pointer md:px-6 py-3 text-sm md:text-base font-semibold rounded-lg transition-colors duration-300 ${
-                  activeTab === tab.id ? 'bg-[#009966] text-white shadow-sm' : 'text-slate-600 hover:bg-emerald-200'
-                }`}
+          <div className="w-full max-w-xs md:max-w-none">
+            {/* Mobile: dropdown */}
+            <div className="md:hidden">
+              <select
+                className="w-full p-3 rounded-xl border border-slate-200 shadow-md text-base font-semibold bg-white"
+                value={activeTab}
+                onChange={e => setActiveTab(e.target.value as typeof activeTab)}
               >
-                {tab.name}
-              </button>
-            ))}
+                {tabs.map(tab => (
+                  <option key={tab.id} value={tab.id}>{tab.name}</option>
+                ))}
+              </select>
+            </div>
+            {/* Desktop/tablet: horizontal tabs */}
+            <div className="hidden md:flex bg-white p-2 rounded-xl shadow-md border border-slate-200 space-x-2">
+              {tabs.map(tab => (
+                <button
+                  key={tab.id}
+                  onClick={() => setActiveTab(tab.id as typeof activeTab)}
+                  className={`px-4 cursor-pointer md:px-6 py-3 text-sm md:text-base font-semibold rounded-lg transition-colors duration-300 ${
+                    activeTab === tab.id ? 'bg-[#009966] text-white shadow-sm' : 'text-slate-600 hover:bg-emerald-200'
+                  }`}
+                >
+                  {tab.name}
+                </button>
+              ))}
+            </div>
           </div>
         </div>
 
