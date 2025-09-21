@@ -8,6 +8,8 @@ import {Showcase} from "@/page/Showcase";
 import {Ourwork} from "@/page/Ourwork";
 import {Clientsreviews} from "@/page/Clientsreviews";
 import {Modelprice} from "@/page/Modelprice";
+import { Connect } from '@/page/Connect';
+import { Footer } from '@/page/Footer';
 
 export default function Home() {
 
@@ -33,6 +35,8 @@ export default function Home() {
             <Ourwork/>
             <Clientsreviews/>
             <Modelprice/>
+            <Connect/>
+            <Footer/>
         </main>
     );
 }
