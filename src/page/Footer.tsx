@@ -1,78 +1,138 @@
-import React from 'react'
+import React, { useMemo } from 'react'
+import Link from 'next/link'
 
-export const Footer = () => {
+// Memoized social links component
+const SocialLinks = React.memo(() => {
+  const socialLinks = useMemo(() => [
+    { href: "https://instagram.com", label: "Instagram" },
+    { href: "https://behance.net", label: "Behance" },
+    { href: "https://facebook.com", label: "Facebook" },
+    { href: "https://linkedin.com", label: "LinkedIn" },
+  ], []);
+
   return (
-    <footer className="w-full h-full flex flex-col  rounded-t-2xl bg-white text-[#212121] font-Neue p-[3.8vw] relative overflow-hidden">
-    
+    <>
+      {socialLinks.map((link) => (
+        <a 
+          key={link.href}
+          href={link.href} 
+          target="_blank" 
+          rel="noopener noreferrer" 
+          className="text-gray-600 hover:text-emerald-700 underline transition-colors duration-200"
+          aria-label={`Follow us on ${link.label}`}
+        >
+          {link.label}
+        </a>
+      ))}
+    </>
+  );
+});
+SocialLinks.displayName = 'SocialLinks';
 
+// Memoized quick links component
+const QuickLinks = React.memo(() => {
+  const quickLinks = useMemo(() => [
+    { href: "/", label: "Home", isInternal: true },
+    { href: "/services", label: "Services", isInternal: true },
+    { href: "/ourwork", label: "Our work", isInternal: true },
+    { href: "/about", label: "About us", isInternal: true },
+    { href: "/blog", label: "Blog", isInternal: true },
+    { href: "/contact", label: "Contact us", isInternal: true },
+  ], []);
+
+  return (
+    <>
+      {quickLinks.map((link) => 
+        link.isInternal ? (
+          <Link 
+            key={link.href}
+            href={link.href} 
+            className="text-gray-600 hover:text-emerald-700 underline transition-colors duration-200"
+            aria-label={`Navigate to ${link.label}`}
+          >
+            {link.label}
+          </Link>
+        ) : (
+          <a 
+            key={link.href}
+            href={link.href} 
+            className="text-gray-600 hover:text-emerald-700 underline transition-colors duration-200"
+            aria-label={`Navigate to ${link.label}`}
+          >
+            {link.label}
+          </a>
+        )
+      )}
+    </>
+  );
+});
+QuickLinks.displayName = 'QuickLinks';
+
+const FooterComponent = () => {
+  const currentYear = useMemo(() => new Date().getFullYear(), []);
+
+  return (
+    <footer className="w-full h-full flex flex-col rounded-t-2xl bg-white text-[#212121] font-Neue p-[3.8vw] relative overflow-hidden">
       <div className="flex-grow pt-20 px-2">
-        <h1 className="text-3xl font-bold font-Neue"><span className="text-emerald-700 text-[8vw] lg:text-[3vw]">eMTrix-</span><br></br>Empowering Startups and Growing Businesses</h1>
+        <h1 className="text-3xl font-bold font-Neue">
+          <span className="text-emerald-700 text-[8vw] lg:text-[3vw]">eMTrix-</span>
+          <br />
+          Empowering Startups and Growing Businesses
+        </h1>
       </div>
 
       <div className="flex-grow mt-5">
         <div className="flex flex-col md:flex-row justify-between gap-8">
           <div className="flex flex-col space-y-4 px-4">
             <h2 className="text-xl font-semibold">Contact Us</h2>
-            <p className="text-gray-600">123 Startup Lane<br />siddhpur City, IN 384151</p>
-            <p className="text-gray-600">Email: emtrix2025@emtrix.com</p>
+            <address className="text-gray-600 not-italic">
+              123 Startup Lane<br />
+              siddhpur City, IN 384151
+            </address>
+            <p className="text-gray-600">
+              Email: <a href="mailto:emtrix2025@emtrix.com" className="hover:text-emerald-700 transition-colors duration-200">emtrix2025@emtrix.com</a>
+            </p>
           </div>
 
           {/* Mobile: row for Follow Us and Quick Links */}
-          <div className="flex flex-row w-full justify-between md:hidden mt-8 px-4 ">
-            <div className="flex flex-col space-y-2 items-start ">
+          <div className="flex flex-row w-full justify-between md:hidden mt-8 px-4">
+            <div className="flex flex-col space-y-2 items-start">
               <h2 className="text-xl font-semibold mb-2">Follow Us</h2>
-              <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-emerald-700 underline">Instagram</a>
-              <a href="https://behance.net" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-emerald-700 underline">Behance</a>
-              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-emerald-700 underline">Facebook</a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-emerald-700 underline">LinkedIn</a>
+              <SocialLinks />
             </div>
             <div className="flex flex-col space-y-2 items-end">
               <h2 className="text-xl font-semibold mb-2">Quick Links</h2>
-              <a href="/" className="text-gray-600 hover:text-emerald-700 underline">Home</a>
-              <a href="/services" className="text-gray-600 hover:text-emerald-700 underline">Services</a>
-              <a href="/ourwork" className="text-gray-600 hover:text-emerald-700 underline">Our work</a>
-              <a href="/about" className="text-gray-600 hover:text-emerald-700 underline">About us</a>
-              <a href="/blog" className="text-gray-600 hover:text-emerald-700 underline">Blog</a>
-              <a href="/contact" className="text-gray-600 hover:text-emerald-700 underline">Contact us</a>
+              <QuickLinks />
             </div>
           </div>
 
           {/* Desktop: columns for Follow Us and Quick Links */}
-          <div className="hidden md:flex flex-row gap-8 ">
+          <div className="hidden md:flex flex-row gap-8">
             <div className="flex flex-col space-y-4 items-end md:items-start lg:mr-36">
               <h2 className="text-xl font-semibold">Follow Us</h2>
               <div className="flex flex-col space-y-2 text-right md:text-left">
-                <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-emerald-700 underline">Instagram</a>
-                <a href="https://behance.net" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-emerald-700 underline">Behance</a>
-                <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-emerald-700 underline">Facebook</a>
-                <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="text-gray-600 hover:text-emerald-700 underline">LinkedIn</a>
+                <SocialLinks />
               </div>
             </div>
             <div className="flex flex-col space-y-4 items-end md:items-start">
               <h2 className="text-xl font-semibold">Quick Links</h2>
               <div className="flex flex-col space-y-2 text-right md:text-left">
-                <a href="/" className="text-gray-600 hover:text-emerald-700 underline">Home</a>
-                <a href="/services" className="text-gray-600 hover:text-emerald-700 underline">Services</a>
-                <a href="/ourwork" className="text-gray-600 hover:text-emerald-700 underline">Our work</a>
-                <a href="/about" className="text-gray-600 hover:text-emerald-700 underline">About us</a>
-                <a href="/blog" className="text-gray-600 hover:text-emerald-700 underline">Blog</a>
-                <a href="/contact" className="text-gray-600 hover:text-emerald-700 underline">Contact us</a>
+                <QuickLinks />
               </div>
             </div>
           </div>
         </div>
       </div>
 
-      
-       
-        
       <div className="border-t border-gray-300 pt-4">
-      </div>
-      <div className="text-center text-sm text-gray-500">
-          &copy; {new Date().getFullYear()} Emtrix. All rights reserved.
+        <div className="text-center text-sm text-gray-500">
+          &copy; {currentYear} Emtrix. All rights reserved.
         </div>
-
+      </div>
     </footer>
-  )
-}
+  );
+};
 
+FooterComponent.displayName = 'Footer';
+
+export const Footer = React.memo(FooterComponent);

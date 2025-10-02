@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback, useMemo } from "react";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
@@ -58,11 +58,13 @@ const pricingData = {
   }
 };
 
-const CheckIcon = () => (
+// Memoized CheckIcon to prevent unnecessary re-renders
+const CheckIcon = React.memo(() => (
   <svg className="w-6 h-6 text-emerald-500 mr-3 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
   </svg>
-);
+));
+CheckIcon.displayName = 'CheckIcon';
 
 type PricingPlan = {
   name: string;
@@ -71,34 +73,68 @@ type PricingPlan = {
   popular?: boolean;
 };
 
-const PricingCard = React.memo(({ plan }: { plan: PricingPlan }) => (
-  <div className="relative  bg-white rounded-xl shadow p-6 flex flex-col min-h-[220px] mx-auto hover:shadow-lg transition-shadow duration-300">
-    {plan.popular && (
-      <div className="absolute top-4 right-4 bg-emerald-500 text-white text-xs font-semibold px-3 py-1 rounded-full shadow">
-        BEST VALUE
-      </div>
-    )}
-    <h3 className="text-base font-semibold text-gray-700 mb-2 tracking-tight">{plan.name}</h3>
-    <div className="mb-2">
-      <span className="text-3xl font-extrabold">{plan.price}</span>
-    </div>
-    <button className="w-full cursor-pointer bg-[#212121] hover:bg-emerald-600 text-white py-2 rounded font-semibold text-sm transition-colors duration-300">
-      Select
-    </button>
-    <p className="text-sm text-gray-700 mt-3 flex-1">{plan.details}</p>
-  </div>
-));
+const PricingCardComponent = ({ plan }: { plan: PricingPlan }) => {
+  const handleSelect = useCallback(() => {
+    // Add selection logic here
+    console.log('Selected plan:', plan.name);
+  }, [plan.name]);
 
-export const Modelprice = React.memo(() => {
+  return (
+    <div className="relative bg-white rounded-xl shadow p-6 flex flex-col min-h-[220px] mx-auto hover:shadow-lg transition-shadow duration-300">
+      {plan.popular && (
+        <div className="absolute top-4 right-4 bg-emerald-500 text-white text-xs font-semibold px-3 py-1 rounded-full shadow">
+          BEST VALUE
+        </div>
+      )}
+      <h3 className="text-base font-semibold text-gray-700 mb-2 tracking-tight">{plan.name}</h3>
+      <div className="mb-2">
+        <span className="text-3xl font-extrabold">{plan.price}</span>
+      </div>
+      <button 
+        onClick={handleSelect}
+        className="w-full cursor-pointer bg-[#212121] hover:bg-emerald-600 text-white py-2 rounded font-semibold text-sm transition-colors duration-300 focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-opacity-50"
+        aria-label={`Select ${plan.name} plan`}
+      >
+        Select
+      </button>
+      <p className="text-sm text-gray-700 mt-3 flex-1">{plan.details}</p>
+    </div>
+  );
+};
+
+PricingCardComponent.displayName = 'PricingCard';
+
+const PricingCard = React.memo(PricingCardComponent);
+
+const ModelpriceComponent = () => {
   const [activeTab, setActiveTab] = useState<'consulting' | 'ecommerce' | 'saas' | 'whiteLabel'>('ecommerce');
-  const tabs = React.useMemo(() => [
+  
+  // Memoized tabs configuration
+  const tabs = useMemo(() => [
     { id: 'consulting', name: 'Consulting' },
     { id: 'ecommerce', name: 'E-commerce' },
     { id: 'saas', name: 'SaaS Add-Ons' },
     { id: 'whiteLabel', name: 'White-Label' },
   ], []);
-  const memoPricingData = React.useMemo(() => pricingData, []);
+  
+  // Memoized pricing data
+  const memoPricingData = useMemo(() => pricingData, []);
   const activeData = memoPricingData[activeTab];
+
+  // Memoized event handlers
+  const handleTabChange = useCallback((tabId: string) => {
+    setActiveTab(tabId as typeof activeTab);
+  }, []);
+
+  const handleQuoteRequest = useCallback(() => {
+    // Add quote request logic here
+    console.log('Quote requested for:', activeData.title);
+  }, [activeData.title]);
+
+  const handleViewWork = useCallback(() => {
+    // Add view work logic here
+    console.log('View all work clicked');
+  }, []);
 
   return (
     <div className="min-h-screen font-Neue px-2">
@@ -108,30 +144,34 @@ export const Modelprice = React.memo(() => {
           <p className="text-lg text-slate-600">Flexible solutions for every stage of your business.</p>
         </header>
 
-        {/* Tabs: dropdown on mobile, horizontal on desktop */}
-        <div className="flex justify-center mb-12">
-          <div className="w-full max-w-xs md:max-w-none">
+        {/* Tabs: dropdown on mobile, horizontal on desktop, styled as in reference */}
+        <div className="flex justify-center mb-16">
+          <div className="w-full max-w-5xl justify-center flex">
             {/* Mobile: dropdown */}
             <div className="md:hidden">
               <select
-                className="w-full p-3 rounded-xl border border-slate-200 shadow-md text-base font-semibold bg-white"
+                className="w-full p-3 rounded-xl border border-slate-200 shadow text-base font-semibold bg-white"
                 value={activeTab}
-                onChange={e => setActiveTab(e.target.value as typeof activeTab)}
+                onChange={e => handleTabChange(e.target.value)}
               >
                 {tabs.map(tab => (
                   <option key={tab.id} value={tab.id}>{tab.name}</option>
                 ))}
               </select>
             </div>
-            {/* Desktop/tablet: horizontal tabs */}
-            <div className="hidden md:flex bg-white p-2 rounded-xl shadow-md border border-slate-200 space-x-2">
+            {/* Desktop/tablet: horizontal tabs with bar */}
+            <div className="hidden md:flex md:w-[70%]  bg-white rounded-2xl justify-between shadow-lg border border-slate-200 px-4 py-3 space-x-4 items-center">
               {tabs.map(tab => (
                 <button
                   key={tab.id}
-                  onClick={() => setActiveTab(tab.id as typeof activeTab)}
-                  className={`px-4 cursor-pointer md:px-6 py-3 text-sm md:text-base font-semibold rounded-lg transition-colors duration-300 ${
-                    activeTab === tab.id ? 'bg-[#009966] text-white shadow-sm' : 'text-slate-600 hover:bg-emerald-200'
+                  onClick={() => handleTabChange(tab.id)}
+                  className={`px-7 py-2 text-base font-semibold rounded-lg transition-colors duration-300 focus:outline-none ${
+                    activeTab === tab.id
+                      ? 'bg-emerald-600 text-white shadow'
+                      : 'text-[#212121] hover:bg-emerald-50'
                   }`}
+                  style={{ minWidth: 120 }}
+                  aria-label={`Switch to ${tab.name} tab`}
                 >
                   {tab.name}
                 </button>
@@ -157,7 +197,7 @@ export const Modelprice = React.memo(() => {
                   <div className="text-3xl md:text-4xl font-extrabold text-slate-900 mt-4 md:mt-0">{(activeData as typeof pricingData.ecommerce).estimatedPrice}</div>
                 </div>
                 <div className="border-t border-slate-200 pt-6">
-                  <p className="font-semibold text-slate-700 mb-4">What's included:</p>
+                  <p className="font-semibold text-slate-700 mb-4">What&apos;s included:</p>
                   <ul className="grid md:grid-cols-2 gap-x-8 gap-y-4">
                     {(activeData as typeof pricingData.ecommerce).features.map((feature: string, index: number) => (
                       <li key={index} className="flex items-center">
@@ -168,7 +208,11 @@ export const Modelprice = React.memo(() => {
                   </ul>
                 </div>
                 <div className="mt-8">
-                  <button className="w-full bg-slate-900 hover:bg-emerald-600 text-white font-semibold py-4 px-6 rounded-lg transition-colors duration-300 text-lg">
+                  <button 
+                    onClick={handleQuoteRequest}
+                    className="w-full bg-slate-900 hover:bg-emerald-600 text-white font-semibold py-4 px-6 rounded-lg transition-colors duration-300 text-lg focus:outline-none focus:ring-2 focus:ring-emerald-500 focus:ring-opacity-50"
+                    aria-label="Request a custom quote for e-commerce solution"
+                  >
                     Request a Custom Quote
                   </button>
                 </div>
@@ -186,7 +230,7 @@ export const Modelprice = React.memo(() => {
                   1024: { slidesPerView: 3 },
                 }}
               >
-                {(activeData as { plans: PricingPlan[] }).plans.map((plan: PricingPlan, idx: number) => (
+                {(activeData as { plans: PricingPlan[] }).plans.map((plan: PricingPlan) => (
                   <SwiperSlide key={plan.name}><PricingCard plan={plan} /></SwiperSlide>
                 ))}
               </Swiper>
@@ -195,19 +239,24 @@ export const Modelprice = React.memo(() => {
 
             <div className='relative w-full items-center justify-center my-10 mt-24 '>
                 <div className="flex flex-col items-center justify-center space-y-4">
-                    <a className="group flex items-center justify-center pl-8 pr-6 py-4 border bg-[#212121] hover:bg-black text-white rounded-full transition-colors  duration-200 cursor-auto">
+                    <button 
+                      onClick={handleViewWork}
+                      className="group flex items-center justify-center pl-8 pr-6 py-4 border bg-[#212121] hover:bg-black text-white rounded-full transition-colors duration-200 cursor-pointer focus:outline-none focus:ring-2 focus:ring-white focus:ring-opacity-50"
+                      aria-label="View all our work"
+                    >
                         View all our work
-                        <div
-                            className='relative ml-8 w-2 h-2 group-hover:scale-500 bg-white duration-200 rounded-full'>
-                            <ArrowUpRight
-                                className="absolute w-2 h-2 text-black opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                            />
+                        <div className='relative ml-8 w-2 h-2 group-hover:scale-500 bg-white duration-200 rounded-full'>
+                            <ArrowUpRight className="absolute w-2 h-2 text-black opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                         </div>
-                    </a>
+                    </button>
                 </div>
             </div>
         </main>
       </div>
     </div>
   );
-});
+};
+
+ModelpriceComponent.displayName = 'Modelprice';
+
+export const Modelprice = React.memo(ModelpriceComponent);
