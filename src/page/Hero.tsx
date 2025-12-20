@@ -1,4 +1,4 @@
-import Image from "next/image";
+
 import {FaGithub, FaInstagram, FaLinkedinIn, FaTwitter,} from "react-icons/fa";
 
 type HeadingLine = {
