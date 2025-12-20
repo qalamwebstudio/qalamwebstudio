@@ -23,7 +23,7 @@ export const Showcase: React.FC = () => {
             char.style.display = 'inline-block'; // Required for scaling
             const onEnter = () => {
                 gsap.to(char, {
-                    color: '#009966',
+                    color: '#00674F',
                     scale: 1.15,
                     duration: 0.3,
                     ease: 'power2.out',
@@ -64,9 +64,9 @@ export const Showcase: React.FC = () => {
             <div className="absolute inset-0 flex justify-center items-center">
                 <h1
                     ref={titleRef}
-                    className="title text-[30vw] mb-28 md:mb-0 space-x-4 text-[#212121] font-FoundersGrotesk"
+                    className="title text-[20vw] md:mb-0 space-x-1 text-[#212121] font-FoundersGrotesk leading-22 md:leading-58 lg:leading-64 "
                 >
-                    eMTrix
+                    Qalam<br/>WebStudio
                 </h1>
             </div>
 

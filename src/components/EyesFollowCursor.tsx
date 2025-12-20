@@ -55,7 +55,7 @@ const EyesFollowCursor: React.FC = () => {
                     ref={(el) => {
                         if (el) eyeRefs.current[i] = el;
                     }}
-                    className="relative w-36 md:w-44 aspect-square rounded-full bg-white border-4 border-black shadow-xl flex items-center justify-center"
+                    className="relative w-36 md:w-44 aspect-square rounded-full bg-white/60 border-4 border-black shadow-xl flex items-center justify-center"
                 >
                     <div
                         ref={(el) => {

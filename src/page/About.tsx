@@ -9,12 +9,12 @@ export const About = () => {
             <div className="py-16 px-6 md:px-12 lg:px-18">
                 <div className="max-w-5xl ">
                     <h2 className="text-4xl md:text-4xl lg:text-5xl font-bold leading-tight mb-6">
-                        eMTrix&#39;s Vision Redefines Digital Possibilities
+                        QalamWebStudio&#39;s Vision Redefines Digital Possibilities
                     </h2>
                     <p className="text-xl text-[#212121] leading-relaxed">
                         We are not just building solutions—we’re crafting meaningful digital transformations.
-                        As passionate MCA students with a shared commitment to innovation, we founded <span
-                        className="font-semibold">eMTrix</span>
+                        As a passionate team with a shared commitment to innovation, we founded <span
+                        className="font-semibold">QalamWebStudio </span>
                         to deliver cutting-edge IT services that blend creativity with modern technology.
                     </p>
                     <button
@@ -54,19 +54,19 @@ export const About = () => {
                     <div>
                         <h3 className="text-3xl md:text-4xl  mb-4">Passion-Driven Team</h3>
                         <p className=" text-base leading-relaxed">
-                            We are a duo of MCA graduates who believe in building high-quality digital products that are
-                            user-first, scalable, and visually impressive.
-                            Our dedication to code, design, and strategy drives everything we do at eMTrix.
+                            We are a team of passionate individuals who believe in building high-quality digital
+                            products that are user-first, scalable, and visually impressive.
+                            Our dedication to code, design, and strategy drives everything we do at QalamWebStudio.
                         </p>
                     </div>
                     <div>
                         <h3 className="text-3xl md:text-4xl  mb-4">What We Deliver</h3>
                         <ul className="list-disc pl-5  text-base leading-loose">
-                            <li>Custom Web & Mobile Applications</li>
+                            <li>Custom Web, Mobile, and Desktop Applications</li>
                             <li>AI-Powered Intelligent Solutions</li>
-                            <li>Cloud Services & Scalable Infrastructure</li>
+                            <li>Cloud Services and Scalable Infrastructure</li>
                             <li>UI/UX with Function-Oriented Design</li>
-                            <li>Secure, Timely, and Robust Development</li>
+                            <li>Secure, Timely, and Robust Development for Model Price</li>
                         </ul>
                     </div>
                 </div>
@@ -75,7 +75,7 @@ export const About = () => {
             {/* Why Choose eMTrix Section */}
             <div className="py-20 px-6 md:px-12 lg:px-18">
                 <div className="max-w-6xl mx-auto text-center">
-                    <h3 className="text-4xl md:text-5xl font-bold mb-6">Why Choose eMTrix</h3>
+                    <h3 className="text-4xl md:text-5xl font-bold mb-6">Why Choose QalamWebStudio</h3>
                     <p className=" text-xl max-w-3xl mx-auto mb-12">
                         We&#39;re not just another IT service provider. We&#39;re your technology partners committed to
                         delivering exceptional results that drive your business forward.

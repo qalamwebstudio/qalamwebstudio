@@ -1,12 +1,15 @@
 import Image from "next/image";
 import {FaGithub, FaInstagram, FaLinkedinIn, FaTwitter,} from "react-icons/fa";
 
-const headingLines = [
+type HeadingLine = {
+    text: string;
+    hasImage: boolean;
+};
+const headingLines: HeadingLine[] = [
     {text: "Engineering Your", hasImage: false},
     {text: "Vision into", hasImage: true},
-    {text: "Reality – Emtrix", hasImage: false},
+    {text: "Reality",hasImage: false},
 ];
-
 const socialLinks = [
     {icon: FaInstagram, url: "https://www.instagram.com/yourprofile", color: "text-pink-600"},
     {icon: FaLinkedinIn, url: "https://www.linkedin.com/in/yourprofile", color: "text-blue-700"},
@@ -28,34 +31,13 @@ export const Hero = () => {
                                 ? 'flex leading-[50px] md:leading-[70px] lg:leading-[70px]'
                                 : 'leading-none whitespace-nowrap'}`}
                         >
-                            {line.hasImage && (
-                                <div
-                                    className="rounded-lg relative overflow-hidden mt-[13px] md:mt-[10px] hidden md:block md:w-[130px] md:h-[60px] lg:mt-[15px] mr-4 lg:w-[180px] lg:h-[89px]">
-                                    <Image
-                                        src="/code.svg"
-                                        alt="Code Logo"
-                                        fill
-                                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                                        className="object-cover"
-                                        loading="lazy"
-                                    />
-                                </div>
-                            )}
-                            {line.text}
+                                <span>{line.text}</span>
                         </h1>
                     ))}
                 </div>
-
                 {/* Mobile Image */}
-                <div className="mt-[30px] relative block md:hidden w-[240px] h-[140px] overflow-hidden rounded-lg">
-                    <Image
-                        src="/code.svg"
-                        alt="Code Logo"
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                        className="object-cover"
-                        loading="lazy"
-                    />
+                <div className="mt-[40px] relative block md:hidden w-[240px] h-[140px] overflow-hidden rounded-lg">
+                   
                 </div>
             </div>
 
@@ -75,13 +57,12 @@ export const Hero = () => {
                     ))}
                 </div>
             </div>
-
             {/* Footer CTA and Tagline */}
             <div
                 className="w-full mt-[10vh] md:mt-[10vh] border-t border-gray-300 py-2 px-6 md:px-12 lg:px-14 flex flex-col sm:flex-row items-center justify-between text-sm md:text-base text-center sm:text-left">
                 <div className="flex flex-col sm:flex-row sm:space-x-8 mb-4 sm:mb-0">
                     <p className="mb-2 sm:mb-0">Empowering Startups and Growing Businesses</p>
-                    <p>Vision. Engineered. Emtrix.</p>
+                    <p>Vision. Engineered. QalamWebStudio.</p>
                 </div>
                 <button
                     className="group relative overflow-hidden px-6 py-3 border border-gray-600 rounded-full transition-colors duration-200">

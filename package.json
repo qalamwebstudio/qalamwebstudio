@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test": "npx @testsprite/testsprite-mcp generateCodeAndExecute",
+    "test:testsprite": "npx @testsprite/testsprite-mcp generateCodeAndExecute"
   },
   "dependencies": {
     "@gsap/react": "^2.1.2",
@@ -28,6 +30,7 @@
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@tailwindcss/postcss": "^4.1.11",
+    "@testsprite/testsprite-mcp": "^0.0.14",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",

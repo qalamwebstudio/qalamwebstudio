@@ -28,13 +28,13 @@ export const Marquee = () => {
         Empowering Startups with Next-Gen Technology • 
         Turning Ideas into Scalable Digital Products • 
         Design. Develop. Deliver. • 
-        Your Vision, Engineered by Emtrix • 
+        Your Vision, Engineered by QalamWebStudio • 
     `;
 
     return (
         <div
             ref={containerRef}
-            className="w-full py-14 md:py-20 bg-emerald-600 rounded-t-2xl overflow-hidden"
+            className="w-full py-14 md:py-20 bg-emerald-700 rounded-t-2xl overflow-hidden"
         >
             <div
                 ref={contentRef}

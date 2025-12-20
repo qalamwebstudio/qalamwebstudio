@@ -47,7 +47,7 @@ const QuickLinks = React.memo(() => {
           <Link 
             key={link.href}
             href={link.href} 
-            className="text-gray-600 hover:text-emerald-700 underline transition-colors duration-200"
+            className="text-gray-600 hover:text-emerald-800 underline transition-colors duration-200"
             aria-label={`Navigate to ${link.label}`}
           >
             {link.label}
@@ -75,7 +75,7 @@ const FooterComponent = () => {
     <footer className="w-full h-full flex flex-col rounded-t-2xl bg-white text-[#212121] font-Neue p-[3.8vw] relative overflow-hidden">
       <div className="flex-grow pt-20 px-2">
         <h1 className="text-3xl font-bold font-Neue">
-          <span className="text-emerald-700 text-[8vw] lg:text-[3vw]">eMTrix-</span>
+          <span className="text-emerald-700 text-[8vw] lg:text-[3vw]">QalamWebStudio</span>
           <br />
           Empowering Startups and Growing Businesses
         </h1>
@@ -90,7 +90,7 @@ const FooterComponent = () => {
               siddhpur City, IN 384151
             </address>
             <p className="text-gray-600">
-              Email: <a href="mailto:emtrix2025@emtrix.com" className="hover:text-emerald-700 transition-colors duration-200">emtrix2025@emtrix.com</a>
+              Email: <a href=" QalamWebStudio@gmail.com" className="hover:text-emerald-700 transition-colors duration-200">QalamWebStudio@gmail.com</a>
             </p>
           </div>
 
@@ -126,7 +126,7 @@ const FooterComponent = () => {
 
       <div className="border-t border-gray-300 pt-4">
         <div className="text-center text-sm text-gray-500">
-          &copy; {currentYear} Emtrix. All rights reserved.
+          &copy; {currentYear}  QalamWebStudio. All rights reserved.
         </div>
       </div>
     </footer>
