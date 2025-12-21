@@ -1,7 +1,6 @@
 import React, { useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
-import LocomotiveScroll from 'locomotive-scroll';
 
 export const Marquee = () => {
     const containerRef = useRef(null);
