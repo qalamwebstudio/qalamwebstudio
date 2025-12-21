@@ -1,6 +1,7 @@
 import React, { useRef } from 'react';
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
+import LocomotiveScroll from 'locomotive-scroll';
 
 export const Marquee = () => {
     const containerRef = useRef(null);
@@ -33,7 +34,7 @@ export const Marquee = () => {
 
     return (
         <div
-            ref={containerRef}
+            ref={containerRef} data-scroll data-scroll-speed=".1"
             className="w-full py-14 md:py-20 bg-emerald-700 rounded-t-2xl overflow-hidden"
         >
             <div

@@ -1,6 +1,8 @@
 
 'use client';
 
+import { useEffect, useRef } from "react";
+import LocomotiveScroll from "locomotive-scroll";
 import { Navbar } from "@/components/Navbar";
 import { Showcase } from "@/page/Showcase";
 import { Ourwork } from "@/page/Ourwork";
@@ -8,8 +10,26 @@ import { Connect } from "@/page/Connect";
 import { Footer } from "@/page/Footer";
 
 export default function WorkPage() {
+  const scrollContainerRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    if (!scrollContainerRef.current) return;
+
+    const locomotiveScroll = new LocomotiveScroll({
+      el: scrollContainerRef.current,
+      smooth: true,
+    });
+
+    return () => {
+      locomotiveScroll.destroy();
+    };
+  }, []);
+
   return (
-    <main className="min-h-screen w-full overflow-x-hidden text-[#212121]">
+    <main
+      ref={scrollContainerRef}
+      className="min-h-screen w-full overflow-x-hidden text-[#212121]"
+    >
       <Navbar />
 
       <section className="pt-32 pb-12 px-6 md:px-16 lg:px-24 font-Neue ">

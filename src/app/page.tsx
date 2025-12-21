@@ -1,5 +1,5 @@
 'use client'
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, useRef } from 'react';
 import { Navbar } from "@/components/Navbar";
 import { Hero } from "@/page/Hero";
 import { Marquee } from "@/components/Marquee";
@@ -10,12 +10,15 @@ import { Clientsreviews } from "@/page/Clientsreviews";
 import { Modelprice } from "@/page/Modelprice";
 import { Connect } from '@/page/Connect';
 import { Footer } from '@/page/Footer';
+import LocomotiveScroll from 'locomotive-scroll';
 
 export default function Home() {
     // Memoized event handler to prevent unnecessary re-renders
     const handleRightClick = useCallback((e: MouseEvent) => {
         e.preventDefault();
     }, []);
+
+    const scrollContainerRef = useRef<HTMLElement | null>(null);
 
     useEffect(() => {
         document.addEventListener('contextmenu', handleRightClick);
@@ -25,13 +28,34 @@ export default function Home() {
         };
     }, [handleRightClick]);
 
+    
+
+      useEffect(() => {
+        if (!scrollContainerRef.current) return;
+
+        const locomotiveScroll = new LocomotiveScroll({
+            el: scrollContainerRef.current,
+            smooth: true,
+        });
+
+        return () => {
+            locomotiveScroll.destroy();
+        };
+    }, []);
+
+
     return (
-        <main className='w-full min-h-screen overflow-x-hidden overflow-y-scroll scrollbar-hide h-screen text-[#212121]'>
+        <main
+            ref={scrollContainerRef}
+            className='w-full min-h-screen overflow-x-hidden overflow-y-auto scrollbar-hide text-[#212121]'
+        >
             <Navbar />
             <Hero />
-            <Marquee />
+            <Marquee  />
             <About />
-            <Showcase />
+            <div className='hidden md:block'>
+               <Showcase />
+            </div>
             <Ourwork />
             <Clientsreviews />
             <Modelprice />

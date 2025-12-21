@@ -1,5 +1,6 @@
 'use client';
-
+import { useEffect, useRef } from "react";
+import LocomotiveScroll from "locomotive-scroll";
 import { Navbar } from "@/components/Navbar";
 import { About } from "@/page/About";
 import { Connect } from "@/page/Connect";
@@ -13,16 +14,34 @@ const coreTeam = [
 ];
 
 export default function AboutPage() {
+  const scrollContainerRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    if (!scrollContainerRef.current) return;
+
+    const locomotiveScroll = new LocomotiveScroll({
+      el: scrollContainerRef.current,
+      smooth: true,
+    });
+
+    return () => {
+      locomotiveScroll.destroy();
+    };
+  }, []);
+
   return (
-    <main className="min-h-screen w-full overflow-x-hidden  text-[#212121]">
+    <main
+      ref={scrollContainerRef}
+      className="min-h-screen w-full overflow-x-hidden  text-[#212121]"
+    >
       <Navbar />
 
-      <section className="pt-32 pb-16 px-6 md:px-16 lg:px-24 font-Neue">
+      <section className="pt-32 pb-44 px-6 md:px-16 lg:px-24 font-Neue">
         <p className="uppercase text-lg tracking-[0.4em] text-emerald-600 mb-6">
           About QalamWebStudio
         </p>
         <h1 className="text-4xl md:text-8xl font-bold leading-tight max-w-7xl">
-          We are MCA grads building bold digital products for ambitious teams.
+          We design and build bold digital products for ambitious teams.
         </h1>
         <p className="mt-6 max-w-2xl text-lg text-slate-600">
           From strategy to shipped experiences, we align engineering, design,
@@ -32,7 +51,7 @@ export default function AboutPage() {
 
       <About />
 
-      <section className="py-20 px-6 md:px-16 lg:px-24 font-Neue">
+      <section className="py-44 px-6 md:px-16 lg:px-24 font-Neue">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-10 mb-12">
           <div>
             <p className="uppercase text-sm tracking-[0.4em] text-emerald-600 mb-4">

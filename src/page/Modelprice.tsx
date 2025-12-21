@@ -267,7 +267,7 @@ const PricingCardComponent = ({ plan }: { plan: PricingPlan }) => {
         <p className="text-sm uppercase tracking-[0.2em] text-slate-500">
           {plan.name}
         </p>
-        <p className="text-4xl md:text-5xl font-bold mt-3 text-slate-900">
+        <p className="text-4xl md:text-5xl font-bold mt-3 text-[#212121]">
           {plan.price}
         </p>
       </div>
@@ -276,7 +276,7 @@ const PricingCardComponent = ({ plan }: { plan: PricingPlan }) => {
 
       <button
         onClick={handleSelect}
-        className="mt-2 inline-flex items-center justify-center rounded-2xl border border-slate-300 bg-white px-5 py-3 text-sm font-semibold text-slate-900 transition-colors duration-300 hover:bg-slate-900 hover:text-white"
+        className="mt-2 w-full inline-flex items-center justify-center rounded-2xl border border-slate-300 bg-slate-50 px-5 py-3 text-sm font-semibold text-slate-900 transition-colors duration-300 hover:bg-[#212121f2] hover:text-white"
         aria-label={`Select ${plan.name} plan`}
       >
         Choose plan
@@ -328,7 +328,7 @@ const ModelpriceComponent = () => {
   }, []);
 
   return (
-    <section className="relative isolate overflow-hidden  py-16 md:py-24">
+    <section  className="relative isolate overflow-hidden  py-16 md:py-24">
       <div className="pointer-events-none absolute inset-0 "></div>
       <div className="pointer-events-none absolute inset-0 opacity-70 [background-image:url('https://www.toptal.com/designers/subtlepatterns/uploads/dots.png')] mix-blend-multiply"></div>
       <div className="relative mx-auto max-w-6xl px-4">
@@ -381,20 +381,24 @@ const ModelpriceComponent = () => {
               )}
             </div>
             <div className="flex flex-wrap gap-3">
-              <button
+              <a
                 onClick={handleQuoteRequest}
-                className="inline-flex items-center justify-center rounded-2xl border border-slate-900 bg-slate-900 px-6 py-3 text-sm font-semibold text-white shadow-lg shadow-slate-400/40 transition-colors hover:bg-black"
+                className="group flex items-center justify-center pl-6 pr-6 py-3 border border-black bg-black hover:bg-transparent  text-white hover:text-black rounded-full transition-colors  duration-200 cursor-pointer"
               >
-                Request quote
-                <ArrowRight className="ml-2 h-4 w-4" />
-              </button>
-              <button
+               Request quote
+                 <div className="relative ml-8 w-2 h-2 group-hover:scale-500 bg-[#f1f1f1] duration-200 rounded-full">
+                   <ArrowUpRight className="absolute w-2 h-2 text-black opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                 </div>
+              </a>
+              <a
                 onClick={handleViewWork}
-                className="inline-flex items-center justify-center rounded-2xl border border-slate-200 bg-white px-6 py-3 text-sm font-semibold text-slate-900 transition-colors hover:border-slate-900"
+                className="group flex items-center justify-center pl-6 pr-6 py-3 border border-black bg-transparent hover:bg-black  text-black hover:text-white rounded-full transition-colors  duration-200 cursor-pointer"
               >
                 View recent work
-                <ArrowUpRight className="ml-2 h-4 w-4" />
-              </button>
+                 <div className="relative ml-4 w-2 h-2 group-hover:scale-500 bg-black  duration-200 rounded-full">
+                   <ArrowUpRight className="absolute w-2 h-2 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                 </div>
+              </a>
             </div>
           </div>
 

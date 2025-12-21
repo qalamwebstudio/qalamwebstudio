@@ -63,7 +63,7 @@ export const Ourwork = () => {
           textAlign: "center",
         }}
       >
-        <h2 className="text-[120px] font-bold text-black/10 m-auto">
+        <h2 className="text-[120px] font-bold text-black/10 m-auto hidden md:block">
           {hoveredProject}
         </h2>
       </div>

@@ -72,7 +72,7 @@ const FooterComponent = () => {
   const currentYear = useMemo(() => new Date().getFullYear(), []);
 
   return (
-    <footer className="w-full h-full flex flex-col rounded-t-2xl bg-white text-[#212121] font-Neue p-[3.8vw] relative overflow-hidden">
+    <footer data-scroll data-scroll-speed="-.2" className="w-full h-[100vh] flex flex-col rounded-t-2xl bg-white text-[#212121] font-Neue p-[3.8vw] relative overflow-hidden">
       <div className="flex-grow pt-20 px-2">
         <h1 className="text-3xl font-bold font-Neue">
           <span className="text-emerald-700 text-[8vw] lg:text-[3vw]">QalamWebStudio</span>

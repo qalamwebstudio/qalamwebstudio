@@ -1,6 +1,8 @@
 
 'use client';
 
+import { useEffect, useRef } from "react";
+import LocomotiveScroll from "locomotive-scroll";
 import { Navbar } from "@/components/Navbar";
 import { Connect } from "@/page/Connect";
 import { Footer } from "@/page/Footer";
@@ -24,8 +26,26 @@ const contactChannels = [
 ];
 
 export default function ContactPage() {
+  const scrollContainerRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    if (!scrollContainerRef.current) return;
+
+    const locomotiveScroll = new LocomotiveScroll({
+      el: scrollContainerRef.current,
+      smooth: true,
+    });
+
+    return () => {
+      locomotiveScroll.destroy();
+    };
+  }, []);
+
   return (
-    <main className="min-h-screen w-full overflow-x-hidden text-[#212121] font-Neue">
+    <main
+      ref={scrollContainerRef}
+      className="min-h-screen w-full overflow-x-hidden text-[#212121] font-Neue"
+    >
       <Navbar />
 
       <section className="pt-32 pb-16 px-6 md:px-16 lg:px-24">

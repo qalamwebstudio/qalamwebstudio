@@ -7,7 +7,7 @@ export const About = () => {
                  style={{boxShadow: "0 4px 6px -1px rgba(0,0,0,0.1)"}}>
             {/* Top Section */}
             <div className="py-16 px-6 md:px-12 lg:px-18">
-                <div className="max-w-5xl ">
+                <div data-scroll data-scroll-speed=".2" className="max-w-5xl ">
                     <h2 className="text-4xl md:text-4xl lg:text-5xl font-bold leading-tight mb-6">
                         QalamWebStudio&#39;s Vision Redefines Digital Possibilities
                     </h2>
@@ -49,7 +49,7 @@ export const About = () => {
             </div>
 
             {/* Feature Section */}
-            <div className="py-16 px-6 md:px-12 lg:px-10 justify-items-end">
+            <div data-scroll data-scroll-speed=".1" className="py-16 px-6 md:px-12 lg:px-10 justify-items-end">
                 <div className="max-w-5xl  grid gap-12 md:grid-cols-2">
                     <div>
                         <h3 className="text-3xl md:text-4xl  mb-4">Passion-Driven Team</h3>
@@ -73,7 +73,7 @@ export const About = () => {
             </div>
 
             {/* Why Choose eMTrix Section */}
-            <div className="py-20 px-6 md:px-12 lg:px-18">
+            <div data-scroll data-scroll-speed="-.1" className="py-20 px-6 md:px-12 lg:px-18">
                 <div className="max-w-6xl mx-auto text-center">
                     <h3 className="text-4xl md:text-5xl font-bold mb-6">Why Choose QalamWebStudio</h3>
                     <p className=" text-xl max-w-3xl mx-auto mb-12">

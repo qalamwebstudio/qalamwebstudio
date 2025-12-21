@@ -19,10 +19,10 @@ const socialLinks = [
 
 export const Hero = () => {
     return (
-        <section className="relative w-full h-screen text-[#212121] flex flex-col  ">
+        <section data-scroll data-scroll-speed="-.4" className="relative w-full h-screen text-[#212121] flex flex-col  ">
             {/* Top content */}
             <div className="w-full flex flex-col justify-start items-start p-6 pt-10 mt-14 md:pt-20 md:px-10 lg:px-14">
-                <div className="font-FoundersGrotesk font-bold text-left">
+                <div data-scroll data-scroll-speed=".2" className="font-FoundersGrotesk font-bold text-left">
                     {headingLines.map((line, index) => (
                         <h1
                             key={index}
