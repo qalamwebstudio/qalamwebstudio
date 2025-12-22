@@ -1,4 +1,5 @@
 import React, { useState, useCallback, useMemo } from "react";
+import { useRouter } from "next/navigation";
 import { ArrowUpRight, ArrowRight } from "lucide-react";
 
 type PricingPlan = {
@@ -248,11 +249,13 @@ const CheckIcon = React.memo(() => (
 ));
 CheckIcon.displayName = "CheckIcon";
 
-const PricingCardComponent = ({ plan }: { plan: PricingPlan }) => {
-  const handleSelect = useCallback(() => {
-    console.log("Selected plan:", plan.name);
-  }, [plan.name]);
-
+const PricingCardComponent = ({
+  plan,
+  onSelectPlan,
+}: {
+  plan: PricingPlan;
+  onSelectPlan: (plan: PricingPlan) => void;
+}) => {
   return (
     <div
       className={`relative rounded-3xl border border-slate-200 bg-[#f1f1f1] ring-1 ring-transparent backdrop-blur shadow-[0_25px_60px_rgba(25,25,84,0.08)] px-7 py-8 flex flex-col gap-4 transition-all duration-300 hover:-translate-y-2 hover:ring-emerald-600`}
@@ -275,7 +278,7 @@ const PricingCardComponent = ({ plan }: { plan: PricingPlan }) => {
       <p className="text-sm text-slate-600 flex-1">{plan.details}</p>
 
       <button
-        onClick={handleSelect}
+        onClick={() => onSelectPlan(plan)}
         className="mt-2 w-full inline-flex items-center justify-center rounded-2xl border border-slate-300 bg-slate-50 px-5 py-3 text-sm font-semibold text-slate-900 transition-colors duration-300 hover:bg-[#212121f2] hover:text-white"
         aria-label={`Select ${plan.name} plan`}
       >
@@ -294,6 +297,7 @@ const ModelpriceComponent = () => {
   const [activeTab, setActiveTab] = useState<PricingCategoryKey>(
     "mobileApps"
   );
+  const router = useRouter();
 
   const tabs = useMemo(
     () => [
@@ -310,7 +314,7 @@ const ModelpriceComponent = () => {
 
   const memoPricingData = useMemo(() => pricingData, []);
   const activeData = memoPricingData[activeTab];
-  
+
 
   // Memoized event handlers
   const handleTabChange = useCallback((tabId: string) => {
@@ -326,6 +330,16 @@ const ModelpriceComponent = () => {
     // Add view work logic here
     console.log("View all work clicked");
   }, []);
+
+  const handlePlanSelect = useCallback(
+    (plan: PricingPlan) => {
+      const params = new URLSearchParams();
+      params.set("service", plan.name);
+      params.set("budget", plan.price);
+      router.push(`/Contact?${params.toString()}`);
+    },
+    [router]
+  );
 
   return (
     <section  className="relative isolate overflow-hidden  py-16 md:py-24">
@@ -404,7 +418,11 @@ const ModelpriceComponent = () => {
 
           <div className="mt-10 grid gap-6 lg:grid-cols-3">
             {activeData.plans.map((plan) => (
-              <PricingCard key={plan.name} plan={plan} />
+              <PricingCard
+                key={plan.name}
+                plan={plan}
+                onSelectPlan={handlePlanSelect}
+              />
             ))}
           </div>
 
