@@ -6,12 +6,12 @@ import { About } from "@/page/About";
 import { Connect } from "@/page/Connect";
 import { Footer } from "@/page/Footer";
 
-const coreTeam = [
-  { name: "Madhukar ", role: "Full-stack Engineer" },
-  { name: "Takshil", role: "Full-stack Engineer" },
-  { name: "Virpal", role: "Full-stack Engineer" },
-  { name: "Sarbaz", role: "Full-stack Engineer" },
-];
+//const coreTeam = [
+//  { name: "Madhukar ", role: "Full-stack Engineer" },
+//  { name: "Takshil", role: "Full-stack Engineer" },
+//{ name: "Virpal", role: "Full-stack Engineer" },
+ // { name: "Sarbaz", role: "Full-stack Engineer" },
+//];
 
 export default function AboutPage() {
   const scrollContainerRef = useRef<HTMLElement | null>(null);
@@ -68,22 +68,27 @@ export default function AboutPage() {
           </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-2">
-          {coreTeam.map((member) => (
-            <div
-              key={member.name}
-              className="rounded-2xl border border-slate-200 bg-slate-50/70 px-6 py-8 shadow-sm"
-            >
-              <p className="text-2xl font-semibold">{member.name}</p>
-              <p className="text-sm uppercase tracking-wide text-emerald-600 mt-2">
-                {member.role}
-              </p>
-              <p className="mt-4 text-slate-600">
-                Partnering with founders to ship products faster with taste,
-                technical depth, and a bias for measurable results.
-              </p>
-            </div>
-          ))}
+        <div className="grid gap-6 md:grid-cols-4">
+
+          <div className="grid grid-cols-5 grid-rows-5 gap-4">
+            <div className="col-span-2 row-span-3 border-emerald-700 border">Madhukar</div>
+            <div className="col-span-2 row-span-2 row-start-4 border-emerald-700 border">Full-stack Engineer</div>
+          </div>
+
+          
+          <div className="grid grid-cols-5 grid-rows-5 gap-4">
+            <div className="col-span-2 row-span-2 border-emerald-700 border">Takshil</div>
+            <div className="col-span-2 row-span-3 row-start-3 border-emerald-700 border">Full-stack Engineer</div>
+          </div>
+          <div className="grid grid-cols-5 grid-rows-5 gap-4">
+            <div className="col-span-2 row-span-3 border-emerald-700 border">Virpal</div>
+            <div className="col-span-2 row-span-2 row-start-4 border-emerald-700 border">Full-stack Engineer</div>
+          </div>
+          <div className="grid grid-cols-5 grid-rows-5 gap-4">
+            <div className="col-span-2 row-span-2 border-emerald-700 border">Sarbaz</div>
+            <div className="col-span-2 row-span-3 row-start-3 border-emerald-700 border">Full-stack Engineer</div>
+          </div>
+
         </div>
       </section>
 

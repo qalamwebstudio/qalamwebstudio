@@ -4,16 +4,125 @@ import { ArrowUpRight } from "lucide-react";
 import gsap from "gsap";
 
 const projects = [
-  { id: 1, label: "WEB SITE" },
-  { id: 2, label: "MOBILE APP" },
-  { id: 3, label: "UI/UX DESIGN" },
-  { id: 4, label: "DESKTOP APP" },
-  { id: 5, label: "CUSTOMISED BUSINESS SOFTWARE" },
-  { id: 6, label: "STARTUP KIT" },
-  { id: 7, label: "LOGO & BRANDING" },
-  { id: 8, label: "BRAND CARDS & MARKETING" },
-  { id: 9, label: "WHITE-LABEL SERVICES" },
+  {
+    id: 1,
+    label: "WEBSITE",
+    title: "Sell Smarter Online",
+    description:
+      "High-performance websites built to convert visitors into customers with speed, clarity, and SEO baked in.",
+    image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=80",
+    details: [
+      "Next.js + Tailwind build",
+      "Conversion-focused layouts",
+      "SEO & analytics ready",
+    ],
+  },
+  {
+    id: 2,
+    label: "MOBILE APP",
+    title: "Book. Track. Pay.",
+    description:
+      "Cross-platform mobile apps that handle bookings, real-time tracking, and seamless digital payments.",
+    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80",
+    details: [
+      "React Native & Expo",
+      "Real-time notifications",
+      "Offline-first experience",
+    ],
+  },
+  {
+    id: 3,
+    label: "UI/UX DESIGN",
+    title: "Design That Thinks",
+    description:
+      "Intuitive and scalable UI/UX systems designed to simplify complex workflows and data-heavy products.",
+    image: "https://images.unsplash.com/photo-1520607162513-77705c0f0d4a?auto=format&fit=crop&w=1200&q=80",
+    details: [
+      "Design systems & components",
+      "Interactive prototypes",
+      "Accessibility-focused UX",
+    ],
+  },
+  {
+    id: 4,
+    label: "DESKTOP APP",
+    title: "Retail, Simplified",
+    description:
+      "Powerful desktop applications that unify inventory, billing, and analytics into one reliable system.",
+    image: "https://images.unsplash.com/photo-1519389950473-47ba0277781c?auto=format&fit=crop&w=1200&q=80",
+    details: [
+      "Electron-based apps",
+      "Offline-first sync",
+      "Advanced reporting tools",
+    ],
+  },
+  {
+    id: 5,
+    label: "CUSTOM BUSINESS SOFTWARE",
+    title: "Business Automation Core",
+    description:
+      "Tailored software solutions that automate operations, reduce manual work, and scale with your business.",
+    image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?auto=format&fit=crop&w=1200&q=80",
+    details: [
+      "Custom workflows",
+      "Secure role-based access",
+      "Scalable backend architecture",
+    ],
+  },
+  {
+    id: 6,
+    label: "STARTUP KIT",
+    title: "Launch Faster",
+    description:
+      "Everything a startup needs to go live fast — from MVP development to payments and admin panels.",
+    image: "https://images.unsplash.com/photo-1469474968028-56623f02e42e?auto=format&fit=crop&w=1200&q=80",
+    details: [
+      "Rapid MVP delivery",
+      "Auth, billing & CMS",
+      "Startup-ready tech stack",
+    ],
+  },
+  {
+    id: 7,
+    label: "LOGO & BRANDING",
+    title: "Brand From Scratch",
+    description:
+      "Complete brand identity design that makes your business look credible, premium, and memorable.",
+    image: "https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=1200&q=80",
+    details: [
+      "Logo & visual identity",
+      "Color & typography system",
+      "Brand guidelines",
+    ],
+  },
+  {
+    id: 8,
+    label: "BRAND CARDS & MARKETING",
+    title: "Print That Performs",
+    description:
+      "High-impact marketing and print assets that strengthen your offline presence and brand recall.",
+    image: "https://images.unsplash.com/photo-1503602642458-232111445657?auto=format&fit=crop&w=1200&q=80",
+    details: [
+      "Business cards & collaterals",
+      "Premium print quality",
+      "Campaign-ready assets",
+    ],
+  },
+  {
+    id: 9,
+    label: "WHITE-LABEL SERVICES",
+    title: "White-Label Power",
+    description:
+      "Dedicated white-label development teams that work as an extension of your agency or startup.",
+    image: "https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1200&q=80",
+    details: [
+      "NDA-secured delivery",
+      "Flexible team scaling",
+      "Weekly progress reporting",
+    ],
+  },
 ];
+
 
 export const Ourwork = () => {
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
@@ -82,14 +191,14 @@ export const Ourwork = () => {
                 {project.label}
               </div>
               <div
-                className="group bg-gray-200/30 h-96 rounded-lg border border-gray-300 overflow-hidden 
-                transition-all duration-500 hover:scale-105 hover:shadow-xl"
+                className="group bg-gray-200/30 min-h-[26rem] rounded-2xl border border-gray-300 overflow-hidden 
+                transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl flex flex-col"
               >
                 {/* Project Image */}
-                <div className="h-1/2 overflow-hidden relative m-3 rounded-lg">
+                <div className="relative m-4 mb-3 rounded-xl overflow-hidden aspect-[4/2]">
                   <Image
-                    src="/design1.png"
-                    alt="Project Preview"
+                    src={project.image}
+                    alt={`${project.label} preview`}
                     fill
                     priority={project.id === 1}
                     className="object-cover transition-transform duration-500 group-hover:scale-110"
@@ -98,16 +207,25 @@ export const Ourwork = () => {
                 </div>
 
                 {/* Project Details */}
-                <div className="h-1/2 p-4 flex flex-col justify-between">
+                <div className="flex-1 px-4 pb-4 flex flex-col gap-3">
                   <div>
                     <h3 className="text-lg font-semibold text-[#212121]">
-                      Project Title
+                      {project.title}
                     </h3>
                     <p className="text-sm text-[#212121] line-clamp-3">
-                      Ye project ek modern web application hai jo performance,
-                      UX aur clean design par focus karta hai.
+                      {project.description}
                     </p>
                   </div>
+                  <ul className="flex flex-wrap gap-2 text-xs text-[#212121]/80 font-medium">
+                    {project.details.map((detail) => (
+                      <li
+                        key={detail}
+                        className="px-3 py-1 border border-[#212121]/15 rounded-full bg-white/80 backdrop-blur-sm"
+                      >
+                        {detail}
+                      </li>
+                    ))}
+                  </ul>
                 </div>
               </div>
             </div>

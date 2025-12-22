@@ -488,7 +488,7 @@ const ModelpriceComponent = () => {
       const params = new URLSearchParams();
       params.set("service", plan.name);
       params.set("budget", plan.price);
-      router.push(`/Contact?${params.toString()}`);
+      router.push(`/Contact?${params.toString()}#contact-form`);
     },
     [router]
   );
