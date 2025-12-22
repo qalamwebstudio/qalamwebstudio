@@ -1,7 +1,10 @@
+'use client';
+
 import React, { useCallback } from "react";
 import EyesFollowCursor from '@/components/EyesFollowCursor';
 import { ArrowRight, ArrowUp } from "lucide-react";
 import { ArrowUpRight } from 'lucide-react';
+import { useRouter } from "next/navigation";
 
 // Memoized icon components to prevent unnecessary re-renders
 const ArrowRightIcon = React.memo(() => (
@@ -19,11 +22,11 @@ ArrowRightIcon.displayName = 'ArrowRightIcon';
 ArrowUpIcon.displayName = 'ArrowUpIcon';
 
 const ConnectComponent = () => {
+  const router = useRouter();
   // Memoized event handlers
   const handleContactClick = useCallback(() => {
-    // Add contact functionality here
-    console.log('Contact clicked');
-  }, []);
+    router.push("/Contact");
+  }, [router]);
 
   const handleEmailClick = useCallback(() => {
     // Add email functionality here
@@ -49,7 +52,7 @@ const ConnectComponent = () => {
           <div className='relative w-full items-center justify-center '>
                 <div className="flex flex-col items-center justify-center space-y-4">
                     <a
-                      className="group flex items-center justify-center pl-8 pr-6 py-4  bg-[#212121] hover:bg-black text-white rounded-full transition-colors  duration-200 cursor-auto"
+                      className="group flex items-center justify-center pl-8 pr-6 py-4  bg-[#212121] hover:bg-black text-white rounded-full transition-colors  duration-200 cursor-pointer"
                       onClick={handleContactClick}
                     >
                           let&apos;s talk
@@ -68,7 +71,7 @@ const ConnectComponent = () => {
            <div className='relative w-full items-center justify-center '>
                 <div className="flex flex-col items-center justify-center space-y-4">
                     <a
-                      className="group flex items-center justify-center pl-8 pr-6 py-4  bg-transparent  border border-black text-black rounded-full transition-colors  duration-200 cursor-auto"
+                      className="group flex items-center justify-center pl-8 pr-6 py-4  bg-transparent  border border-black text-black rounded-full transition-colors  duration-200 cursor-pointer"
                       onClick={handleEmailClick}
                     >
                         QalamWebStudio@gmail.com
