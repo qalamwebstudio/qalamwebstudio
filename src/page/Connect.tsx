@@ -34,8 +34,8 @@ const ConnectComponent = () => {
   }, []);
 
   return (
-    <section data-scroll data-scroll-speed="-.1" className="w-full h-[110vh] md:h-[170vh] flex flex-col rounded-t-2xl justify-center items-center bg-emerald-700 text-[#212121] font-FoundersGrotesk font-bold p-[3.8vw] relative overflow-hidden">
-      <div className="flex flex-col items-center w-full">
+    <section  className="w-full h-[100vh] md:h-[130vh] flex flex-col rounded-t-2xl justify-center items-center bg-emerald-700 text-[#212121] font-FoundersGrotesk font-bold p-[3.8vw] relative overflow-hidden">
+      <div data-scroll data-scroll-speed=".1" className="flex flex-col items-center w-full">
             <div className="absolute justify-center flex pointer-events-none">
                 <EyesFollowCursor/>
             </div>

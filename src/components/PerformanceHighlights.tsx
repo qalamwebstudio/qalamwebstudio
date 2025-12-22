@@ -21,7 +21,7 @@ const performanceStats = [
 export function PerformanceHighlights() {
   return (
     <section className="px-6 md:px-16 lg:px-24 pb-16 md:pb-20 font-Neue">
-      <div className="rounded-[40px] border border-white/40 bg-gradient-to-br from-white/80 via-white/60 to-emerald-50/60 shadow-[0_35px_120px_rgba(15,23,42,0.15)] backdrop-blur-xl p-8 md:p-14">
+      <div data-scroll data-scroll-speed=".1" className="rounded-[40px] border border-white/40 bg-gradient-to-br from-white/80 via-white/60 to-emerald-50/60 shadow-[0_35px_120px_rgba(15,23,42,0.15)] backdrop-blur-xl p-8 md:p-14">
         <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
           <div className="max-w-xl space-y-4">
             <p className="uppercase text-sm tracking-[0.4em] text-emerald-600">
