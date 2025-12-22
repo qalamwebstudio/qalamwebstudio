@@ -1,7 +1,7 @@
 
 'use client';
 
-import { useEffect, useRef, useState } from "react";
+import { Suspense, useEffect, useRef, useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
 import { useSearchParams } from "next/navigation";
 import LocomotiveScroll from "locomotive-scroll";
@@ -30,7 +30,7 @@ const contactChannels = [
 const DEFAULT_SERVICE_MESSAGE =
   "Visit our pricing section to select a specific service and get instant quotes!";
 
-export default function ContactPage() {
+function ContactPageContent() {
   const searchParams = useSearchParams();
   const scrollContainerRef = useRef<HTMLElement | null>(null);
   const selectedServiceRef = useRef<HTMLTextAreaElement | null>(null);
@@ -282,5 +282,13 @@ export default function ContactPage() {
         <Footer />
       </div>
     </main>
+  );
+}
+
+export default function ContactPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-white" />}>
+      <ContactPageContent />
+    </Suspense>
   );
 }
