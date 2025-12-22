@@ -31,8 +31,11 @@ const ConnectComponent = () => {
   }, []);
 
   return (
-    <section data-scroll data-scroll-speed="-.1" className="w-full h-[170vh] flex flex-col rounded-t-2xl justify-center items-center bg-emerald-700 text-[#212121] font-FoundersGrotesk font-bold p-[3.8vw] relative overflow-hidden">
+    <section data-scroll data-scroll-speed="-.1" className="w-full h-[110vh] md:h-[170vh] flex flex-col rounded-t-2xl justify-center items-center bg-emerald-700 text-[#212121] font-FoundersGrotesk font-bold p-[3.8vw] relative overflow-hidden">
       <div className="flex flex-col items-center w-full">
+            <div className="absolute justify-center flex pointer-events-none">
+                <EyesFollowCursor/>
+            </div>
         <h1 className="text-[16vw] md:text-[14vw] lg:text-[12vw] font-extrabold lg:leading-35 leading-none text-center mb-8 tracking-wide ">
           READY
           <br />
@@ -40,9 +43,7 @@ const ConnectComponent = () => {
           <br />
           THE PROJECT?
         </h1>
-         <div className="absolute inset-0 flex justify-center items-center pointer-events-none">
-                <EyesFollowCursor/>
-            </div>
+     
         <div className="flex flex-col items-center gap-2 w-full max-w-md mt-10 mb-10">
           <div className="flex flex-col items-center justify-center space-y-4 font-Neue tracking-wide ">
           <div className='relative w-full items-center justify-center '>
