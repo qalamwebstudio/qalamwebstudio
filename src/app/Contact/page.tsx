@@ -138,7 +138,7 @@ export default function ContactPage() {
         ))}
         </section>
 
-        <section className="pb-20 px-6 md:px-16 lg:px-24">
+        <section id="contact-form" className="pb-20 px-6 md:px-16 lg:px-24">
         <div  className="rounded-[36px] border border-white/50 bg-gradient-to-br from-white/80 via-white/60 to-emerald-50/60 shadow-[0_35px_120px_rgba(15,23,42,0.15)] backdrop-blur-xl p-8 md:p-12 ">
           <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr]">
             <div className="space-y-6">

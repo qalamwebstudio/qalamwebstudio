@@ -17,7 +17,10 @@ const socialLinks = [
     {icon: FaGithub, url: "https://github.com/yourprofile", color: "text-gray-800"},
 ];
 
+import { useRouter } from "next/navigation";
+
 export const Hero = () => {
+    const router = useRouter();
     return (
         <section data-scroll data-scroll-speed="-.2" className="relative w-full h-screen text-[#212121] flex flex-col  ">
             {/* Top content */}
@@ -65,6 +68,7 @@ export const Hero = () => {
                     <p>Vision. Engineered. QalamWebStudio.</p>
                 </div>
                 <button
+                    onClick={() => router.push("/services#modelprice")}
                     className="group relative overflow-hidden px-6 py-3 border border-gray-600 rounded-full transition-colors duration-200">
                     {/* Animated black background */}
                     <span

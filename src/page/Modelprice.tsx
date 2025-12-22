@@ -5,7 +5,7 @@ import { ArrowUpRight, ArrowRight } from "lucide-react";
 type PricingPlan = {
   name: string;
   price: string;
-  details?: string;
+  details?: string | string[];
   popular?: boolean;
 };
 
@@ -36,31 +36,55 @@ const pricingData: Record<PricingCategoryKey, PricingCategory> = {
       {
         name: "Static Website (3–5 Pages)",
         price: "₹2,500 – ₹8,000",
-        details: "Responsive layout with contact form.",
+        details: [
+          "3–5 responsive pages with clean layout",
+          "Mobile, tablet & desktop friendly design",
+          "Contact form with basic validation",
+          "Fast loading and simple navigation",
+          "Best for small businesses and local services",
+        ],
       },
       {
         name: "Business Website",
         price: "₹8,000 – ₹15,000",
-        details: "Up to 8 pages, animations & SEO-ready.",
+        details: [
+          "Up to 8 professionally designed pages",
+          "Modern animations and smooth transitions",
+          "SEO-ready structure for better search ranking",
+          "Optimized performance and loading speed",
+          "Designed to convert visitors into leads",
+        ],
         popular: true,
       },
       {
         name: "Portfolio / Personal Website",
         price: "₹4,000 – ₹10,000",
-        details: "Modern design to showcase skills or brand.",
+        details: [
+          "Modern and personal branding-focused design",
+          "Showcase skills, projects, or personal brand",
+          "Clean UI with smooth scrolling experience",
+          "Fully responsive across all devices",
+          "Ideal for freelancers, creators, and professionals",
+        ],
       },
       {
         name: "Custom Website",
         price: "₹15,000+",
-        details: "Tailored UI/UX with advanced features.",
+        details: [
+          "Fully custom UI/UX tailored to business needs",
+          "Advanced features and custom functionality",
+          "Scalable structure for future growth",
+          "High-performance and security-focused setup",
+          "Perfect for startups and growing brands",
+        ],
       },
     ],
     features: [
-      "Custom UI built in Next.js with blazing-fast performance",
-      "Secure checkout, payments & storefront integrations",
-      "Core Web Vitals optimization & WCAG accessibility",
-      "CMS handoff + documentation so your team ships fast",
-      "Automation for analytics, uptime, and post-launch support",
+      "High-performance storefront built with modern frameworks",
+      "Secure checkout, payments, and order management",
+      "Inventory, fulfillment, and admin dashboard integration",
+      "SEO, speed, and conversion optimization",
+      "Post-launch monitoring, analytics, and growth support",
     ],
   },
 
@@ -69,26 +93,48 @@ const pricingData: Record<PricingCategoryKey, PricingCategory> = {
     description:
       "Reliable and scalable mobile applications with clean UI and strong backend support.",
     features: [
-      "Pixel-perfect UI for Android & iOS devices",
-      "Realtime sync with Firebase or RESTful APIs",
-      "Play Store / App Store deployment with analytics",
+      "High-quality UI/UX crafted for Android & iOS platforms",
+      "Scalable backend integration with Firebase or RESTful APIs",
+      "Secure authentication, data storage, and app workflows",
+      "Performance optimization and device-level testing",
+      "End-to-end Play Store / App Store deployment with analytics",
     ],
     plans: [
       {
         name: "Basic Android App",
         price: "₹10,000 – ₹20,000",
-        details: "3–5 screens with Firebase backend.",
+        details: [
+          "3–5 essential app screens with clean and modern UI",
+          "Firebase backend setup (Auth + Database)",
+          "Basic user authentication (Login / Signup)",
+          "Smooth performance with standard testing",
+          "Best suited for MVPs and early-stage startups",
+        ],
         popular: true,
       },
       {
         name: "Business Mobile App",
         price: "₹20,000 – ₹40,000",
-        details: "Auth, APIs, admin panel & deployment.",
+        details: [
+          "Complete business-ready mobile application",
+          "Secure authentication & role-based access",
+          "REST API integration with database",
+          "Admin panel for content & user management",
+          "Push notifications & basic analytics",
+          "Play Store deployment support",
+        ],
       },
       {
         name: "Custom App",
         price: "₹40,000+",
-        details: "Feature-rich, scalable architecture.",
+        details: [
+          "Fully custom, feature-rich mobile application",
+          "Scalable and future-ready architecture",
+          "Advanced integrations (APIs, payments, third-party tools)",
+          "Performance optimization & security best practices",
+          "Custom UI/UX tailored to business goals",
+          "Long-term scalability and upgrade support",
+        ],
       },
     ],
   },
@@ -258,7 +304,7 @@ const PricingCardComponent = ({
 }) => {
   return (
     <div
-      className={`relative rounded-3xl border border-slate-200 bg-[#f1f1f1] ring-1 ring-transparent backdrop-blur shadow-[0_25px_60px_rgba(25,25,84,0.08)] px-7 py-8 flex flex-col gap-4 transition-all duration-300 hover:-translate-y-2 hover:ring-emerald-600`}
+      className={`relative rounded-3xl border border-slate-200 bg-gradient-to-br from-white/80 via-white/60 to-emerald-50/60 shadow-[0_35px_120px_rgba(15,23,42,0.15)] backdrop-blur-xl ring-1 ring-transparent  px-7 py-8 flex flex-col gap-4 transition-all duration-300 hover:-translate-y-2 hover:ring-emerald-600`}
     >
       {plan.popular && (
         <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-emerald-600 text-white text-xs font-semibold tracking-wide px-4 py-1 rounded-full shadow-lg">
@@ -275,7 +321,15 @@ const PricingCardComponent = ({
         </p>
       </div>
 
-      <p className="text-sm text-slate-600 flex-1">{plan.details}</p>
+      {Array.isArray(plan.details) ? (
+        <ul className="text-sm text-slate-600 flex-1 list-disc space-y-1 pl-5">
+          {plan.details.map((item) => (
+            <li key={item}>{item}</li>
+          ))}
+        </ul>
+      ) : (
+        <p className="text-sm text-slate-600 flex-1">{plan.details}</p>
+      )}
 
       <button
         onClick={() => onSelectPlan(plan)}
@@ -342,7 +396,7 @@ const ModelpriceComponent = () => {
   );
 
   return (
-    <section  className="relative isolate overflow-hidden  py-16 md:py-24">
+    <section id="modelprice" className="relative isolate overflow-hidden  py-16 md:py-24">
       <div className="pointer-events-none absolute inset-0 "></div>
       <div className="pointer-events-none absolute inset-0 opacity-70 [background-image:url('https://www.toptal.com/designers/subtlepatterns/uploads/dots.png')] mix-blend-multiply"></div>
       <div className="relative mx-auto max-w-6xl px-4">
@@ -366,11 +420,10 @@ const ModelpriceComponent = () => {
               <button
                 key={tab.id}
                 onClick={() => handleTabChange(tab.id)}
-                className={`rounded-2xl border px-4 py-2 text-sm font-semibold transition-all duration-300 ${
-                  isActive
-                    ? "border-neutral-900 bg-neutral-900 text-white shadow-lg shadow-slate-300/60"
-                    : "border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-neutral-900"
-                }`}
+                className={`rounded-2xl border px-4 py-2 text-sm font-semibold transition-all duration-300 ${isActive
+                  ? "border-neutral-900 bg-neutral-900 text-white shadow-lg shadow-slate-300/60"
+                  : "border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-neutral-900"
+                  }`}
                 aria-label={`Switch to ${tab.name} pricing`}
               >
                 {tab.name}
@@ -379,7 +432,7 @@ const ModelpriceComponent = () => {
           })}
         </div>
 
-        <article className="mt-14 rounded-[40px] border border-slate-100 bg-[#f1f1f1] p-10 shadow-[0_30px_80px_rgba(15,23,42,0.08)] backdrop-blur">
+        <article className="mt-14 rounded-[40px] border border-slate-100 bg-[#f1f1f1] shadow-[0_35px_120px_rgba(15,23,42,0.15)] backdrop-blur-xl p-10 ">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div>
               <div className="inline-flex items-center gap-2 rounded-full border border-emerald-100 bg-emerald-50 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-emerald-600">
@@ -399,19 +452,19 @@ const ModelpriceComponent = () => {
                 onClick={handleQuoteRequest}
                 className="group flex items-center justify-center pl-6 pr-6 py-3 border border-black bg-black hover:bg-transparent  text-white hover:text-black rounded-full transition-colors  duration-200 cursor-pointer"
               >
-               Request quote
-                 <div className="relative ml-8 w-2 h-2 group-hover:scale-500 bg-[#f1f1f1] duration-200 rounded-full">
-                   <ArrowUpRight className="absolute w-2 h-2 text-black opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                 </div>
+                Request quote
+                <div className="relative ml-8 w-2 h-2 group-hover:scale-500 bg-[#f1f1f1] duration-200 rounded-full">
+                  <ArrowUpRight className="absolute w-2 h-2 text-black opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </div>
               </a>
               <a
                 onClick={handleViewWork}
                 className="group flex items-center justify-center pl-6 pr-6 py-3 border border-black bg-transparent hover:bg-black  text-black hover:text-white rounded-full transition-colors  duration-200 cursor-pointer"
               >
                 View recent work
-                 <div className="relative ml-4 w-2 h-2 group-hover:scale-500 bg-black  duration-200 rounded-full">
-                   <ArrowUpRight className="absolute w-2 h-2 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                 </div>
+                <div className="relative ml-4 w-2 h-2 group-hover:scale-500 bg-black  duration-200 rounded-full">
+                  <ArrowUpRight className="absolute w-2 h-2 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                </div>
               </a>
             </div>
           </div>

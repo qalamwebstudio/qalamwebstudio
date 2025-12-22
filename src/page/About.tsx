@@ -1,6 +1,10 @@
+'use client';
+
 import React from 'react';
+import { useRouter } from "next/navigation";
 
 export const About = () => {
+    const router = useRouter();
 
     return (
         <section className="w-full text-[#212121] font-Neue bg-[#f1f1f1] rounded-t-2xl "
@@ -18,6 +22,7 @@ export const About = () => {
                         to deliver cutting-edge IT services that blend creativity with modern technology.
                     </p>
                     <button
+                        onClick={() => router.push("/Contact#contact-form")}
                         className="mt-10 group relative overflow-hidden px-6 py-3 border border-gray-700 rounded-full transition-colors duration-200 focus:outline-none"
                     >
                         {/* Background animation layer */}
