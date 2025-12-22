@@ -7,6 +7,7 @@ import { Modelprice } from "@/page/Modelprice";
 import { Connect } from "@/page/Connect";
 import { Footer } from "@/page/Footer";
 import { PerformanceHighlights } from "@/components/PerformanceHighlights";
+import ProjectTimeline from "@/components/ProjectTimeline";
 import {
   SiNextdotjs,
   SiReact,
@@ -58,7 +59,6 @@ export default function ServicesPage() {
       className="min-h-screen w-full overflow-x-hidden text-[#212121]"
     >
       <Navbar />
-
       <section className="pt-32 pb-16 px-6 md:mb-24 md:px-16 lg:px-24 font-Neue ">
         <p className="uppercase text-lg tracking-[0.4em] text-emerald-600 mb-16">
           Services
@@ -72,6 +72,7 @@ export default function ServicesPage() {
         </p>
       </section>
       <PerformanceHighlights />
+      <ProjectTimeline/>
       <section className="px-6 md:px-16 lg:px-24 py-12 md:py-16  backdrop-blur border-y border-emerald-100">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
           <div>

@@ -34,10 +34,9 @@ const QuickLinks = React.memo(() => {
   const quickLinks = useMemo(() => [
     { href: "/", label: "Home", isInternal: true },
     { href: "/services", label: "Services", isInternal: true },
-    { href: "/ourwork", label: "Our work", isInternal: true },
+    { href: "/work", label: "Our work", isInternal: true },
     { href: "/about", label: "About us", isInternal: true },
-    { href: "/blog", label: "Blog", isInternal: true },
-    { href: "/contact", label: "Contact us", isInternal: true },
+    { href: "/Contact", label: "Contact us", isInternal: true },
   ], []);
 
   return (
