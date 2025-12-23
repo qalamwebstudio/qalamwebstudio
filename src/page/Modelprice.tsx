@@ -530,7 +530,7 @@ const ModelpriceComponent = () => {
           })}
         </div>
 
-        <article className="mt-14 rounded-[40px] border border-slate-100 bg-[#f1f1f1] shadow-[0_35px_120px_rgba(15,23,42,0.15)] backdrop-blur-xl p-10 ">
+        <article className="mt-14 rounded-[40px] border border-slate-100 bg-[#f1f1f1] shadow-[0_35px_120px_rgba(15,23,42,0.15)] backdrop-blur-xl  p-6 lg:p-10  ">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div>
               <div className="inline-flex items-center gap-2 rounded-full border border-emerald-100 bg-emerald-50 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-emerald-600">
