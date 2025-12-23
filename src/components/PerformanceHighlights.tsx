@@ -20,7 +20,7 @@ const performanceStats = [
 
 export function PerformanceHighlights() {
   return (
-    <section className="px-2 md:px-16 lg:px-24 pb-16 md:pb-20 font-Neue">
+    <section className="px-6 md:px-16 lg:px-24 pb-16 md:pb-20 font-Neue">
       <div className="rounded-[40px] border border-white/40 bg-gradient-to-br from-white via-white to-emerald-50 shadow-[0_30px_90px_rgba(15,23,42,0.12)] p-8 md:p-14">
         <div className="flex flex-col gap-8 md:flex-row md:items-center md:justify-between">
           <div className="max-w-xl space-y-4">
