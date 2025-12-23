@@ -146,7 +146,7 @@ export const Clientsreviews = () => {
   const thirdColumn = useMemo(() => testimonials.slice(6, 9), []);
 
   return (
-    <section className="w-full bg-[#f1f1f1] text-[#212121] font-Neue p-[3.8vw]">
+    <section className="w-full text-[#212121] font-Neue p-[3.8vw]">
       <div className="w-full justify-center flex items-center">
         <h1 className="text-[40px] md:text-[48px] lg:text-[52px] py-4">
           Clients’ reviews

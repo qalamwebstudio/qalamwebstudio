@@ -26,6 +26,21 @@ type PricingCategoryKey =
   | "startupKit"
   | "whiteLabel";
 
+type PricingTab = {
+  id: PricingCategoryKey;
+  name: string;
+};
+
+const tabs: PricingTab[] = [
+  { id: "mobileApps", name: "Mobile Apps" },
+  { id: "websiteDevelopment", name: "Websites" },
+  { id: "desktopSoftware", name: "Desktop Apps" },
+  { id: "redesign", name: "Website Redesign" },
+  { id: "brandMarketing", name: "Brand & Marketing" },
+  { id: "startupKit", name: "Startup Kit" },
+  { id: "whiteLabel", name: "White Label" },
+];
+
 const pricingData: Record<PricingCategoryKey, PricingCategory> = {
   websiteDevelopment: {
     title: "Website Development",
@@ -188,7 +203,7 @@ const pricingData: Record<PricingCategoryKey, PricingCategory> = {
 },
 
 
- redesign: {
+  redesign: {
   title: "Website Redesign",
   description:
     "Upgrade outdated websites with modern UI, speed, and usability improvements.",
@@ -402,7 +417,7 @@ const PricingCardComponent = ({
 }) => {
   return (
     <div
-      className={`relative rounded-3xl border border-slate-200 bg-gradient-to-br from-white/80 via-white/60 to-emerald-50/60 shadow-[0_35px_120px_rgba(15,23,42,0.15)] backdrop-blur-xl ring-1 ring-transparent  px-7 py-8 flex flex-col gap-4 transition-all duration-300 hover:-translate-y-2 hover:ring-emerald-600`}
+      className={`relative rounded-3xl border border-slate-200 bg-white shadow-[0_24px_70px_rgba(15,23,42,0.12)] ring-1 ring-transparent  px-7 py-8 flex flex-col gap-4 transition-all duration-300 hover:-translate-y-2 hover:ring-emerald-600`}
     >
       {plan.popular && (
         <span className="absolute -top-3 left-1/2 -translate-x-1/2 bg-emerald-600 text-white text-xs font-semibold tracking-wide px-4 py-1 rounded-full shadow-lg">
@@ -445,32 +460,28 @@ PricingCardComponent.displayName = "PricingCard";
 
 const PricingCard = React.memo(PricingCardComponent);
 
+const FeaturesList = React.memo(({ features }: { features: string[] }) => (
+  <div className="mt-5 grid gap-4 md:grid-cols-2">
+    {features.map((feature) => (
+      <div key={feature} className="flex items-start text-sm text-[#212121]">
+        <CheckIcon />
+        <span>{feature}</span>
+      </div>
+    ))}
+  </div>
+));
+FeaturesList.displayName = "FeaturesList";
+
 const ModelpriceComponent = () => {
   const [activeTab, setActiveTab] = useState<PricingCategoryKey>(
     "mobileApps"
   );
   const router = useRouter();
 
-  const tabs = useMemo(
-    () => [
-      { id: "websiteDevelopment", name: "Website" },
-      { id: "mobileApps", name: "Mobile App" },
-      { id: "desktopSoftware", name: "Desktop" },
-      { id: "redesign", name: "Redesign" },
-      { id: "brandMarketing", name: "Branding & Marketing" },
-      { id: "startupKit", name: "Startup Kit" },
-      { id: "whiteLabel", name: "White Label" },
-    ],
-    []
-  );
+  const activeData = useMemo(() => pricingData[activeTab], [activeTab]);
 
-  const memoPricingData = useMemo(() => pricingData, []);
-  const activeData = memoPricingData[activeTab];
-
-
-  // Memoized event handlers
-  const handleTabChange = useCallback((tabId: string) => {
-    setActiveTab(tabId as typeof activeTab);
+  const handleTabChange = useCallback((tabId: PricingCategoryKey) => {
+    setActiveTab(tabId);
   }, []);
 
   const handleQuoteRequest = useCallback(() => {
@@ -493,10 +504,33 @@ const ModelpriceComponent = () => {
     [router]
   );
 
+  const tabButtons = useMemo(
+    () =>
+      tabs.map((tab) => {
+        const isActive = activeTab === tab.id;
+        return (
+          <button
+            key={tab.id}
+            onClick={() => handleTabChange(tab.id)}
+            className={`rounded-2xl border px-4 py-2 text-sm font-semibold transition-all duration-300 ${
+              isActive
+                ? "border-neutral-900 bg-neutral-900 text-white shadow-lg shadow-slate-300/60"
+                : "border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-neutral-900"
+            }`}
+            aria-label={`Switch to ${tab.name} pricing`}
+          >
+            {tab.name}
+          </button>
+        );
+      }),
+    [activeTab, handleTabChange]
+  );
+
   return (
-    <section id="modelprice" className="relative isolate overflow-hidden  py-8 md:py-24">
-      <div className="pointer-events-none absolute inset-0 "></div>
-      <div className="pointer-events-none absolute inset-0 opacity-70 [background-image:url('https://www.toptal.com/designers/subtlepatterns/uploads/dots.png')] mix-blend-multiply"></div>
+    <section
+      id="modelprice"
+      className="relative isolate overflow-hidden py-8 md:py-24 bg-[radial-gradient(circle_at_30%_20%,rgba(33,33,33,0.05),transparent_45%),radial-gradient(circle_at_80%_0,rgba(0,0,0,0.04),transparent_50%),#f8f8f8]"
+    >
       <div className="relative mx-auto max-w-6xl px-4">
         <header className="text-center">
           <p className="inline-flex items-center rounded-full border border-slate-200 bg-[#f1f1f1] px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-slate-600">
@@ -512,22 +546,7 @@ const ModelpriceComponent = () => {
         </header>
 
         <div className="mt-12 flex flex-wrap justify-center gap-3">
-          {tabs.map((tab) => {
-            const isActive = activeTab === tab.id;
-            return (
-              <button
-                key={tab.id}
-                onClick={() => handleTabChange(tab.id)}
-                className={`rounded-2xl border px-4 py-2 text-sm font-semibold transition-all duration-300 ${isActive
-                  ? "border-neutral-900 bg-neutral-900 text-white shadow-lg shadow-slate-300/60"
-                  : "border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-neutral-900"
-                  }`}
-                aria-label={`Switch to ${tab.name} pricing`}
-              >
-                {tab.name}
-              </button>
-            );
-          })}
+          {tabButtons}
         </div>
 
         <article className="mt-14 rounded-[40px] border border-slate-100 bg-[#f1f1f1] shadow-[0_35px_120px_rgba(15,23,42,0.15)] backdrop-blur-xl  p-6 lg:p-10  ">
@@ -581,14 +600,7 @@ const ModelpriceComponent = () => {
             <p className="text-sm font-semibold uppercase tracking-[0.35em] text-[#212121]">
               In every package, inclusive
             </p>
-            <div className="mt-5 grid gap-4 md:grid-cols-2">
-              {activeData.features.map((feature) => (
-                <div key={feature} className="flex items-start text-sm text-[#212121]">
-                  <CheckIcon />
-                  <span>{feature}</span>
-                </div>
-              ))}
-            </div>
+            <FeaturesList features={activeData.features} />
           </div>
         </article>
       </div>
