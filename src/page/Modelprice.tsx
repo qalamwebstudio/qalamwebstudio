@@ -414,7 +414,7 @@ const PricingCardComponent = ({
         <p className="text-sm uppercase tracking-[0.2em] text-slate-500">
           {plan.name}
         </p>
-        <p className="text-4xl md:text-5xl font-bold mt-3 text-[#212121]">
+        <p className="text-2xl md:text-3xl font-bold mt-3 text-[#212121]">
           {plan.price}
         </p>
       </div>
