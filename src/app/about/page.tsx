@@ -1,4 +1,5 @@
 'use client';
+import Image from "next/image";
 import { useEffect, useRef } from "react";
 import LocomotiveScroll from "locomotive-scroll";
 import { Navbar } from "@/components/Navbar";
@@ -6,12 +7,88 @@ import { About } from "@/page/About";
 import { Connect } from "@/page/Connect";
 import { Footer } from "@/page/Footer";
 
-//const coreTeam = [
-//  { name: "Madhukar ", role: "Full-stack Engineer" },
-//  { name: "Takshil", role: "Full-stack Engineer" },
-//{ name: "Virpal", role: "Full-stack Engineer" },
- // { name: "Sarbaz", role: "Full-stack Engineer" },
-//];
+type CoreTeamMember = {
+  id: number;
+  name: string;
+  role: string;
+  image: string;
+};
+
+const coreTeam: CoreTeamMember[] = [
+  {
+    id: 1,
+    name: "Sarbaz",
+    role: "Full-Stack Developer (Backend-Focused, System Architecture & APIs)",
+    image:
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=500&q=80",
+  },
+  {
+    id: 2,
+    name: "Madhukar",
+    role:
+      "Lead Frontend Engineer & UI/UX Designer (Web, Mobile & Desktop Interfaces)",
+    image:
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=500&q=80",
+  },
+  {
+    id: 3,
+    name: "Virpal",
+    role:
+      "Backend Engineer & AI/ML Developer (Scalable Systems & Intelligent Models)",
+    image:
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=500&q=80",
+  },
+  {
+    id: 4,
+    name: "Takshil",
+    role:
+      "Social Media Manager & Creative Designer (Brand Strategy & Visual Identity)",
+    image:
+      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=500&q=80",
+  },
+];
+
+
+type CardInfoProps = {
+  member: CoreTeamMember;
+};
+
+function CardInfo({ member }: CardInfoProps) {
+  return (
+    <div className="bg-gradient-to-br from-white/80 via-emerald-400 to-emerald-600/60 shadow-[0_35px_120px_rgba(15,23,42,0.15)] backdrop-blur-xl relative h-[160px] rounded-2xl  flex items-center px-4">
+      <p className="text-[#212121]  font-bold  leading-snug font-Neue  text-2xl">
+        {member.name}
+        <br />
+        <span className="text-sm font-Neue text-[#4e4e4e]">{member.role}</span>
+      </p>
+      <span className="from-white/80 to-emerald-400/60 absolute top-3 right-3 w-8 h-8 rounded-full flex items-center bg-gradient-to-br justify-center text-sm">
+        {member.id}
+      </span>
+    </div>
+  );
+}
+
+type CardImageProps = {
+  member: CoreTeamMember;
+};
+
+function CardImage({ member }: CardImageProps) {
+  return (
+    <div className="shadow-[0_35px_120px_rgba(15,23,42,0.15)] backdrop-blur-xl relative h-[320px] rounded-2xl border border-black/30 flex items-center justify-center">
+      <Image
+        src={member.image}
+        alt={`${member.name} portrait`}
+        width={220}
+        height={280}
+        className="h-full w-full object-cover rounded-xl"
+      />
+
+      <span className="from-white/80 to-emerald-400/60 absolute top-3 right-3 w-8 h-8 rounded-full flex items-center bg-gradient-to-br justify-center text-sm">
+        {member.id}
+      </span>
+    </div>
+  );
+}
 
 export default function AboutPage() {
   const scrollContainerRef = useRef<HTMLElement | null>(null);
@@ -68,28 +145,27 @@ export default function AboutPage() {
           </p>
         </div>
 
-        <div className="grid gap-6 md:grid-cols-4">
+        
+          <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4">
 
-          <div className="grid grid-cols-5 grid-rows-5 gap-4">
-            <div className="col-span-2 row-span-3 border-emerald-700 border">Madhukar</div>
-            <div className="col-span-2 row-span-2 row-start-4 border-emerald-700 border">Full-stack Engineer</div>
-          </div>
+            {coreTeam.map((member, idx) => (
+              <div key={member.id} className="flex flex-col gap-6">
+                {idx % 2 === 0 ? (
+                  <>
+                    <CardImage member={member} />
+                    <CardInfo member={member} />
+                  </>
+                ) : (
+                  <>
+                    <CardInfo member={member} />
+                    <CardImage member={member} />
+                  </>
+                )}
+              </div>
+            ))}
 
-          
-          <div className="grid grid-cols-5 grid-rows-5 gap-4">
-            <div className="col-span-2 row-span-2 border-emerald-700 border">Takshil</div>
-            <div className="col-span-2 row-span-3 row-start-3 border-emerald-700 border">Full-stack Engineer</div>
           </div>
-          <div className="grid grid-cols-5 grid-rows-5 gap-4">
-            <div className="col-span-2 row-span-3 border-emerald-700 border">Virpal</div>
-            <div className="col-span-2 row-span-2 row-start-4 border-emerald-700 border">Full-stack Engineer</div>
-          </div>
-          <div className="grid grid-cols-5 grid-rows-5 gap-4">
-            <div className="col-span-2 row-span-2 border-emerald-700 border">Sarbaz</div>
-            <div className="col-span-2 row-span-3 row-start-3 border-emerald-700 border">Full-stack Engineer</div>
-          </div>
-
-        </div>
+        
       </section>
 
       <Connect />

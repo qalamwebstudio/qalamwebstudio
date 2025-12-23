@@ -494,7 +494,7 @@ const ModelpriceComponent = () => {
   );
 
   return (
-    <section id="modelprice" className="relative isolate overflow-hidden  py-16 md:py-24">
+    <section id="modelprice" className="relative isolate overflow-hidden  py-8 md:py-24">
       <div className="pointer-events-none absolute inset-0 "></div>
       <div className="pointer-events-none absolute inset-0 opacity-70 [background-image:url('https://www.toptal.com/designers/subtlepatterns/uploads/dots.png')] mix-blend-multiply"></div>
       <div className="relative mx-auto max-w-6xl px-4">

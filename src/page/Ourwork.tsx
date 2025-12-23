@@ -123,7 +123,6 @@ const projects = [
   },
 ];
 
-
 export const Ourwork = () => {
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
 
@@ -182,7 +181,7 @@ export const Ourwork = () => {
           {projects.map((project) => (
             <div
               key={project.id}
-              className="w-full group"
+              className="w-full group "
               onMouseEnter={() => handleProjectHover(project.label, true)}
               onMouseLeave={() => handleProjectHover(project.label, false)}
             >
@@ -191,7 +190,7 @@ export const Ourwork = () => {
                 {project.label}
               </div>
               <div
-                className="group bg-gray-200/30 min-h-[26rem] rounded-2xl border border-gray-300 overflow-hidden 
+                className="group from-white/80 via-white/60 to-emerald-50/60 min-h-[26rem] rounded-2xl border border-gray-300 overflow-hidden 
                 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl flex flex-col"
               >
                 {/* Project Image */}
@@ -207,7 +206,7 @@ export const Ourwork = () => {
                 </div>
 
                 {/* Project Details */}
-                <div className="flex-1 px-4 flex flex-col gap-3">
+                <div className="flex-1 px-4 flex flex-col gap-3 pb-5">
                   <div>
                     <h3 className="text-lg font-semibold text-[#212121]">
                       {project.title}
@@ -226,6 +225,14 @@ export const Ourwork = () => {
                       </li>
                     ))}
                   </ul>
+
+                  <button
+                    className="mt-auto inline-flex items-center justify-center gap-2 self-end rounded-full border border-[#212121] bg-[#212121] px-5 py-2 text-sm font-semibold text-white transition-all duration-300 hover:-translate-x-1 hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
+                    aria-label={`View details for ${project.title}`}
+                  >
+                    View project
+                    <ArrowUpRight className="h-4 w-4" />
+                  </button>
                 </div>
               </div>
             </div>
