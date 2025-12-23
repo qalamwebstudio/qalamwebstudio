@@ -207,7 +207,7 @@ export const Ourwork = () => {
                 </div>
 
                 {/* Project Details */}
-                <div className="flex-1 px-4 pb-4 flex flex-col gap-3">
+                <div className="flex-1 px-4 flex flex-col gap-3">
                   <div>
                     <h3 className="text-lg font-semibold text-[#212121]">
                       {project.title}
