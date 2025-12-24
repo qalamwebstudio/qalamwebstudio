@@ -83,10 +83,6 @@ function CardImage({ member }: CardImageProps) {
         loading="lazy"
         className="h-full w-full object-cover transition-transform duration-500 ease-out will-change-transform group-hover:scale-105"
       />
-
-      <span className="absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center text-sm border border-white/70 bg-white/90 text-[#212121] font-semibold">
-        {member.id}
-      </span>
     </div>
   );
 }

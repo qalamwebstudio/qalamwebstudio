@@ -17,7 +17,7 @@ import { Footer } from "@/page/Footer";
 type TabId = (typeof workLibraryTabs)[number]["id"];
 
 const LibraryCard = ({ project }: { project: WorkLibraryProject }) => (
-  <article className="group flex flex-col rounded-[32px] border border-slate-200 bg-white shadow-[0_25px_70px_rgba(15,23,42,0.12)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_35px_120px_rgba(15,23,42,0.14)]">
+  <article className="group flex flex-col rounded-[32px] border border-slate-200 from-white via-white to-emerald-50 shadow-[0_25px_70px_rgba(15,23,42,0.12)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_35px_120px_rgba(15,23,42,0.14)]">
     <div className="relative m-5 mb-4 aspect-[4/2] overflow-hidden rounded-2xl">
       <Image
         src={project.heroImage}
@@ -84,13 +84,11 @@ export default function WorkLibraryPage() {
   useEffect(() => {
     if (initializedFromQuery.current) return;
     const tabParam = searchParams.get("tab");
-    if (!tabParam) {
-      initializedFromQuery.current = true;
-      return;
-    }
-    const isValidTab = workLibraryTabs.some((tab) => tab.id === tabParam);
-    if (isValidTab) {
-      setActiveTab(tabParam as TabId);
+    if (tabParam) {
+      const isValidTab = workLibraryTabs.some((tab) => tab.id === tabParam);
+      if (isValidTab) {
+        setActiveTab(tabParam as TabId);
+      }
     }
     initializedFromQuery.current = true;
   }, [searchParams]);
@@ -111,7 +109,7 @@ export default function WorkLibraryPage() {
   }, []);
 
   return (
-    <main ref={scrollContainerRef} className="min-h-screen bg-[#f5f5f5] text-[#212121]">
+    <main ref={scrollContainerRef} className="min-h-screen  text-[#212121]">
       <Navbar />
 
       <section className="px-6 pt-28 pb-12 md:px-16 lg:px-24 font-Neue">

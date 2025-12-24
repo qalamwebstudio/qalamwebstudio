@@ -1,15 +1,12 @@
 'use client';
 
 export type WorkLibraryCategory =
-  | 'webExperience'
-  | 'ecommerce'
-  | 'mobileProduct'
-  | 'desktopSuite'
-  | 'saasPlatform'
-  | 'processAutomation'
-  | 'brandingKit'
-  | 'marketingOps'
-  | 'whiteLabel';
+  | 'website'
+  | 'mobileApp'
+  | 'desktopApp'
+  | 'customBusiness'
+  | 'brandingMarketing'
+  | 'startupKit';
 
 export type WorkLibraryProject = {
   id: string;
@@ -29,15 +26,12 @@ export type WorkLibraryProject = {
 export const workLibraryTabs: { id: 'all' | WorkLibraryCategory; name: string }[] =
   [
     { id: 'all', name: 'All' },
-    { id: 'webExperience', name: 'Web Experiences' },
-    { id: 'ecommerce', name: 'Commerce' },
-    { id: 'mobileProduct', name: 'Mobile Products' },
-    { id: 'desktopSuite', name: 'Desktop Suites' },
-    { id: 'saasPlatform', name: 'SaaS Platforms' },
-    { id: 'processAutomation', name: 'Automation' },
-    { id: 'brandingKit', name: 'Branding' },
-    { id: 'marketingOps', name: 'Marketing Ops' },
-    { id: 'whiteLabel', name: 'White Label' },
+    { id: 'website', name: 'Website' },
+    { id: 'mobileApp', name: 'Mobile App' },
+    { id: 'desktopApp', name: 'Desktop Software' },
+    { id: 'customBusiness', name: 'Custom Business Software' },
+    { id: 'brandingMarketing', name: 'Branding & Marketing' },
+    { id: 'startupKit', name: 'Startup Kit' },
   ];
 
 export const workLibraryProjects: WorkLibraryProject[] = [
@@ -54,7 +48,7 @@ export const workLibraryProjects: WorkLibraryProject[] = [
     ],
     heroImage:
       'https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?auto=format&fit=crop&w=1600&q=80',
-    category: 'webExperience',
+    category: 'website',
     stats: {
       timeline: '6 weeks',
       scope: '12 templates',
@@ -74,7 +68,7 @@ export const workLibraryProjects: WorkLibraryProject[] = [
     ],
     heroImage:
       'https://images.unsplash.com/photo-1475180098004-ca77a66827be?auto=format&fit=crop&w=1600&q=80',
-    category: 'ecommerce',
+    category: 'website',
     stats: {
       timeline: '8 weeks',
       scope: '40+ screens',
@@ -94,7 +88,7 @@ export const workLibraryProjects: WorkLibraryProject[] = [
     ],
     heroImage:
       'https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=80',
-    category: 'mobileProduct',
+    category: 'mobileApp',
     stats: {
       timeline: '10 weeks',
       scope: 'Android + iOS',
@@ -114,7 +108,7 @@ export const workLibraryProjects: WorkLibraryProject[] = [
     ],
     heroImage:
       'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1600&q=80',
-    category: 'desktopSuite',
+    category: 'customBusiness',
     stats: {
       timeline: '12 weeks',
       scope: 'Windows + macOS',
@@ -134,7 +128,7 @@ export const workLibraryProjects: WorkLibraryProject[] = [
     ],
     heroImage:
       'https://images.unsplash.com/photo-1483478550801-ceba5fe50e8e?auto=format&fit=crop&w=1600&q=80',
-    category: 'saasPlatform',
+    category: 'desktopApp',
     stats: {
       timeline: '14 weeks',
       scope: '3 personas',
@@ -154,7 +148,7 @@ export const workLibraryProjects: WorkLibraryProject[] = [
     ],
     heroImage:
       'https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=1600&q=80',
-    category: 'processAutomation',
+    category: 'desktopApp',
     stats: {
       timeline: '16 weeks',
       scope: '7 integrations',
@@ -174,7 +168,7 @@ export const workLibraryProjects: WorkLibraryProject[] = [
     ],
     heroImage:
       'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1600&q=80',
-    category: 'brandingKit',
+    category: 'brandingMarketing',
     stats: {
       timeline: '5 weeks',
       scope: '40 deliverables',
@@ -194,7 +188,7 @@ export const workLibraryProjects: WorkLibraryProject[] = [
     ],
     heroImage:
       'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=1600&q=80',
-    category: 'marketingOps',
+    category: 'brandingMarketing',
     stats: {
       timeline: '7 weeks',
       scope: '20 component types',
@@ -214,7 +208,7 @@ export const workLibraryProjects: WorkLibraryProject[] = [
     ],
     heroImage:
       'https://images.unsplash.com/photo-1474631245212-32dc3c8310c6?auto=format&fit=crop&w=1600&q=80',
-    category: 'whiteLabel',
+    category: 'startupKit',
     stats: {
       timeline: '9 weeks',
       scope: '6 reseller kits',
