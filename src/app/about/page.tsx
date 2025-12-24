@@ -18,25 +18,25 @@ const coreTeam: CoreTeamMember[] = [
   {
     id: 1,
     name: "Sarbaz",
-    role: "System Architect • High-Scale Backend & API Design",
+    role: "System Architect Designs high-scale backend systems with robust, secure API architecture",
     image: "/sarbaz.jpeg",
   },
   {
     id: 2,
     name: "Madhukar",
-    role: "Lead Frontend Engineer • System Design & API Architecture",
+    role: "Lead Frontend Engineer ,scalable system design, API integration & performance architecture",
     image: "/madhukar.jpg",
   },
   {
     id: 3,
     name: "Virpal",
-    role: "AI/ML Engineer • Intelligent Systems & Automation",
+    role: "AI/ML Engineer Builds intelligent systems with machine learning models & automation workflows",
     image: "/virpal.jpg",
   },
   {
     id: 4,
     name: "Takshil",
-    role: "Creative Director • Brand Strategy & Visual Systems",
+    role: "Creative Director Crafts powerful brand strategies with premium visual identity systems",
     image: "/takshil.jpg",
   },
 ];
@@ -49,10 +49,11 @@ type CardInfoProps = {
 function CardInfo({ member }: CardInfoProps) {
   return (
     <div className="bg-white border border-emerald-50 shadow-[0_20px_50px_rgba(15,23,42,0.08)] relative h-[160px] rounded-2xl flex items-center px-4 transition-transform duration-300 hover:-translate-y-1">
-      <p className="text-[#212121] font-bold leading-snug font-Neue text-2xl">
+      <p className="text-[#212121] font-Neue text-2xl p-4 leading-tight">
         {member.name}
-        <br />
-        <span className="text-sm font-Neue text-[#4e4e4e]">{member.role}</span>
+        <span className="mt-2 block text-sm text-[#4e4e4e]">
+          {member.role}
+        </span>
       </p>
       <span className="absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center text-sm border border-emerald-200 bg-emerald-50 text-emerald-700 font-semibold">
         {member.id}
@@ -99,7 +100,7 @@ export default function AboutPage() {
   return (
     <main
       ref={scrollContainerRef}
-      className="min-h-screen w-full overflow-x-hidden  text-[#212121]"
+      className="min-h-screen w-full overflow-x-hidden font-Neue  text-[#212121]"
     >
       <Navbar />
 
