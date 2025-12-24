@@ -142,24 +142,29 @@ export default function AboutPage() {
           </p>
         </div>
 
-          <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4">
-
-            {coreTeam.map((member, idx) => (
+        <div className="max-w-7xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4">
+          {coreTeam.map((member, idx) => {
+            const isOdd = idx % 2 !== 0;
+            return (
               <div key={member.id} className="flex flex-col gap-6">
-                {idx % 2 === 0 ? (
-                  <>
-                    <CardImage member={member} />
-                    <CardInfo member={member} />
-                  </>
-                ) : (
-                  <>
-                    <CardInfo member={member} />
-                    <CardImage member={member} />
-                  </>
-                )}
+                <div
+                  className={`order-1 ${
+                    isOdd ? "sm:order-2" : "sm:order-1"
+                  }`}
+                >
+                  <CardImage member={member} />
+                </div>
+                <div
+                  className={`order-2 ${
+                    isOdd ? "sm:order-1" : "sm:order-2"
+                  }`}
+                >
+                  <CardInfo member={member} />
+                </div>
               </div>
-            ))}
-          </div>
+            );
+          })}
+        </div>
       </section>
       <Connect />
       <Footer />
