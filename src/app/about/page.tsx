@@ -24,7 +24,7 @@ const coreTeam: CoreTeamMember[] = [
   {
     id: 2,
     name: "Madhukar",
-    role: "Lead Engineer • Frontend Systems & API Architecture",
+    role: "Lead Frontend Engineer • System Design & API Architecture",
     image: "/madhukar.jpg",
   },
   {
