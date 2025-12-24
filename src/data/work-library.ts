@@ -30,7 +30,7 @@ export const workLibraryTabs: { id: 'all' | WorkLibraryCategory; name: string }[
     { id: 'mobileApp', name: 'Mobile App' },
     { id: 'desktopApp', name: 'Desktop Software' },
     { id: 'customBusiness', name: 'Custom Business Software' },
-    { id: 'brandingMarketing', name: 'Branding & Marketing' },
+    { id: 'brandingMarketing', name: 'Branding , UI/UX & Marketing ' },
     { id: 'startupKit', name: 'Startup Kit' },
   ];
 

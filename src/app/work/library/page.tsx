@@ -1,10 +1,9 @@
 'use client';
-
 import React, { Suspense, useMemo, useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import LocomotiveScroll from "locomotive-scroll";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
   workLibraryProjects,
   workLibraryTabs,
@@ -16,6 +15,7 @@ import { Footer } from "@/page/Footer";
 
 type TabId = (typeof workLibraryTabs)[number]["id"];
 
+// LibraryCard remains same
 const LibraryCard = ({ project }: { project: WorkLibraryProject }) => (
   <article className="group flex flex-col rounded-[32px] border border-slate-200 from-white via-white to-emerald-50 shadow-[0_25px_70px_rgba(15,23,42,0.12)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_35px_120px_rgba(15,23,42,0.14)]">
     <div className="relative m-5 mb-4 aspect-[4/2] overflow-hidden rounded-2xl">
@@ -30,7 +30,6 @@ const LibraryCard = ({ project }: { project: WorkLibraryProject }) => (
         {project.stack}
       </div>
     </div>
-
     <div className="flex flex-1 flex-col gap-5 px-6 pb-6">
       <div>
         <p className="text-xs uppercase tracking-[0.35em] text-emerald-600">
@@ -43,7 +42,6 @@ const LibraryCard = ({ project }: { project: WorkLibraryProject }) => (
           {project.summary}
         </p>
       </div>
-
       <ul className="grid gap-2 text-sm text-[#212121]">
         {project.deliverables.map((deliverable) => (
           <li
@@ -55,7 +53,6 @@ const LibraryCard = ({ project }: { project: WorkLibraryProject }) => (
           </li>
         ))}
       </ul>
-
       <div className="flex items-center justify-between pt-2">
         <p className="text-sm font-medium text-emerald-600">
           Impact: {project.stats.impact}
@@ -69,6 +66,7 @@ const LibraryCard = ({ project }: { project: WorkLibraryProject }) => (
   </article>
 );
 
+// Fallback remains same
 function LibraryPageFallback() {
   return (
     <main className="min-h-screen bg-white text-[#212121]">
@@ -99,47 +97,69 @@ export default function WorkLibraryPage() {
 
 function WorkLibraryContent() {
   const searchParams = useSearchParams();
-  const initializedFromQuery = useRef(false);
-  const [activeTab, setActiveTab] = useState<TabId>("all");
+  const router = useRouter();
+  const pathname = usePathname();
+  const scrollContainerRef = useRef<HTMLElement | null>(null);
+
+  // ✅ Yeh line sabse important hai — initial state query se set karo
+  const initialTab: TabId = (() => {
+    const tabParam = searchParams.get("tab");
+    if (!tabParam) return "all";
+    const isValid = workLibraryTabs.some((tab) => tab.id === tabParam);
+    return isValid ? (tabParam as TabId) : "all";
+  })();
+
+  const [activeTab, setActiveTab] = useState<TabId>(initialTab);
+
+  // Optional: Agar URL change ho externally (e.g. back button), toh sync karo
+  useEffect(() => {
+    const tabParam = searchParams.get("tab");
+    const validTab = tabParam && workLibraryTabs.some((t) => t.id === tabParam)
+      ? (tabParam as TabId)
+      : "all";
+
+    if (validTab !== activeTab) {
+      setActiveTab(validTab);
+    }
+  }, [searchParams, activeTab]);
 
   const filteredProjects = useMemo(() => {
     if (activeTab === "all") return workLibraryProjects;
-    return workLibraryProjects.filter(
-      (project) => project.category === activeTab
-    );
+    return workLibraryProjects.filter((project) => project.category === activeTab);
   }, [activeTab]);
 
-  useEffect(() => {
-    if (initializedFromQuery.current) return;
-    const tabParam = searchParams.get("tab");
-    if (tabParam) {
-      const isValidTab = workLibraryTabs.some((tab) => tab.id === tabParam);
-      if (isValidTab) {
-        setActiveTab(tabParam as TabId);
-      }
-    }
-    initializedFromQuery.current = true;
-  }, [searchParams]);
+  const handleTabChange = (tabId: TabId) => {
+    if (tabId === activeTab) return;
+    setActiveTab(tabId);
 
-  const scrollContainerRef = useRef<HTMLElement | null>(null);
+    const params = new URLSearchParams(searchParams.toString());
+    if (tabId === "all") {
+      params.delete("tab");
+    } else {
+      params.set("tab", tabId);
+    }
+
+    const queryString = params.toString();
+    router.replace(
+      queryString ? `${pathname}?${queryString}` : pathname,
+      { scroll: false }
+    );
+  };
 
   useEffect(() => {
     if (!scrollContainerRef.current) return;
-
     const locomotiveScroll = new LocomotiveScroll({
       el: scrollContainerRef.current,
       smooth: true,
     });
-
     return () => {
       locomotiveScroll.destroy();
     };
   }, []);
 
   return (
-    <main ref={scrollContainerRef} className="min-h-screen  text-[#212121]">
+    <main ref={scrollContainerRef} className="min-h-screen text-[#212121]">
       <Navbar />
-
       <section className="px-6 pt-28 pb-12 md:px-16 lg:px-24 font-Neue">
         <p className="uppercase text-xs font-semibold tracking-[0.55em] text-emerald-600">
           Work Library
@@ -152,14 +172,13 @@ function WorkLibraryContent() {
           mobile, desktop, automation, and branding missions. Each card outlines
           stack, scope, and the measurable impact.
         </p>
-
         <div className="mt-10 flex flex-wrap gap-3">
           {workLibraryTabs.map((tab) => {
             const isActive = activeTab === tab.id;
             return (
               <button
                 key={tab.id}
-                onClick={() => setActiveTab(tab.id)}
+                onClick={() => handleTabChange(tab.id)}
                 className={`rounded-2xl border px-4 py-2 text-sm font-semibold transition-all duration-300 ${
                   isActive
                     ? "border-neutral-900 bg-neutral-900 text-white shadow-lg shadow-slate-300/60"

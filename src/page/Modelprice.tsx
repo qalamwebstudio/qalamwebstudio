@@ -1,6 +1,7 @@
 import React, { useState, useCallback, useMemo } from "react";
 import { useRouter } from "next/navigation";
-import { ArrowUpRight, ArrowRight } from "lucide-react";
+import { ArrowUp, ArrowRight } from "lucide-react";
+import type { WorkLibraryCategory } from "@/data/work-library";
 
 type PricingPlan = {
   name: string;
@@ -34,7 +35,7 @@ type PricingTab = {
 const tabs: PricingTab[] = [
   { id: "mobileApps", name: "Mobile Apps" },
   { id: "websiteDevelopment", name: "Websites" },
-  { id: "desktopSoftware", name: "Desktop Apps" },
+  { id: "desktopSoftware", name: "Desktop Software" },
   { id: "redesign", name: "Website Redesign" },
   { id: "brandMarketing", name: "Brand & Marketing" },
   { id: "startupKit", name: "Startup Kit" },
@@ -155,238 +156,248 @@ const pricingData: Record<PricingCategoryKey, PricingCategory> = {
   },
 
   desktopSoftware: {
-  title: "Desktop Software",
-  description:
-    "Lightweight to enterprise-grade desktop applications built for productivity and control.",
-  features: [
-    "Offline-first workflows with local database support",
-    "Secure installers with auto-update pipelines",
-    "Optimized performance for heavy business operations",
-    "Cross-platform support (Windows / macOS)",
-    "Long-term maintainability and data security",
-  ],
-  plans: [
-    {
-      name: "Mini Desktop Tool",
-      price: "₹8,000 – ₹18,000",
-      details: [
-        "Lightweight utility built using Python or Electron",
-        "Local database with offline access",
-        "Simple workflows and focused functionality",
-        "Low system resource usage",
-        "Ideal for internal tools and automation",
-      ],
-    },
-    {
-      name: "Business Desktop Software",
-      price: "₹20,000 – ₹40,000",
-      details: [
-        "Business-grade desktop application",
-        "Advanced workflows and reporting",
-        "Role-based access and data security",
-        "Designed for long-term business use",
-      ],
-      popular: true,
-    },
-    {
-      name: "Custom Desktop ERP Software",
-      price: "₹60,000+",
-      details: [
-        "Fully customized ERP tailored to business processes",
-        "Modules for inventory, billing, accounts, and reports",
-        "Offline-first architecture with secure local storage",
-        "User roles, permissions, and audit logs",
-        "Scalable system with future module expansion",
-      ],
-    },
-  ],
-},
+    title: "Desktop Software",
+    description:
+      "Lightweight to enterprise-grade desktop applications built for productivity and control.",
+    features: [
+      "Offline-first workflows with local database support",
+      "Secure installers with auto-update pipelines",
+      "Optimized performance for heavy business operations",
+      "Cross-platform support (Windows / macOS)",
+      "Long-term maintainability and data security",
+    ],
+    plans: [
+      {
+        name: "Mini Desktop Tool",
+        price: "₹8,000 – ₹18,000",
+        details: [
+          "Lightweight utility built using Python or Electron",
+          "Local database with offline access",
+          "Simple workflows and focused functionality",
+          "Low system resource usage",
+          "Ideal for internal tools and automation",
+        ],
+      },
+      {
+        name: "Business Desktop Software",
+        price: "₹20,000 – ₹40,000",
+        details: [
+          "Business-grade desktop application",
+          "Advanced workflows and reporting",
+          "Role-based access and data security",
+          "Designed for long-term business use",
+        ],
+        popular: true,
+      },
+      {
+        name: "Custom Desktop ERP Software",
+        price: "₹60,000+",
+        details: [
+          "Fully customized ERP tailored to business processes",
+          "Modules for inventory, billing, accounts, and reports",
+          "Offline-first architecture with secure local storage",
+          "User roles, permissions, and audit logs",
+          "Scalable system with future module expansion",
+        ],
+      },
+    ],
+  },
 
 
   redesign: {
-  title: "Website Redesign",
-  description:
-    "Upgrade outdated websites with modern UI, speed, and usability improvements.",
-  features: [
-    "Figma-first redesign with collaborative reviews and iterations",
-    "UI/UX, accessibility, SEO, and conversion-focused audits",
-    "Performance optimization and Core Web Vitals improvements",
-    "Migration and redesign without downtime or SEO loss",
-    "Modern design aligned with current brand and user behavior",
-  ],
-  plans: [
-    {
-      name: "UI Refresh",
-      price: "₹4,000 – ₹8,000",
-      details: [
-        "Visual design improvements and layout refinement",
-        "Modern colors, typography, and spacing updates",
-        "Minor UI fixes without changing core structure",
-        "Best for websites that look outdated but function well",
-      ],
-    },
-    {
-      name: "Full Redesign",
-      price: "₹10,000 – ₹20,000",
-      details: [
-        "Complete UI/UX redesign based on modern standards",
-        "Performance and loading speed optimization",
-        "SEO fixes and structural improvements",
-        "Better usability and conversion-focused layouts",
-        "Ideal for businesses planning growth or rebranding",
-      ],
-      popular: true,
-    },
-  ],
-},
+    title: "Website Redesign",
+    description:
+      "Upgrade outdated websites with modern UI, speed, and usability improvements.",
+    features: [
+      "Figma-first redesign with collaborative reviews and iterations",
+      "UI/UX, accessibility, SEO, and conversion-focused audits",
+      "Performance optimization and Core Web Vitals improvements",
+      "Migration and redesign without downtime or SEO loss",
+      "Modern design aligned with current brand and user behavior",
+    ],
+    plans: [
+      {
+        name: "UI Refresh",
+        price: "₹4,000 – ₹8,000",
+        details: [
+          "Visual design improvements and layout refinement",
+          "Modern colors, typography, and spacing updates",
+          "Minor UI fixes without changing core structure",
+          "Best for websites that look outdated but function well",
+        ],
+      },
+      {
+        name: "Full Redesign",
+        price: "₹10,000 – ₹20,000",
+        details: [
+          "Complete UI/UX redesign based on modern standards",
+          "Performance and loading speed optimization",
+          "SEO fixes and structural improvements",
+          "Better usability and conversion-focused layouts",
+          "Ideal for businesses planning growth or rebranding",
+        ],
+        popular: true,
+      },
+    ],
+  },
 
 
   startupKit: {
-  title: "Startup Kit",
-  description:
-    "Everything a startup needs to launch fast and look professional.",
-  features: [
-    "Conversion-focused marketing website with startup-ready copy",
-    "Complete brand identity including logo and visual guidelines",
-    "Pitch deck slides and basic investor-ready assets",
-    "Automation setup for CRM, email workflows, and analytics",
-    "Launch-ready setup to save time and early-stage costs",
-  ],
-  plans: [
-    {
-      name: "Basic Startup Kit",
-      price: "₹15,000 – ₹25,000",
-      details: [
-        "Professional startup website (static or basic dynamic)",
-        "Custom logo design with brand colors",
-        "Domain and hosting setup guidance",
-        "Basic SEO and performance optimization",
-        "Ideal for early-stage or idea-stage startups",
-      ],
-    },
-    {
-      name: "Pro Startup Kit",
-      price: "₹30,000 – ₹50,000",
-      details: [
-        "Complete startup website with advanced UI and structure",
-        "Custom logo and full branding assets",
-        "Mobile or desktop billing application setup",
-        "Marketing creatives (banners, visiting cards, pitch visuals)",
-        "Designed for startups preparing for growth or funding",
-      ],
-      popular: true,
-    },
-  ],
-},
+    title: "Startup Kit",
+    description:
+      "Everything a startup needs to launch fast and look professional.",
+    features: [
+      "Conversion-focused marketing website with startup-ready copy",
+      "Complete brand identity including logo and visual guidelines",
+      "Pitch deck slides and basic investor-ready assets",
+      "Automation setup for CRM, email workflows, and analytics",
+      "Launch-ready setup to save time and early-stage costs",
+    ],
+    plans: [
+      {
+        name: "Basic Startup Kit",
+        price: "₹15,000 – ₹25,000",
+        details: [
+          "Professional startup website (static or basic dynamic)",
+          "Custom logo design with brand colors",
+          "Domain and hosting setup guidance",
+          "Basic SEO and performance optimization",
+          "Ideal for early-stage or idea-stage startups",
+        ],
+      },
+      {
+        name: "Pro Startup Kit",
+        price: "₹30,000 – ₹50,000",
+        details: [
+          "Complete startup website with advanced UI and structure",
+          "Custom logo and full branding assets",
+          "Mobile or desktop billing application setup",
+          "Marketing creatives (banners, visiting cards, pitch visuals)",
+          "Designed for startups preparing for growth or funding",
+        ],
+        popular: true,
+      },
+    ],
+  },
 
 
   whiteLabel: {
-  title: "White-Label Services",
-  description:
-    "Fully built, customizable solutions ready for resale or quick deployment.",
-  features: [
-    "Complete source code ownership with clear documentation",
-    "Multi-tenant architecture with easy branding switches",
-    "Customizable UI, logos, and color themes",
-    "Resale-ready setup with deployment guidance",
-    "Team training and handover for smooth client delivery",
-  ],
-  plans: [
-    {
-      name: "Delivery App Template",
-      price: "₹30,000 – ₹50,000",
-      details: [
-        "Ready-to-use delivery app with full source code",
-        "Firebase backend for authentication and data handling",
-        "Order management and basic admin panel",
-        "Easily rebrandable for multiple clients",
-        "Ideal for agencies and food delivery startups",
-      ],
-      popular: true,
-    },
-    {
-      name: "POS System",
-      price: "₹25,000 – ₹45,000",
-      details: [
-        "Complete POS software with billing system",
-        "Inventory management and stock tracking",
-        "Multi-store and multi-user support",
-        "Custom branding for different businesses",
-        "Suitable for retail, restaurants, and franchises",
-      ],
-    },
-    {
-      name: "Agency Website",
-      price: "₹20,000 – ₹40,000",
-      details: [
-        "Modern agency website with CMS integration",
-        "SEO-optimized pages for better visibility",
-        "Reusable structure for multiple client projects",
-        "Easy content updates and branding changes",
-        "Perfect for agencies reselling websites to clients",
-      ],
-    },
-  ],
-},
+    title: "White-Label Services",
+    description:
+      "Fully built, customizable solutions ready for resale or quick deployment.",
+    features: [
+      "Complete source code ownership with clear documentation",
+      "Multi-tenant architecture with easy branding switches",
+      "Customizable UI, logos, and color themes",
+      "Resale-ready setup with deployment guidance",
+      "Team training and handover for smooth client delivery",
+    ],
+    plans: [
+      {
+        name: "Delivery App Template",
+        price: "₹30,000 – ₹50,000",
+        details: [
+          "Ready-to-use delivery app with full source code",
+          "Firebase backend for authentication and data handling",
+          "Order management and basic admin panel",
+          "Easily rebrandable for multiple clients",
+          "Ideal for agencies and food delivery startups",
+        ],
+        popular: true,
+      },
+      {
+        name: "POS System",
+        price: "₹25,000 – ₹45,000",
+        details: [
+          "Complete POS software with billing system",
+          "Inventory management and stock tracking",
+          "Multi-store and multi-user support",
+          "Custom branding for different businesses",
+          "Suitable for retail, restaurants, and franchises",
+        ],
+      },
+      {
+        name: "Agency Website",
+        price: "₹20,000 – ₹40,000",
+        details: [
+          "Modern agency website with CMS integration",
+          "SEO-optimized pages for better visibility",
+          "Reusable structure for multiple client projects",
+          "Easy content updates and branding changes",
+          "Perfect for agencies reselling websites to clients",
+        ],
+      },
+    ],
+  },
 
 
   brandMarketing: {
-  title: "Branding & Marketing",
-  description:
-    "Identity, collateral, and campaign assets crafted to keep your brand consistent everywhere.",
-  features: [
-    "Multiple logo concepts with structured feedback and revisions",
-    "Complete brand guidelines for color, typography, and usage",
-    "Print and digital-ready exports for all platforms",
-    "Fast creative turnaround with direct collaboration",
-    "Consistent branding across online and offline touchpoints",
-  ],
-  plans: [
-    {
-      name: "Logo Design",
-      price: "₹2,000 – ₹5,000",
-      details: [
-        "Custom logo concepts based on brand understanding",
-        "Multiple revisions for final refinement",
-        "Source files and high-resolution exports",
-        "Usable across web, print, and social media",
-      ],
-    },
-    {
-      name: "Brand Identity Kit",
-      price: "₹6,000 – ₹12,000",
-      details: [
-        "Custom logo with brand-aligned design",
-        "Defined color palette and typography system",
-        "Brand usage guidelines for consistency",
-        "Assets ready for web, print, and marketing",
-        "Ideal for startups and growing brands",
-      ],
-      popular: true,
-    },
-    {
-      name: "Visiting / Brand Card Design",
-      price: "₹1,000 – ₹3,000",
-      details: [
-        "Professional visiting or brand card design",
-        "Print-ready files with proper bleed and margins",
-        "Digital formats for sharing online",
-        "Design aligned with overall brand identity",
-      ],
-    },
-    {
-      name: "Social Media Creatives",
-      price: "₹2,000 – ₹6,000",
-      details: [
-        "Custom-designed social media posts and banners",
-        "Campaign-ready creatives for promotions",
-        "Consistent branding across all designs",
-        "Formats optimized for major social platforms",
-      ],
-    },
-  ],
-},
+    title: "Branding & Marketing",
+    description:
+      "Identity, collateral, and campaign assets crafted to keep your brand consistent everywhere.",
+    features: [
+      "Multiple logo concepts with structured feedback and revisions",
+      "Complete brand guidelines for color, typography, and usage",
+      "Print and digital-ready exports for all platforms",
+      "Fast creative turnaround with direct collaboration",
+      "Consistent branding across online and offline touchpoints",
+    ],
+    plans: [
+      {
+        name: "Logo Design",
+        price: "₹2,000 – ₹5,000",
+        details: [
+          "Custom logo concepts based on brand understanding",
+          "Multiple revisions for final refinement",
+          "Source files and high-resolution exports",
+          "Usable across web, print, and social media",
+        ],
+      },
+      {
+        name: "Brand Identity Kit",
+        price: "₹6,000 – ₹12,000",
+        details: [
+          "Custom logo with brand-aligned design",
+          "Defined color palette and typography system",
+          "Brand usage guidelines for consistency",
+          "Assets ready for web, print, and marketing",
+          "Ideal for startups and growing brands",
+        ],
+        popular: true,
+      },
+      {
+        name: "Visiting / Brand Card Design",
+        price: "₹1,000 – ₹3,000",
+        details: [
+          "Professional visiting or brand card design",
+          "Print-ready files with proper bleed and margins",
+          "Digital formats for sharing online",
+          "Design aligned with overall brand identity",
+        ],
+      },
+      {
+        name: "Social Media Creatives",
+        price: "₹2,000 – ₹6,000",
+        details: [
+          "Custom-designed social media posts and banners",
+          "Campaign-ready creatives for promotions",
+          "Consistent branding across all designs",
+          "Formats optimized for major social platforms",
+        ],
+      },
+    ],
+  },
 
+};
+
+const libraryTabByPricing: Record<PricingCategoryKey, WorkLibraryCategory> = {
+  mobileApps: "mobileApp",
+  websiteDevelopment: "website",
+  desktopSoftware: "desktopApp",
+  redesign: "website",
+  brandMarketing: "brandingMarketing",
+  startupKit: "startupKit",
+  whiteLabel: "customBusiness",
 };
 
 // Memoized CheckIcon to prevent unnecessary re-renders
@@ -490,9 +501,9 @@ const ModelpriceComponent = () => {
   }, [activeData.title]);
 
   const handleViewWork = useCallback(() => {
-    // Add view work logic here
-    console.log("View all work clicked");
-  }, []);
+    const targetTab = libraryTabByPricing[activeTab];
+    router.push(`/work/library?tab=${targetTab}`);
+  }, [activeTab, router]);
 
   const handlePlanSelect = useCallback(
     (plan: PricingPlan) => {
@@ -512,11 +523,10 @@ const ModelpriceComponent = () => {
           <button
             key={tab.id}
             onClick={() => handleTabChange(tab.id)}
-            className={`rounded-2xl border px-4 py-2 text-sm font-semibold transition-all duration-300 ${
-              isActive
-                ? "border-neutral-900 bg-neutral-900 text-white shadow-lg shadow-slate-300/60"
-                : "border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-neutral-900"
-            }`}
+            className={`rounded-2xl border px-4 py-2 text-sm font-semibold transition-all duration-300 ${isActive
+              ? "border-neutral-900 bg-neutral-900 text-white shadow-lg shadow-slate-300/60"
+              : "border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-neutral-900"
+              }`}
             aria-label={`Switch to ${tab.name} pricing`}
           >
             {tab.name}
@@ -549,7 +559,7 @@ const ModelpriceComponent = () => {
           {tabButtons}
         </div>
 
-        <article className="mt-14 rounded-[40px] border border-slate-100 bg-[#f1f1f1] shadow-[0_35px_120px_rgba(15,23,42,0.15)] backdrop-blur-xl  p-6 lg:p-10  ">
+        <article className="mt-14 rounded-[40px] border border-slate-100 bg-gradient-to-br from-white via-white to-emerald-50  shadow-[0_35px_120px_rgba(15,23,42,0.15)] backdrop-blur-xl  p-6 lg:p-10  ">
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             <div>
               <div className="inline-flex items-center gap-2 rounded-full border border-emerald-100 bg-emerald-50 px-4 py-1 text-xs font-semibold uppercase tracking-[0.3em] text-emerald-600">
@@ -564,25 +574,16 @@ const ModelpriceComponent = () => {
                 </p>
               )}
             </div>
-            <div className="flex flex-wrap gap-3">
-              <a
-                onClick={handleQuoteRequest}
-                className="group flex items-center justify-center pl-6 pr-6 py-3 border border-black bg-black hover:bg-transparent  text-white hover:text-black rounded-full transition-colors  duration-200 cursor-pointer"
-              >
-                Request quote
-                <div className="relative ml-8 w-2 h-2 group-hover:scale-500 bg-[#f1f1f1] duration-200 rounded-full">
-                  <ArrowUpRight className="absolute w-2 h-2 text-black opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                </div>
-              </a>
-              <a
+            <div className="flex shrink-0">
+              <button
                 onClick={handleViewWork}
-                className="group flex items-center justify-center pl-6 pr-6 py-3 border border-black bg-transparent hover:bg-black  text-black hover:text-white rounded-full transition-colors  duration-200 cursor-pointer"
+                className="overflow-hidden group flex items-center justify-center pl-8 pr-6 py-4 border bg-[#212121] hover:bg-black text-white rounded-full transition-colors  duration-200 cursor-pointer"
               >
-                View recent work
-                <div className="relative ml-4 w-2 h-2 group-hover:scale-500 bg-black  duration-200 rounded-full">
-                  <ArrowUpRight className="absolute w-2 h-2 text-white opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                <span className="z-10">View recent work</span>
+                <div className="relative ml-8 w-2 h-2 group-hover:scale-500 bg-white duration-200 rounded-full">
+                  <ArrowUp className="absolute w-2 h-2 text-black opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
-              </a>
+              </button>
             </div>
           </div>
 
@@ -596,7 +597,7 @@ const ModelpriceComponent = () => {
             ))}
           </div>
 
-          <div className="mt-12 rounded-3xl border border-slate-100 bg-[#f8f8f8] px-6 py-6">
+          <div className="mt-12 rounded-3xl  bg-transparent px-6 py-6">
             <p className="text-sm font-semibold uppercase tracking-[0.35em] text-[#212121]">
               In every package, inclusive
             </p>

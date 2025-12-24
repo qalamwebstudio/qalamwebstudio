@@ -3,17 +3,9 @@ import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { ArrowUpRight } from "lucide-react";
 import gsap from "gsap";
+import type { WorkLibraryCategory } from "@/data/work-library";
 
-type LibraryTabId =
-  | "webExperience"
-  | "mobileProduct"
-  | "design"
-  | "desktopSuite"
-  | "saasPlatform"
-  | "processAutomation"
-  | "brandingKit"
-  | "marketingOps"
-  | "whiteLabel";
+type LibraryTabId = WorkLibraryCategory;
 
 type ShowcaseProject = {
   id: number;
@@ -38,7 +30,7 @@ const projects: ShowcaseProject[] = [
       "Conversion-focused layouts",
       "SEO & analytics ready",
     ],
-    libraryTab: "webExperience",
+    libraryTab: "website",
   },
   {
     id: 2,
@@ -52,7 +44,7 @@ const projects: ShowcaseProject[] = [
       "Real-time notifications",
       "Offline-first experience",
     ],
-    libraryTab: "mobileProduct",
+    libraryTab: "mobileApp",
   },
   {
     id: 3,
@@ -66,7 +58,7 @@ const projects: ShowcaseProject[] = [
       "Interactive prototypes",
       "Accessibility-focused UX",
     ],
-    libraryTab: "processAutomation",
+    libraryTab: "brandingMarketing",
   },
   {
     id: 4,
@@ -80,7 +72,7 @@ const projects: ShowcaseProject[] = [
       "Offline-first sync",
       "Advanced reporting tools",
     ],
-    libraryTab: "desktopSuite",
+    libraryTab: "desktopApp",
   },
   {
     id: 5,
@@ -94,7 +86,7 @@ const projects: ShowcaseProject[] = [
       "Secure role-based access",
       "Scalable backend architecture",
     ],
-    libraryTab: "saasPlatform",
+    libraryTab: "customBusiness",
   },
   {
     id: 6,
@@ -108,7 +100,7 @@ const projects: ShowcaseProject[] = [
       "Auth, billing & CMS",
       "Startup-ready tech stack",
     ],
-    libraryTab: "processAutomation",
+    libraryTab: "startupKit",
   },
   {
     id: 7,
@@ -122,7 +114,7 @@ const projects: ShowcaseProject[] = [
       "Color & typography system",
       "Brand guidelines",
     ],
-    libraryTab: "brandingKit",
+    libraryTab: "brandingMarketing",
   },
   {
     id: 8,
@@ -136,7 +128,7 @@ const projects: ShowcaseProject[] = [
       "Premium print quality",
       "Campaign-ready assets",
     ],
-    libraryTab: "marketingOps",
+    libraryTab: "brandingMarketing",
   },
   {
     id: 9,
@@ -150,7 +142,7 @@ const projects: ShowcaseProject[] = [
       "Flexible team scaling",
       "Weekly progress reporting",
     ],
-    libraryTab: "whiteLabel",
+    libraryTab: "customBusiness",
   },
 ];
 
