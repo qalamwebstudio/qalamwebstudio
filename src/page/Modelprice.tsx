@@ -495,11 +495,6 @@ const ModelpriceComponent = () => {
     setActiveTab(tabId);
   }, []);
 
-  const handleQuoteRequest = useCallback(() => {
-    // Add quote request logic here
-    console.log("Quote requested for:", activeData.title);
-  }, [activeData.title]);
-
   const handleViewWork = useCallback(() => {
     const targetTab = libraryTabByPricing[activeTab];
     router.push(`/work/library?tab=${targetTab}`);
