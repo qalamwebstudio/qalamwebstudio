@@ -55,13 +55,13 @@ type CardInfoProps = {
 
 function CardInfo({ member }: CardInfoProps) {
   return (
-    <div className="bg-gradient-to-br from-white/80 via-emerald-400 to-emerald-600/60 shadow-[0_35px_120px_rgba(15,23,42,0.15)] backdrop-blur-xl relative h-[160px] rounded-2xl  flex items-center px-4">
-      <p className="text-[#212121]  font-bold  leading-snug font-Neue  text-2xl">
+    <div className="bg-white border border-emerald-50 shadow-[0_20px_50px_rgba(15,23,42,0.08)] relative h-[160px] rounded-2xl flex items-center px-4 transition-transform duration-300 hover:-translate-y-1">
+      <p className="text-[#212121] font-bold leading-snug font-Neue text-2xl">
         {member.name}
         <br />
         <span className="text-sm font-Neue text-[#4e4e4e]">{member.role}</span>
       </p>
-      <span className="from-white/80 to-emerald-400/60 absolute top-3 right-3 w-8 h-8 rounded-full flex items-center bg-gradient-to-br justify-center text-sm">
+      <span className="absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center text-sm border border-emerald-200 bg-emerald-50 text-emerald-700 font-semibold">
         {member.id}
       </span>
     </div>
@@ -74,16 +74,17 @@ type CardImageProps = {
 
 function CardImage({ member }: CardImageProps) {
   return (
-    <div className="shadow-[0_35px_120px_rgba(15,23,42,0.15)] backdrop-blur-xl relative h-[320px] rounded-2xl border border-black/30 flex items-center justify-center">
+    <div className="group shadow-[0_25px_60px_rgba(15,23,42,0.12)] relative h-[320px] rounded-2xl border border-slate-200 overflow-hidden">
       <Image
         src={member.image}
         alt={`${member.name} portrait`}
         width={220}
         height={280}
-        className="h-full w-full object-cover rounded-xl"
+        loading="lazy"
+        className="h-full w-full object-cover transition-transform duration-500 ease-out will-change-transform group-hover:scale-105"
       />
 
-      <span className="from-white/80 to-emerald-400/60 absolute top-3 right-3 w-8 h-8 rounded-full flex items-center bg-gradient-to-br justify-center text-sm">
+      <span className="absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center text-sm border border-white/70 bg-white/90 text-[#212121] font-semibold">
         {member.id}
       </span>
     </div>

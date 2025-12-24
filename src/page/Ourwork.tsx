@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { ArrowUpRight } from "lucide-react";
 import gsap from "gsap";
 
@@ -123,8 +124,10 @@ const projects = [
   },
 ];
 
+
 export const Ourwork = () => {
   const [hoveredProject, setHoveredProject] = useState<string | null>(null);
+  const router = useRouter();
 
   useEffect(() => {
     // Initialize GSAP animations
@@ -241,12 +244,15 @@ export const Ourwork = () => {
       </div>
       <div className="relative w-full items-center justify-center my-10 mt-24 ">
         <div className="flex flex-col items-center justify-center space-y-4">
-          <a className="group flex items-center justify-center pl-8 pr-6 py-4 border bg-[#212121] hover:bg-black text-white rounded-full transition-colors  duration-200 cursor-pointer ">
-            View all our work
+          <button
+            onClick={() => router.push("/work/library")}
+            className="overflow-hidden group flex items-center justify-center pl-8 pr-6 py-4 border bg-[#212121] hover:bg-black text-white rounded-full transition-colors  duration-200 cursor-pointer "
+          >
+            <span className="z-10">View all our work</span> 
             <div className="relative ml-8 w-2 h-2 group-hover:scale-500 bg-white duration-200 rounded-full">
               <ArrowUpRight className="absolute w-2 h-2 text-black opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
             </div>
-          </a>
+          </button>
         </div>
       </div>
     </section>

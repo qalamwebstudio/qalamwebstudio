@@ -1,0 +1,154 @@
+'use client';
+
+import React, { useMemo, useState } from "react";
+import Image from "next/image";
+import { ArrowUpRight } from "lucide-react";
+import LocomotiveScroll from "locomotive-scroll";
+import { useRef, useEffect } from "react";
+import {
+  workLibraryProjects,
+  workLibraryTabs,
+  WorkLibraryProject,
+} from "@/data/work-library";
+import { Navbar } from "@/components/Navbar";
+import { Connect } from "@/page/Connect";
+import { Footer } from "@/page/Footer";
+
+type TabId = (typeof workLibraryTabs)[number]["id"];
+
+const LibraryCard = ({ project }: { project: WorkLibraryProject }) => (
+  <article className="group flex flex-col rounded-[32px] border border-slate-200 bg-white shadow-[0_25px_70px_rgba(15,23,42,0.12)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[0_35px_120px_rgba(15,23,42,0.14)]">
+    <div className="relative m-5 mb-4 aspect-[4/2] overflow-hidden rounded-2xl">
+      <Image
+        src={project.heroImage}
+        alt={`${project.title} preview`}
+        fill
+        className="object-cover transition-transform duration-500 group-hover:scale-105"
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+      />
+      <div className="absolute left-5 top-5 rounded-full bg-white/90 px-4 py-1 text-[11px] font-semibold uppercase tracking-[0.35em] text-[#212121]">
+        {project.stack}
+      </div>
+    </div>
+
+    <div className="flex flex-1 flex-col gap-5 px-6 pb-6">
+      <div>
+        <p className="text-xs uppercase tracking-[0.35em] text-emerald-600">
+          {project.stats.scope} • {project.stats.timeline}
+        </p>
+        <h2 className="mt-3 text-2xl font-semibold text-[#212121]">
+          {project.title}
+        </h2>
+        <p className="mt-2 text-sm text-[#212121]/80 leading-relaxed">
+          {project.summary}
+        </p>
+      </div>
+
+      <ul className="grid gap-2 text-sm text-[#212121]">
+        {project.deliverables.map((deliverable) => (
+          <li
+            key={deliverable}
+            className="flex items-center gap-2 rounded-2xl border border-[#212121]/10 bg-[#f7f7f7] px-3 py-2"
+          >
+            <span className="h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+            {deliverable}
+          </li>
+        ))}
+      </ul>
+
+      <div className="flex items-center justify-between pt-2">
+        <p className="text-sm font-medium text-emerald-600">
+          Impact: {project.stats.impact}
+        </p>
+        <button className="inline-flex items-center gap-2 rounded-full border border-[#212121] bg-[#212121] px-5 py-2 text-sm font-semibold text-white transition-colors duration-300 hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black">
+          View project
+          <ArrowUpRight className="h-4 w-4" />
+        </button>
+      </div>
+    </div>
+  </article>
+);
+
+export default function WorkLibraryPage() {
+  const [activeTab, setActiveTab] = useState<TabId>("all");
+
+  const filteredProjects = useMemo(() => {
+    if (activeTab === "all") return workLibraryProjects;
+    return workLibraryProjects.filter(
+      (project) => project.category === activeTab
+    );
+  }, [activeTab]);
+
+    const scrollContainerRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    if (!scrollContainerRef.current) return;
+
+    const locomotiveScroll = new LocomotiveScroll({
+      el: scrollContainerRef.current,
+      smooth: true,
+    });
+
+    return () => {
+      locomotiveScroll.destroy();
+    };
+  }, []);
+
+  return (
+    <main ref={scrollContainerRef} className="min-h-screen bg-[#f5f5f5] text-[#212121]">
+      <Navbar />
+
+      <section className="px-6 pt-28 pb-12 md:px-16 lg:px-24 font-Neue">
+        <p className="uppercase text-xs font-semibold tracking-[0.55em] text-emerald-600">
+          Work Library
+        </p>
+        <h1 className="mt-4 text-4xl md:text-6xl font-bold leading-tight">
+          Every project, launch, and system we&apos;ve shipped recently.
+        </h1>
+        <p className="mt-4 max-w-3xl text-base md:text-lg text-[#212121]/80">
+          Browse work by track and see how our delivery squads handle web,
+          mobile, desktop, automation, and branding missions. Each card outlines
+          stack, scope, and the measurable impact.
+        </p>
+
+        <div className="mt-10 flex flex-wrap gap-3">
+          {workLibraryTabs.map((tab) => {
+            const isActive = activeTab === tab.id;
+            return (
+              <button
+                key={tab.id}
+                onClick={() => setActiveTab(tab.id)}
+                className={`rounded-2xl border px-4 py-2 text-sm font-semibold transition-all duration-300 ${
+                  isActive
+                    ? "border-neutral-900 bg-neutral-900 text-white shadow-lg shadow-slate-300/60"
+                    : "border-slate-200 bg-white text-slate-600 hover:border-slate-300 hover:text-neutral-900"
+                }`}
+                aria-label={`Filter work by ${tab.name}`}
+              >
+                {tab.name}
+              </button>
+            );
+          })}
+        </div>
+      </section>
+
+      <section className="px-6 pb-20 md:px-16 lg:px-24">
+        {filteredProjects.length === 0 ? (
+          <div className="rounded-3xl border border-dashed border-slate-300 bg-white/70 p-12 text-center text-slate-600">
+            No work published under this category yet. Ping us for a tailored
+            case study.
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 gap-8 sm:grid-cols-2 lg:grid-cols-3">
+            {filteredProjects.map((project) => (
+              <LibraryCard key={project.id} project={project} />
+            ))}
+          </div>
+        )}
+      </section>
+
+      <Connect />
+      <Footer />
+    </main>
+  );
+}
