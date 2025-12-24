@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useMemo, useState, useEffect, useRef } from "react";
+import React, { Suspense, useMemo, useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import LocomotiveScroll from "locomotive-scroll";
@@ -69,7 +69,35 @@ const LibraryCard = ({ project }: { project: WorkLibraryProject }) => (
   </article>
 );
 
+function LibraryPageFallback() {
+  return (
+    <main className="min-h-screen bg-white text-[#212121]">
+      <Navbar />
+      <section className="px-6 pt-28 pb-12 md:px-16 lg:px-24 font-Neue">
+        <p className="uppercase text-xs font-semibold tracking-[0.55em] text-emerald-600">
+          Loading Work Library
+        </p>
+        <h1 className="mt-4 text-4xl md:text-6xl font-bold leading-tight">
+          Gathering recent work…
+        </h1>
+        <p className="mt-4 max-w-3xl text-base md:text-lg text-[#212121]/80">
+          Hang tight while we load case studies and delivery tracks.
+        </p>
+      </section>
+      <Footer />
+    </main>
+  );
+}
+
 export default function WorkLibraryPage() {
+  return (
+    <Suspense fallback={<LibraryPageFallback />}>
+      <WorkLibraryContent />
+    </Suspense>
+  );
+}
+
+function WorkLibraryContent() {
   const searchParams = useSearchParams();
   const initializedFromQuery = useRef(false);
   const [activeTab, setActiveTab] = useState<TabId>("all");

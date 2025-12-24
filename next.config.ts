@@ -1,8 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  // Use supported top-level options in Next 15
-  optimizePackageImports: ['lucide-react', 'framer-motion', 'gsap'],
   turbopack: {},
 
   // Optimize images
