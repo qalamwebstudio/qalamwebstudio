@@ -1,10 +1,10 @@
 'use client';
 
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import LocomotiveScroll from "locomotive-scroll";
-import { useRef, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 import {
   workLibraryProjects,
   workLibraryTabs,
@@ -70,6 +70,8 @@ const LibraryCard = ({ project }: { project: WorkLibraryProject }) => (
 );
 
 export default function WorkLibraryPage() {
+  const searchParams = useSearchParams();
+  const initializedFromQuery = useRef(false);
   const [activeTab, setActiveTab] = useState<TabId>("all");
 
   const filteredProjects = useMemo(() => {
@@ -79,7 +81,21 @@ export default function WorkLibraryPage() {
     );
   }, [activeTab]);
 
-    const scrollContainerRef = useRef<HTMLElement | null>(null);
+  useEffect(() => {
+    if (initializedFromQuery.current) return;
+    const tabParam = searchParams.get("tab");
+    if (!tabParam) {
+      initializedFromQuery.current = true;
+      return;
+    }
+    const isValidTab = workLibraryTabs.some((tab) => tab.id === tabParam);
+    if (isValidTab) {
+      setActiveTab(tabParam as TabId);
+    }
+    initializedFromQuery.current = true;
+  }, [searchParams]);
+
+  const scrollContainerRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     if (!scrollContainerRef.current) return;

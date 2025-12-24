@@ -4,7 +4,28 @@ import { useRouter } from "next/navigation";
 import { ArrowUpRight } from "lucide-react";
 import gsap from "gsap";
 
-const projects = [
+type LibraryTabId =
+  | "webExperience"
+  | "mobileProduct"
+  | "design"
+  | "desktopSuite"
+  | "saasPlatform"
+  | "processAutomation"
+  | "brandingKit"
+  | "marketingOps"
+  | "whiteLabel";
+
+type ShowcaseProject = {
+  id: number;
+  label: string;
+  title: string;
+  description: string;
+  image: string;
+  details: string[];
+  libraryTab: LibraryTabId;
+};
+
+const projects: ShowcaseProject[] = [
   {
     id: 1,
     label: "WEBSITE",
@@ -17,6 +38,7 @@ const projects = [
       "Conversion-focused layouts",
       "SEO & analytics ready",
     ],
+    libraryTab: "webExperience",
   },
   {
     id: 2,
@@ -30,6 +52,7 @@ const projects = [
       "Real-time notifications",
       "Offline-first experience",
     ],
+    libraryTab: "mobileProduct",
   },
   {
     id: 3,
@@ -43,6 +66,7 @@ const projects = [
       "Interactive prototypes",
       "Accessibility-focused UX",
     ],
+    libraryTab: "processAutomation",
   },
   {
     id: 4,
@@ -56,6 +80,7 @@ const projects = [
       "Offline-first sync",
       "Advanced reporting tools",
     ],
+    libraryTab: "desktopSuite",
   },
   {
     id: 5,
@@ -69,6 +94,7 @@ const projects = [
       "Secure role-based access",
       "Scalable backend architecture",
     ],
+    libraryTab: "saasPlatform",
   },
   {
     id: 6,
@@ -82,6 +108,7 @@ const projects = [
       "Auth, billing & CMS",
       "Startup-ready tech stack",
     ],
+    libraryTab: "processAutomation",
   },
   {
     id: 7,
@@ -95,6 +122,7 @@ const projects = [
       "Color & typography system",
       "Brand guidelines",
     ],
+    libraryTab: "brandingKit",
   },
   {
     id: 8,
@@ -108,6 +136,7 @@ const projects = [
       "Premium print quality",
       "Campaign-ready assets",
     ],
+    libraryTab: "marketingOps",
   },
   {
     id: 9,
@@ -121,6 +150,7 @@ const projects = [
       "Flexible team scaling",
       "Weekly progress reporting",
     ],
+    libraryTab: "whiteLabel",
   },
 ];
 
@@ -152,6 +182,10 @@ export const Ourwork = () => {
         ease: "power3.in",
       });
     }
+  };
+
+  const handleViewProject = (tab: LibraryTabId) => {
+    router.push(`/work/library?tab=${tab}`);
   };
 
   return (
@@ -230,6 +264,7 @@ export const Ourwork = () => {
                   </ul>
 
                   <button
+                    onClick={() => handleViewProject(project.libraryTab)}
                     className="mt-auto inline-flex items-center justify-center gap-2 self-end rounded-full border border-[#212121] bg-[#212121] px-5 py-2 text-sm font-semibold text-white transition-all duration-300 hover:-translate-x-1 hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black"
                     aria-label={`View details for ${project.title}`}
                   >

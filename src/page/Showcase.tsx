@@ -62,7 +62,7 @@ export const Showcase: React.FC = () => {
         <section 
             className="relative Showcase w-full h-[40vh] md:h-[75vh] lg:min-h-screen flex items-center justify-center overflow-hidden">
 
-            <div data-scroll data-scroll-speed="-.3" className="absolute inset-0 flex justify-center items-center">
+            <div data-scroll data-scroll-speed="-.8" className="absolute inset-0 flex justify-center items-center">
                 <h1
                     ref={titleRef}
                     className="title text-[20vw] md:mb-0 space-x-1 text-[#212121] font-FoundersGrotesk leading-22 md:leading-58 lg:leading-64 "
