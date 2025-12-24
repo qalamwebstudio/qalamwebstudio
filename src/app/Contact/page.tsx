@@ -5,6 +5,7 @@ import { Suspense, useEffect, useRef, useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
 import { useSearchParams } from "next/navigation";
 import LocomotiveScroll from "locomotive-scroll";
+import emailjs from "@emailjs/browser";
 import { Navbar } from "@/components/Navbar";
 import { Connect } from "@/page/Connect";
 import { Footer } from "@/page/Footer";
@@ -30,6 +31,13 @@ const contactChannels = [
 const DEFAULT_SERVICE_MESSAGE =
   "Visit our pricing section to select a specific service and get instant quotes!";
 
+const EMAILJS_SERVICE_ID = process.env.NEXT_PUBLIC_EMAILJS_SERVICE_ID || "";
+const EMAILJS_STUDIO_TEMPLATE_ID =
+  process.env.NEXT_PUBLIC_EMAILJS_STUDIO_TEMPLATE_ID || "";
+const EMAILJS_THANKYOU_TEMPLATE_ID =
+  process.env.NEXT_PUBLIC_EMAILJS_THANKYOU_TEMPLATE_ID || "";
+const EMAILJS_PUBLIC_KEY = process.env.NEXT_PUBLIC_EMAILJS_PUBLIC_KEY || "";
+
 function ContactPageContent() {
   const searchParams = useSearchParams();
   const scrollContainerRef = useRef<HTMLElement | null>(null);
@@ -50,7 +58,9 @@ function ContactPageContent() {
     selectedService: seedValue || DEFAULT_SERVICE_MESSAGE,
     projectDetails: "",
   });
-  const [status, setStatus] = useState<"idle" | "submitting" | "success">("idle");
+  const [status, setStatus] = useState<
+    "idle" | "submitting" | "success" | "error"
+  >("idle");
 
   useEffect(() => {
     if (!scrollContainerRef.current) return;
@@ -91,14 +101,63 @@ function ContactPageContent() {
       }
     };
 
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setStatus("submitting");
 
-    setTimeout(() => {
-      console.table(formData);
+    const templateParams = {
+      name: formData.name,
+      email: formData.email,
+      company: formData.company || "Not provided",
+      selectedService: formData.selectedService,
+      projectDetails: formData.projectDetails || "Not provided",
+    };
+
+    if (
+      !EMAILJS_SERVICE_ID ||
+      !EMAILJS_STUDIO_TEMPLATE_ID ||
+      !EMAILJS_THANKYOU_TEMPLATE_ID ||
+      !EMAILJS_PUBLIC_KEY
+    ) {
+      console.error(
+        "Missing EmailJS environment variables. Please configure service/template IDs and public key."
+      );
+      setStatus("error");
+      return;
+    }
+
+    try {
+      await Promise.all([
+        emailjs.send(
+          EMAILJS_SERVICE_ID,
+          EMAILJS_STUDIO_TEMPLATE_ID,
+          templateParams,
+          {
+            publicKey: EMAILJS_PUBLIC_KEY,
+          }
+        ),
+        emailjs.send(
+          EMAILJS_SERVICE_ID,
+          EMAILJS_THANKYOU_TEMPLATE_ID,
+          templateParams,
+          {
+            publicKey: EMAILJS_PUBLIC_KEY,
+          }
+        ),
+      ]);
+
       setStatus("success");
-    }, 500);
+      setFormData({
+        name: "",
+        email: "",
+        company: "",
+        selectedService: DEFAULT_SERVICE_MESSAGE,
+        projectDetails: "",
+      });
+    } catch (error) {
+      console.error("Failed to send contact form via EmailJS", error);
+      setStatus("error");
+    }
   };
 
   return (
@@ -130,7 +189,6 @@ function ContactPageContent() {
                 key={channel.label}
                 className="group relative overflow-hidden rounded-[28px] border border-emerald-50 bg-gradient-to-br from-white via-white to-emerald-50 p-6 "
               >
-                
                 <div className="pl-4">
                   <p className="text-xs font-semibold uppercase tracking-[0.45em] text-emerald-600 mb-3">
                     {channel.label}
@@ -280,6 +338,11 @@ function ContactPageContent() {
               {status === "success" && (
                 <p className="text-center text-sm font-medium text-emerald-600">
                   Thanks! We&apos;ll respond with a detailed proposal within 48 hours.
+                </p>
+              )}
+              {status === "error" && (
+                <p className="text-center text-sm font-medium text-red-500">
+                  Something went wrong while sending. Please try again or email us directly.
                 </p>
               )}
             </form>
