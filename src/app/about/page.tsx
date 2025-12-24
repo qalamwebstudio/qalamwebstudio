@@ -18,28 +18,25 @@ const coreTeam: CoreTeamMember[] = [
   {
     id: 1,
     name: "Sarbaz",
-    role: "Full-Stack Developer (Backend-Focused, System Architecture & APIs)",
+    role: "System Architect • High-Scale Backend & API Design",
     image: "/sarbaz.jpeg",
   },
   {
     id: 2,
     name: "Madhukar",
-    role:
-      "Lead Frontend Engineer & UI/UX Designer (Web, Mobile & Desktop Interfaces)",
+    role: "Lead Engineer • Frontend Systems & API Architecture",
     image: "/madhukar.jpg",
   },
   {
     id: 3,
     name: "Virpal",
-    role:
-      "Backend Engineer & AI/ML Developer (Scalable Systems & Intelligent Models)",
+    role: "AI/ML Engineer • Intelligent Systems & Automation",
     image: "/virpal.jpg",
   },
   {
     id: 4,
     name: "Takshil",
-    role:
-      "Social Media Manager & Creative Designer (Brand Strategy & Visual Identity)",
+    role: "Creative Director • Brand Strategy & Visual Systems",
     image: "/takshil.jpg",
   },
 ];
