@@ -123,25 +123,34 @@ function ContactPageContent() {
         </p>
         </section>
 
-        <section className="pb-20 px-6 md:px-16 lg:px-24 grid gap-8 md:grid-cols-3">
-        {contactChannels.map((channel) => (
-          <div
-            key={channel.label} 
-            className="rounded-3xl border border-white/40 bg-gradient-to-br from-white/80 via-white/60 to-emerald-50/60 shadow-[0_35px_120px_rgba(15,23,42,0.15)] backdrop-blur-xl p-8"
-          >
-            <p className="text-sm uppercase tracking-[0.4em] text-emerald-600 mb-4">
-              {channel.label}
-            </p>
-            <p className="text-2xl font-semibold break-words">{channel.value}</p>
-            <p className="mt-3 text-slate-500 text-sm">{channel.helper}</p>
+        <section className="pb-20 px-4 md:px-16 lg:px-24">
+          <div className="mx-auto grid gap-6 md:grid-cols-3">
+            {contactChannels.map((channel) => (
+              <article
+                key={channel.label}
+                className="group relative overflow-hidden rounded-[28px] border border-emerald-50 bg-white/95 p-6 shadow-[0_25px_80px_rgba(15,23,42,0.12)] transition-transform duration-300 hover:-translate-y-1"
+              >
+                <div className="absolute inset-y-6 left-0 w-1 rounded-full bg-emerald-500/70"></div>
+                <div className="pl-4">
+                  <p className="text-xs font-semibold uppercase tracking-[0.45em] text-emerald-600 mb-3">
+                    {channel.label}
+                  </p>
+                  <p className="text-2xl font-semibold text-[#111] leading-tight break-words">
+                    {channel.value}
+                  </p>
+                  <p className="mt-3 text-sm text-slate-500 leading-relaxed">
+                    {channel.helper}
+                  </p>
+                </div>
+              </article>
+            ))}
           </div>
-        ))}
         </section>
 
-        <section id="contact-form" className="pb-20 px-6 md:px-16 lg:px-24">
-        <div  className="rounded-[36px] border border-white/50 bg-gradient-to-br from-white/80 via-white/60 to-emerald-50/60 shadow-[0_35px_120px_rgba(15,23,42,0.15)] backdrop-blur-xl p-8 md:p-12 ">
+        <section id="contact-form" className="pb-20 px-4 md:px-16 lg:px-24">
+        <div  className="rounded-[36px] border border-white/50 bg-gradient-to-br from-white/80 via-white/60 to-emerald-50/60 shadow-[0_35px_120px_rgba(15,23,42,0.15)] backdrop-blur-xl p-3 md:p-12 ">
           <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr]">
-            <div className="space-y-6">
+            <div className="space-y-6 p-6">
               <p className="uppercase text-sm tracking-[0.45em] text-emerald-600">
                 Project Intake
               </p>
