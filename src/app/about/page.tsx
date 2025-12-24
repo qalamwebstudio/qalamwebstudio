@@ -19,32 +19,28 @@ const coreTeam: CoreTeamMember[] = [
     id: 1,
     name: "Sarbaz",
     role: "Full-Stack Developer (Backend-Focused, System Architecture & APIs)",
-    image:
-      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=500&q=80",
+    image: "/sarbaz.jpeg",
   },
   {
     id: 2,
     name: "Madhukar",
     role:
       "Lead Frontend Engineer & UI/UX Designer (Web, Mobile & Desktop Interfaces)",
-    image:
-      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=500&q=80",
+    image: "/madhukar.jpg",
   },
   {
     id: 3,
     name: "Virpal",
     role:
       "Backend Engineer & AI/ML Developer (Scalable Systems & Intelligent Models)",
-    image:
-      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=500&q=80",
+    image: "/virpal.jpg",
   },
   {
     id: 4,
     name: "Takshil",
     role:
       "Social Media Manager & Creative Designer (Brand Strategy & Visual Identity)",
-    image:
-      "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?auto=format&fit=crop&w=500&q=80",
+    image: "/takshil.jpg",
   },
 ];
 
