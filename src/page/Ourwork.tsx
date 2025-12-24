@@ -219,7 +219,7 @@ export const Ourwork = () => {
                 {project.label}
               </div>
               <div
-                className="group  bg-gradient-to-br from-white/80 via-white/60 to-emerald-50/60 min-h-[26rem] rounded-2xl border border-gray-300 overflow-hidden 
+                className="group from-white/80 via-white/60 to-emerald-50/60  min-h-[26rem] rounded-2xl border border-gray-300 overflow-hidden 
                 transition-all duration-500 hover:scale-[1.02] hover:shadow-2xl flex flex-col"
               >
                 {/* Project Image */}
