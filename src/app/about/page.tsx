@@ -25,7 +25,7 @@ const coreTeam: CoreTeamMember[] = [
     id: 2,
     name: "Madhukar",
     role: "Lead Frontend Engineer ,scalable system design, API integration & performance architecture",
-    image: "/madhukar.jpg",
+    image: "/madhukar.png",
   },
   {
     id: 3,
@@ -37,7 +37,7 @@ const coreTeam: CoreTeamMember[] = [
     id: 4,
     name: "Takshil",
     role: "Creative Director Crafts powerful brand strategies with premium visual identity systems",
-    image: "/takshil.jpg",
+    image: "/takshil.png",
   },
 ];
 
