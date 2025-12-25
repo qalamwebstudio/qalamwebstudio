@@ -19,7 +19,7 @@ const coreTeam: CoreTeamMember[] = [
     id: 1,
     name: "Sarbaz",
     role: "System Architect Designs high-scale backend systems with robust, secure API architecture",
-    image: "/sarbaz.jpeg",
+    image: "/sarbaz.jpg",
   },
   {
     id: 2,
@@ -31,7 +31,7 @@ const coreTeam: CoreTeamMember[] = [
     id: 3,
     name: "Virpal",
     role: "AI/ML Engineer Builds intelligent systems with machine learning models & automation workflows",
-    image: "/virpal.jpg",
+    image: "/virpal.png",
   },
   {
     id: 4,

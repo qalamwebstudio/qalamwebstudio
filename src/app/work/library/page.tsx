@@ -57,7 +57,7 @@ const LibraryCard = ({ project }: { project: WorkLibraryProject }) => (
         <p className="text-sm font-medium text-emerald-600">
           Impact: {project.stats.impact}
         </p>
-        <button className="inline-flex items-center gap-2 rounded-full border border-[#212121] bg-[#212121] px-5 py-2 text-sm font-semibold text-white transition-colors duration-300 hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black">
+        <button className="inline-flex items-center gap-2 rounded-full border border-[#212121] bg-[#212121] px-5 py-2 text-sm font-semibold text-white transition-colors duration-300 hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black whitespace-nowrap shrink-0 min-w-[140px] justify-center">
           View project
           <ArrowUpRight className="h-4 w-4" />
         </button>
