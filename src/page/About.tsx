@@ -1,21 +1,68 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import { useRouter } from "next/navigation";
 
 export const About = () => {
     const router = useRouter();
+    const containerRef = useRef<HTMLDivElement>(null);
+
+    useEffect(() => {
+        const container = containerRef.current;
+        if (!container) return;
+
+        const sections = Array.from(container.querySelectorAll<HTMLElement>("[data-progress-reveal]"));
+        if (!sections.length) return;
+
+        const handleScroll = () => {
+            const viewportHeight = window.innerHeight || 1;
+            const startTrigger = viewportHeight; // start when element bottom hits viewport bottom
+            const endTrigger = viewportHeight * 0.9; // finish when element center reaches half viewport
+
+            sections.forEach((section) => {
+                const rect = section.getBoundingClientRect();
+                const distance = startTrigger - rect.bottom;
+                const range = startTrigger - endTrigger + rect.height;
+                const rawProgress = distance / range;
+                const progress = Math.max(0, Math.min(rawProgress, 1));
+                section.style.setProperty("--scroll-progress", progress.toString());
+            });
+        };
+
+        handleScroll();
+        window.addEventListener("scroll", handleScroll, { passive: true });
+
+        return () => {
+            window.removeEventListener("scroll", handleScroll);
+        };
+    }, []);
 
     return (
-        <section className="w-full text-[#212121] font-Neue bg-[#f1f1f1] rounded-t-2xl "
+        <section
+            ref={containerRef}
+            className="w-full text-[#212121] font-Neue bg-[#f1f1f1] rounded-t-2xl "
                  style={{boxShadow: "0 4px 6px -1px rgba(0,0,0,0.1)"}}>
             {/* Top Section */}
             <div className="py-16 px-6 md:px-12 lg:px-18">
                 <div data-scroll data-scroll-speed=".2" className="max-w-5xl ">
-                    <h2 className="text-4xl md:text-4xl lg:text-5xl font-bold leading-tight mb-6">
+                    <h2
+                        data-progress-reveal
+                        className="text-4xl md:text-4xl lg:text-5xl font-bold leading-tight mb-6"
+                        style={{
+                            maskImage:
+                                "linear-gradient(to bottom, rgba(0,0,0, calc(var(--scroll-progress, 0))) 0%, rgba(0,0,0, calc(var(--scroll-progress, 0))) 100%)",
+                        }}
+                    >
                         QalamWebStudio&#39;s Vision Redefines Digital Possibilities
                     </h2>
-                    <p className="text-xl text-[#212121] leading-relaxed">
+                    <p
+                        data-progress-reveal
+                        className="text-xl text-[#212121] leading-relaxed"
+                        style={{
+                            maskImage:
+                                "linear-gradient(to bottom, rgba(0,0,0, calc(var(--scroll-progress, 0))) 0%, rgba(0,0,0, calc(var(--scroll-progress, 0))) 100%)",
+                        }}
+                    >
                         We are not just building solutions—we’re crafting meaningful digital transformations.
                         As a passionate team with a shared commitment to innovation, we founded <span
                         className="font-semibold">QalamWebStudio </span>
@@ -56,7 +103,10 @@ export const About = () => {
             {/* Feature Section */}
             <div data-scroll data-scroll-speed=".1" className="py-16 px-6 md:px-12 lg:px-10 justify-items-end">
                 <div className="max-w-5xl  grid gap-12 md:grid-cols-2">
-                    <div>
+                    <div data-progress-reveal className="space-y-4" style={{
+                        maskImage:
+                            "linear-gradient(to bottom, rgba(0,0,0, calc(var(--scroll-progress, 0))) 0%, rgba(0,0,0, calc(var(--scroll-progress, 0))) 100%)",
+                    }}>
                         <h3 className="text-3xl md:text-4xl  mb-4">Passion-Driven Team</h3>
                         <p className=" text-base leading-relaxed">
                             We are a team of passionate individuals who believe in building high-quality digital
@@ -64,7 +114,10 @@ export const About = () => {
                             Our dedication to code, design, and strategy drives everything we do at QalamWebStudio.
                         </p>
                     </div>
-                    <div>
+                    <div data-progress-reveal style={{
+                        maskImage:
+                            "linear-gradient(to bottom, rgba(0,0,0, calc(var(--scroll-progress, 0))) 0%, rgba(0,0,0, calc(var(--scroll-progress, 0))) 100%)",
+                    }}>
                         <h3 className="text-3xl md:text-4xl  mb-4">What We Deliver</h3>
                         <ul className="list-disc pl-5  text-base leading-loose">
                             <li>Custom Web, Mobile, and Desktop Applications</li>
@@ -80,8 +133,24 @@ export const About = () => {
             {/* Why Choose eMTrix Section */}
             <div data-scroll data-scroll-speed="-.1" className="py-20 px-6 md:px-12 lg:px-18">
                 <div className="max-w-6xl mx-auto text-center">
-                    <h3 className="text-4xl md:text-5xl font-bold mb-6">Why Choose QalamWebStudio</h3>
-                    <p className=" text-xl max-w-3xl mx-auto mb-12">
+                    <h3
+                        data-progress-reveal
+                        className="text-4xl md:text-5xl font-bold mb-6"
+                        style={{
+                            maskImage:
+                                "linear-gradient(to bottom, rgba(0,0,0, calc(var(--scroll-progress, 0))) 0%, rgba(0,0,0, calc(var(--scroll-progress, 0))) 100%)",
+                        }}
+                    >
+                        Why Choose QalamWebStudio
+                    </h3>
+                    <p
+                        data-progress-reveal
+                        className=" text-xl max-w-3xl mx-auto mb-12"
+                        style={{
+                            maskImage:
+                                "linear-gradient(to bottom, rgba(0,0,0, calc(var(--scroll-progress, 0))) 0%, rgba(0,0,0, calc(var(--scroll-progress, 0))) 100%)",
+                        }}
+                    >
                         We&#39;re not just another IT service provider. We&#39;re your technology partners committed to
                         delivering exceptional results that drive your business forward.
                     </p>
@@ -115,6 +184,11 @@ export const About = () => {
                         }
                     ].map((item, index) => (
                         <div key={index}
+                             data-progress-reveal
+                             style={{
+                                 maskImage:
+                                     "linear-gradient(to bottom, rgba(0,0,0, calc(var(--scroll-progress, 0))) 0%, rgba(0,0,0, calc(var(--scroll-progress, 0))) 100%)",
+                             }}
                              className=" p-6 rounded-xl shadow hover:shadow-md  bg-white/10 backdrop-blur-md border border-white/20 transition">
                             <h4 className="text-xl font-semibold mb-2">{item.title}</h4>
                             <p>{item.desc}</p>

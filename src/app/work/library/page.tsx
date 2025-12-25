@@ -2,7 +2,7 @@
 import React, { Suspense, useMemo, useState, useEffect, useRef } from "react";
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
-import LocomotiveScroll from "locomotive-scroll";
+import { useLocomotiveScroll } from "@/hooks/useLocomotiveScroll";
 import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import {
   workLibraryProjects,
@@ -146,16 +146,7 @@ function WorkLibraryContent() {
     );
   };
 
-  useEffect(() => {
-    if (!scrollContainerRef.current) return;
-    const locomotiveScroll = new LocomotiveScroll({
-      el: scrollContainerRef.current,
-      smooth: true,
-    });
-    return () => {
-      locomotiveScroll.destroy();
-    };
-  }, []);
+  useLocomotiveScroll(scrollContainerRef);
 
   return (
     <main ref={scrollContainerRef} className="min-h-screen text-[#212121]">

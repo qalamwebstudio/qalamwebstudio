@@ -1,13 +1,13 @@
 
 'use client';
 import { useEffect, useRef } from "react";
-import LocomotiveScroll from "locomotive-scroll";
 import { Navbar } from "@/components/Navbar";
 import { Modelprice } from "@/page/Modelprice";
 import { Connect } from "@/page/Connect";
 import { Footer } from "@/page/Footer";
 import { PerformanceHighlights } from "@/components/PerformanceHighlights";
 import ProjectTimeline from "@/components/ProjectTimeline";
+import { useLocomotiveScroll } from "@/hooks/useLocomotiveScroll";
 import {
   SiNextdotjs,
   SiReact,
@@ -38,20 +38,9 @@ const techStack = [
 ];
 
 export default function ServicesPage() {
+
   const scrollContainerRef = useRef<HTMLElement | null>(null);
-
-  useEffect(() => {
-    if (!scrollContainerRef.current) return;
-
-    const locomotiveScroll = new LocomotiveScroll({
-      el: scrollContainerRef.current,
-      smooth: true,
-    });
-
-    return () => {
-      locomotiveScroll.destroy();
-    };
-  }, []);
+  useLocomotiveScroll(scrollContainerRef);
 
   return (
     <main
@@ -72,7 +61,7 @@ export default function ServicesPage() {
         </p>
       </section>
       <PerformanceHighlights />
-      <ProjectTimeline/>
+      <ProjectTimeline />
       <section className="px-6 md:px-16 lg:px-24 py-12 md:py-16  backdrop-blur border-y border-emerald-100">
         <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-8">
           <div>

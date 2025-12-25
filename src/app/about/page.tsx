@@ -1,7 +1,7 @@
 'use client';
 import Image from "next/image";
 import { useEffect, useRef } from "react";
-import LocomotiveScroll from "locomotive-scroll";
+import { useLocomotiveScroll } from "@/hooks/useLocomotiveScroll";
 import { Navbar } from "@/components/Navbar";
 import { About } from "@/page/About";
 import { Connect } from "@/page/Connect";
@@ -82,20 +82,10 @@ function CardImage({ member }: CardImageProps) {
 }
 
 export default function AboutPage() {
+  
   const scrollContainerRef = useRef<HTMLElement | null>(null);
 
-  useEffect(() => {
-    if (!scrollContainerRef.current) return;
-
-    const locomotiveScroll = new LocomotiveScroll({
-      el: scrollContainerRef.current,
-      smooth: true,
-    });
-
-    return () => {
-      locomotiveScroll.destroy();
-    };
-  }, []);
+  useLocomotiveScroll(scrollContainerRef);
 
   return (
     <main

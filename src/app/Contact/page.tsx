@@ -3,7 +3,7 @@
 import { Suspense, useEffect, useRef, useState } from "react";
 import type { ChangeEvent, FormEvent } from "react";
 import { useSearchParams } from "next/navigation";
-import LocomotiveScroll from "locomotive-scroll";
+import { useLocomotiveScroll } from "@/hooks/useLocomotiveScroll";
 import emailjs from "@emailjs/browser";
 import { Navbar } from "@/components/Navbar";
 import { Connect } from "@/page/Connect";
@@ -60,18 +60,7 @@ function ContactPageContent() {
     "idle" | "submitting" | "success" | "error"
   >("idle");
 
-  useEffect(() => {
-    if (!scrollContainerRef.current) return;
-
-    const locomotiveScroll = new LocomotiveScroll({
-      el: scrollContainerRef.current,
-      smooth: true,
-    });
-
-    return () => {
-      locomotiveScroll.destroy();
-    };
-  }, []);
+  useLocomotiveScroll(scrollContainerRef);
 
   useEffect(() => {
     setFormData((prev) => ({

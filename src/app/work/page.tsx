@@ -2,7 +2,7 @@
 'use client';
 
 import { useEffect, useRef } from "react";
-import LocomotiveScroll from "locomotive-scroll";
+import { useLocomotiveScroll } from "@/hooks/useLocomotiveScroll";
 import { Navbar } from "@/components/Navbar";
 import { Showcase } from "@/page/Showcase";
 import { Ourwork } from "@/page/Ourwork";
@@ -12,18 +12,7 @@ import { Footer } from "@/page/Footer";
 export default function WorkPage() {
   const scrollContainerRef = useRef<HTMLElement | null>(null);
 
-  useEffect(() => {
-    if (!scrollContainerRef.current) return;
-
-    const locomotiveScroll = new LocomotiveScroll({
-      el: scrollContainerRef.current,
-      smooth: true,
-    });
-
-    return () => {
-      locomotiveScroll.destroy();
-    };
-  }, []);
+  useLocomotiveScroll(scrollContainerRef);
 
   return (
     <main
