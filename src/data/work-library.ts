@@ -48,7 +48,7 @@ export const workLibraryProjects: WorkLibraryProject[] = [
     ],
     heroImage:
       'https://drive.google.com/uc?export=view&id=1WF89xQrBzKDDMUkfjKUxiQwx_ihKFUzt',
-    category: 'customBusiness',
+    category: 'website',
     stats: {
       timeline: '3 weeks',
       scope: 'B2B marketplace',
@@ -68,7 +68,7 @@ export const workLibraryProjects: WorkLibraryProject[] = [
     ],
     heroImage:
       'https://drive.google.com/uc?export=view&id=1z_WK191n9lHWKXeNhKvEgugeApbuNJef',
-    category: 'customBusiness',
+    category: 'website',
     stats: {
       timeline: '4 weeks',
       scope: 'Student practice portal',

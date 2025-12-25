@@ -13,6 +13,7 @@ const headingLines: HeadingLine[] = [
     {text: "Vision into", hasImage: true},
     {text: "Reality",hasImage: false},
 ];
+
 const socialLinks = [
     {icon: FaInstagram, url: "https://www.instagram.com/yourprofile", color: "text-pink-600"},
     {icon: FaLinkedinIn, url: "https://www.linkedin.com/in/yourprofile", color: "text-blue-700"},
@@ -142,7 +143,7 @@ export const Hero = () => {
                 </div>
                 {/* Mobile Image */}
                 <div className="mt-[40px] relative block md:hidden w-[240px] h-[140px] overflow-hidden rounded-lg">
-                   
+
                 </div>
             </div>
 
