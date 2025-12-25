@@ -22,13 +22,15 @@ const socialLinks = [
 
 import { useRouter } from "next/navigation";
 
+let heroAnimationPlayed = false;
+
 export const Hero = () => {
     const router = useRouter();
     const headingContainerRef = useRef<HTMLDivElement>(null);
     const charRefs = useRef<HTMLSpanElement[]>([]);
     const socialRefs = useRef<HTMLAnchorElement[]>([]);
     const footerRefs = useRef<HTMLElement[]>([]);
-    const hasAnimated = useRef(false);
+    const hasAnimated = useRef(heroAnimationPlayed);
 
     charRefs.current = [];
     socialRefs.current = [];
@@ -42,6 +44,7 @@ export const Hero = () => {
         )
             return;
         hasAnimated.current = true;
+        heroAnimationPlayed = true;
 
         const ctx = gsap.context(() => {
             const hiddenTargets = [

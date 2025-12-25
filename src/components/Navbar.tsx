@@ -49,13 +49,15 @@ const navItems = [
   { label: "Contact us", href: "/Contact" },
 ];
 
+let navbarAnimationPlayed = false;
+
 export const Navbar = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const navBarRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLAnchorElement>(null);
   const navLinksRef = useRef<HTMLDivElement>(null);
-  const hasAnimated = useRef(false);
+  const hasAnimated = useRef(navbarAnimationPlayed);
 
   const menuRef = useRef<HTMLDivElement>(null);
   const menuOverlayRef = useRef<HTMLDivElement>(null);
@@ -90,6 +92,7 @@ export const Navbar = () => {
   useLayoutEffect(() => {
     if (hasAnimated.current) return;
     hasAnimated.current = true;
+    navbarAnimationPlayed = true;
 
     const ctx = gsap.context(() => {
       const tl = gsap.timeline({
