@@ -10,10 +10,9 @@ export function useLocomotiveScroll(ref: RefObject<HTMLElement | null>) {
     let mounted = true;
 
     (async () => {
-      const module = await import("locomotive-scroll");
+      const { default: LocomotiveScroll } = await import("locomotive-scroll");
       if (!mounted || !ref.current) return;
 
-      const LocomotiveScroll = module.default;
       instance = new LocomotiveScroll({
         el: ref.current,
         smooth: true,

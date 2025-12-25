@@ -17,6 +17,7 @@ const socialLinks = [
     {icon: FaInstagram, url: "https://www.instagram.com/yourprofile", color: "text-pink-600"},
     {icon: FaLinkedinIn, url: "https://www.linkedin.com/in/yourprofile", color: "text-blue-700"},
     {icon: FaTwitter, url: "https://twitter.com/yourprofile", color: "text-sky-500"},
+    {icon: FaGithub, url: "https://github.com/yourprofile", color: "text-gray-800"},
 ];
 
 import { useRouter } from "next/navigation";

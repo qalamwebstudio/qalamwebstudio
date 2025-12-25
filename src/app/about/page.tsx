@@ -1,6 +1,6 @@
-'use client';
+"use client";
 import Image from "next/image";
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { useLocomotiveScroll } from "@/hooks/useLocomotiveScroll";
 import { Navbar } from "@/components/Navbar";
 import { About } from "@/page/About";

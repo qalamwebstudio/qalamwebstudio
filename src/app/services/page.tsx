@@ -1,6 +1,6 @@
 
-'use client';
-import { useEffect, useRef } from "react";
+"use client";
+import { useRef } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Modelprice } from "@/page/Modelprice";
 import { Connect } from "@/page/Connect";

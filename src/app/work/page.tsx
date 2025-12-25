@@ -1,7 +1,7 @@
 
-'use client';
+"use client";
 
-import { useEffect, useRef } from "react";
+import { useRef } from "react";
 import { useLocomotiveScroll } from "@/hooks/useLocomotiveScroll";
 import { Navbar } from "@/components/Navbar";
 import { Showcase } from "@/page/Showcase";
