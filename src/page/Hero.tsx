@@ -2,7 +2,7 @@
 
 import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
-import {  FaInstagram, FaLinkedinIn, FaTwitter } from "react-icons/fa";
+import {  FaInstagram, FaLinkedinIn, FaTwitter, FaWhatsapp } from "react-icons/fa";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
@@ -21,9 +21,9 @@ const headingLines: HeadingLine[] = [
 ];
 
 const socialLinks = [
-    {icon: FaInstagram, url: "https://www.instagram.com/yourprofile", color: "text-pink-600"},
-    {icon: FaLinkedinIn, url: "https://www.linkedin.com/in/yourprofile", color: "text-blue-700"},
-    {icon: FaTwitter, url: "https://twitter.com/yourprofile", color: "text-sky-500"},
+    {icon: FaInstagram, url: "https://www.instagram.com/qalamweb.studio?igsh=cXRvazZzajd6ZGJv&utm_source=qr", color: "text-pink-600"},
+    {icon: FaLinkedinIn, url: "https://www.linkedin.com/company/qalam-web-studio/", color: "text-blue-700"},
+    {icon: FaWhatsapp, url: "https://wa.me/918141875116", color: "text-green-500"},
 ];
 
 let heroAnimationPlayed = false;
@@ -289,7 +289,7 @@ export const Hero = () => {
             </div>
             {/* Footer CTA and Tagline */}
             <div
-                className="w-full mt-[0vh] md:mt-[10vh] border-t border-gray-300 py-2 px-6 md:px-12 lg:px-14 flex flex-col sm:flex-row items-center justify-between text-sm md:text-base text-center sm:text-left">
+                className="w-full mt-[0vh] md:mt-[10vh] border-t border-gray-300 py-4 px-6 md:px-12 lg:px-14 flex flex-col sm:flex-row items-center justify-between text-sm md:text-base text-center sm:text-left">
                 <div className="flex flex-col sm:flex-row sm:space-x-8 mb-4 sm:mb-0">
                     {[
                         "Empowering Startups and Growing Businesses",

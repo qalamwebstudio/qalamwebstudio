@@ -4,10 +4,10 @@ import Link from 'next/link'
 // Memoized social links component
 const SocialLinks = React.memo(() => {
   const socialLinks = useMemo(() => [
-    { href: "https://instagram.com", label: "Instagram" },
+    { href: "https://www.instagram.com/qalamweb.studio?igsh=cXRvazZzajd6ZGJv&utm_source=qr", label: "Instagram" },
     { href: "https://behance.net", label: "Behance" },
-    { href: "https://facebook.com", label: "Facebook" },
-    { href: "https://linkedin.com", label: "LinkedIn" },
+    { href: "https://www.linkedin.com/company/qalam-web-studio/", label: "LinkedIn" },
+    { href: "https://wa.me/918141875116", label: "WhatsApp" },
   ], []);
 
   return (

@@ -17,7 +17,7 @@ const contactChannels = [
   },
   {
     label: "Phone / WhatsApp",
-    value: "+91 98765 43210",
+    value: "+91 8141875116",
     helper: "Call us 10 AM – 8 PM IST for new engagements.",
   },
   {
