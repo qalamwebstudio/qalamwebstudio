@@ -181,7 +181,7 @@ export const Hero = () => {
     return (
         <section data-scroll data-scroll-speed="-.2" className="relative w-full h-screen text-[#212121] flex flex-col  ">
             {/* Top content */}
-            <div className="w-full flex flex-col justify-start items-start p-6 pt-10 mt-14 md:pt-20 md:px-10 lg:px-14">
+            <div className="w-full flex flex-col justify-start items-start px-6  pt-10 mt-14 md:pt-20 md:px-10 lg:px-14">
                 <div 
                     ref={headingContainerRef}
                     className="font-FoundersGrotesk font-bold text-left"
@@ -253,7 +253,7 @@ export const Hero = () => {
                 </div>
 
                 {/* Mobile Image */}
-                <div className="mt-[40px] relative block md:hidden w-[240px] h-[150px] overflow-hidden rounded-lg">
+                <div className="mt-[140px]  relative block md:hidden w-[240px] h-[150px] overflow-hidden rounded-lg">
                     <Image
                         src="/4t2.png"
                         alt="4T Logo"
@@ -289,7 +289,7 @@ export const Hero = () => {
             </div>
             {/* Footer CTA and Tagline */}
             <div
-                className="w-full mt-[10vh] md:mt-[10vh] border-t border-gray-300 py-2 px-6 md:px-12 lg:px-14 flex flex-col sm:flex-row items-center justify-between text-sm md:text-base text-center sm:text-left">
+                className="w-full mt-[0vh] md:mt-[10vh] border-t border-gray-300 py-2 px-6 md:px-12 lg:px-14 flex flex-col sm:flex-row items-center justify-between text-sm md:text-base text-center sm:text-left">
                 <div className="flex flex-col sm:flex-row sm:space-x-8 mb-4 sm:mb-0">
                     {[
                         "Empowering Startups and Growing Businesses",
