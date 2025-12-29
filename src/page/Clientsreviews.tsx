@@ -1,88 +1,77 @@
 import React, { useRef, useEffect, useMemo } from "react";
-import Image from "next/image";
 import gsap from "gsap";
 
 const testimonials = [
   {
     text: "This service exceeded my expectations. Highly recommended! Extra line: Great experience overall.",
-    imageSrc: "https://i.pravatar.cc/100?img=11",
+    initials: "AS",
     name: "Amit Sharma",
     EmailID: "amit.sharma@email.com",
   },
   {
     text: "Professional and prompt support throughout the project. Extra line: They solved my problem quickly.",
-    imageSrc: "https://i.pravatar.cc/100?img=12",
+    initials: "PV",
     name: "Priya Verma",
     EmailID: "priya.verma@email.com",
   },
   {
     text: "The team delivered a beautiful and functional website. Extra line: Clean code and great design.",
-    imageSrc: "https://i.pravatar.cc/100?img=13",
+    initials: "RS",
     name: "Rahul Singh",
     EmailID: "rahul.singh@email.com",
   },
   {
     text: "Great communication and attention to detail. Extra line: Always kept me updated on progress.",
-    imageSrc: "https://i.pravatar.cc/100?img=14",
+    initials: "SP",
     name: "Sneha Patel",
     EmailID: "sneha.patel@email.com",
   },
   {
     text: "I am very happy with the final result. Thank you! Extra line: The project was completed before deadline.",
-    imageSrc: "https://i.pravatar.cc/100?img=15",
+    initials: "VJ",
     name: "Vikram Joshi",
     EmailID: "vikram.joshi@email.com",
   },
   {
-    text: "Fast delivery and excellent quality work. Extra line: Highly recommend their services.",
-    imageSrc: "https://i.pravatar.cc/100?img=16",
-    name: "Meera Nair",
-    EmailID: "meera.nair@email.com",
+    text: "Outstanding work quality and professional service. QalamWebStudio delivered exactly what we needed for our business. Highly recommended!",
+    initials: "AP",
+    name: "Aashish Pande",
+    EmailID: "aashishpande@wyomb.com",
   },
   {
-    text: "They understood my requirements perfectly. Extra line: Smooth collaboration throughout.",
-    imageSrc: "https://i.pravatar.cc/100?img=17",
-    name: "Rohan Gupta",
-    EmailID: "rohan.gupta@email.com",
+    text: "Excellent development team with great technical expertise. They completed our project on time and exceeded our expectations.",
+    initials: "UP",
+    name: "Utsav Patel",
+    EmailID: "up81151@gmail.com",
   },
   {
-    text: "Creative solutions and a friendly team. Extra line: Great value for money.",
-    imageSrc: "https://i.pravatar.cc/100?img=18",
-    name: "Kavita Desai",
-    EmailID: "kavita.desai@email.com",
-  },
-  {
-    text: "I will definitely work with them again. Extra line: This is my go-to team for web projects.",
-    imageSrc: "https://i.pravatar.cc/100?img=19",
-    name: "Suresh Kumar",
-    EmailID: "suresh.kumar@email.com",
-  },
-  {
-    text: "Outstanding experience from start to finish. Will use again! Extra line: 5 stars service!",
-    imageSrc: "https://i.pravatar.cc/100?img=20",
-    name: "Anjali Mehta",
-    EmailID: "anjali.mehta@email.com",
+    text: "Professional approach and quality work. The team was responsive and delivered a fantastic website.",
+    initials: "VS",
+    name: "Virendra Singh",
+    EmailID: "svirendra1052@gmail.com",
   },
 ];
 
+
 type Testimonial = {
   text: string;
-  imageSrc: string;
+  initials?: string;
   name: string;
   EmailID: string;
 };
 
-const TestimonialCard = ({ text, imageSrc, name, EmailID }: Testimonial) => (
+const TestimonialCard = ({
+  text,
+  initials = "",
+  name,
+  EmailID,
+}: Testimonial) => (
   <div className="card">
     <div>{text}</div>
     <div className="flex items-center gap-2 mt-5">
-      <Image
-        src={imageSrc}
-        alt={name}
-        width={80}
-        height={80}
-        className="h-10 w-10 rounded-full"
-      />
+        <span className="flex h-10 w-10 items-center justify-center rounded-full bg-emerald-100 text-sm font-semibold text-emerald-700">
+          {initials.toUpperCase()}
+        </span>
       <div className="flex flex-col">
         <div className="font-medium tracking-tight leading-5">{name}</div>
         <a className="leading-5 tracking-tight" href={`mailto:${EmailID}`}>

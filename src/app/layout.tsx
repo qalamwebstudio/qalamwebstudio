@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Script from "next/script";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -18,6 +19,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://qalamwebstudio.online"),
   title: "QalamWebStudio - IT Services & Digital Solutions",
   description: "Empowering startups and growing businesses with cutting-edge web development, mobile apps, and digital solutions. Transform your ideas into scalable digital products.",
   keywords: ["web development", "mobile app development"," Desktop Software. development"," Business custom Software development"," Startup kit", "Logo & branding", "Brand cards & marketing", "White-label services", "IT services", "digital solutions", "startup", "business"],
@@ -35,10 +37,13 @@ export const metadata: Metadata = {
       'max-snippet': -1,
     },
   },
+  alternates: {
+    canonical: "/",
+  },
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://qalamwebstudio.com',
+    url: 'https://qalamwebstudio.online',
     title: 'QalamWebStudio - IT Services & Digital Solutions',
     description: 'Empowering startups and growing businesses with cutting-edge web development, mobile apps, and digital solutions.',
     siteName: 'QalamWebStudio',
@@ -60,6 +65,31 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased scrollbar-hide`}
       >
+        <Script
+          id="structured-data"
+          type="application/ld+json"
+          strategy="afterInteractive"
+        >
+          {JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "Organization",
+            name: "QalamWebStudio",
+            url: "https://qalamwebstudio.online",
+            logo: "https://qalamwebstudio.online/logo.png",
+            sameAs: [
+              "https://www.instagram.com/qalamweb.studio",
+              "https://www.linkedin.com/company/qalam-web-studio/",
+              "https://wa.me/918141875116",
+            ],
+            contactPoint: {
+              "@type": "ContactPoint",
+              telephone: "+91-81418-75116",
+              contactType: "customer support",
+              areaServed: "IN",
+              availableLanguage: ["en", "hi"],
+            },
+          })}
+        </Script>
         {children}
       </body>
     </html>

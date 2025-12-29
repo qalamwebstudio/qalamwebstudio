@@ -17,13 +17,13 @@ type CoreTeamMember = {
 const coreTeam: CoreTeamMember[] = [
   {
     id: 1,
-    name: "Sarbaz",
-    role: "Founder & CEO — Leads company vision, strategy, decision-making, and scalable system architecture",
+    name: "Sarbaz Malek",
+    role: "Founder & CEO — Leads company vision, strategy, decision-making, and scalable system architecture and Graphic designer",
     image: "/sarbaz.jpg",
   },
   {
     id: 2,
-    name: "Madhukar",
+    name: "Parihar Madhukar",
     role: "Co-Founder & CTO — Owns frontend architecture, scalable system design, API integration & performance",
     image: "/madhukar.png",
   },
@@ -35,7 +35,7 @@ const coreTeam: CoreTeamMember[] = [
   },
   {
     id: 4,
-    name: "Takshil",
+    name: "Taxil Prajapati",
     role: "Chief Marketing Officer (CMO) & Chief Operations Officer (COO) — Drives marketing strategy, brand growth, and operational execution",
     image: "/takshil.png",
   },
