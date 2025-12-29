@@ -2,7 +2,7 @@
 
 import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
-import {  FaInstagram, FaLinkedinIn, FaTwitter, FaWhatsapp } from "react-icons/fa";
+import {  FaInstagram, FaLinkedinIn, FaWhatsapp } from "react-icons/fa";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 
