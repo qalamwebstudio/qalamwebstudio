@@ -29,7 +29,7 @@ const coreTeam: CoreTeamMember[] = [
   },
   {
     id: 3,
-    name: "Virpal",
+    name: "Virpal Sinh",
     role: "Chief AI Officer (CAIO) — Leads AI strategy, machine learning architecture, and intelligent automation systems",
     image: "/virpal.png",
   },
@@ -40,7 +40,6 @@ const coreTeam: CoreTeamMember[] = [
     image: "/takshil.png",
   },
 ];
-
 
 type CardInfoProps = {
   member: CoreTeamMember;
@@ -55,9 +54,6 @@ function CardInfo({ member }: CardInfoProps) {
           {member.role}
         </span>
       </p>
-      <span className="absolute top-3 right-3 w-8 h-8 rounded-full flex items-center justify-center text-sm border border-emerald-200 bg-emerald-50 text-emerald-700 font-semibold">
-        {member.id}
-      </span>
     </div>
   );
 }

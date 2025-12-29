@@ -22,8 +22,8 @@ const contactChannels = [
   },
   {
     label: "Studio HQ",
-    value: "123 Startup Lane, Siddhpur, Gujarat 384151",
-    helper: "Drop by with a prior appointment.",
+    value: "Ahmedabad, Gujarat, India 380001",
+    helper: "Drop by with a prior appointment. We're located in the heart of Ahmedabad.",
   },
 ];
 
