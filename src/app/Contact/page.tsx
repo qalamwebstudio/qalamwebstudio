@@ -52,6 +52,7 @@ function ContactPageContent() {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    phone: "",
     company: "",
     selectedService: seedValue || DEFAULT_SERVICE_MESSAGE,
     projectDetails: "",
@@ -94,8 +95,10 @@ function ContactPageContent() {
 
     const safeName = formData.name.trim() || "Unnamed Lead";
     const safeCompany = formData.company.trim() || "Not provided";
+    const safePhone = formData.phone.trim() || "Not provided";
     const safeProjectDetails =
       formData.projectDetails.trim() || "Not provided yet.";
+
     const safeSelectedService =
       formData.selectedService.trim() || DEFAULT_SERVICE_MESSAGE;
 
@@ -106,6 +109,7 @@ function ContactPageContent() {
       `Name: ${safeName}`,
       `Email: ${formData.email}`,
       `Company: ${safeCompany}`,
+      `Phone: ${safePhone}`,
       `Selected Service / Budget: ${safeSelectedService}`,
       `Project Details: ${safeProjectDetails}`,
     ].join("\n");
@@ -116,6 +120,7 @@ function ContactPageContent() {
       client_email: formData.email,
       email: formData.email,
       client_company: safeCompany,
+      client_phone: safePhone,
       selected_service: safeSelectedService,
       project_details: safeProjectDetails,
       full_details: studioDetails,
@@ -153,6 +158,7 @@ function ContactPageContent() {
       setFormData({
         name: "",
         email: "",
+        phone: "",
         company: "",
         selectedService: DEFAULT_SERVICE_MESSAGE,
         projectDetails: "",
@@ -274,6 +280,19 @@ function ContactPageContent() {
                     value={formData.email}
                     onChange={handleFieldChange("email")}
                     placeholder="you@company.com"
+                    className="mt-2 w-full rounded-2xl border border-emerald-100/80 bg-white/80 px-4 py-3 text-base text-slate-800 placeholder:text-slate-500 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-100"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold uppercase tracking-[0.35em] text-slate-500">
+                    Phone Number
+                  </label>
+                  <input
+                    type="tel"
+                    value={formData.phone}
+                    onChange={handleFieldChange("phone")}
+                    placeholder="+91 98765 43210"
                     className="mt-2 w-full rounded-2xl border border-emerald-100/80 bg-white/80 px-4 py-3 text-base text-slate-800 placeholder:text-slate-500 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-100"
                   />
                 </div>
