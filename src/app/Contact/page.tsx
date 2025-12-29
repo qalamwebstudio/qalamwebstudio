@@ -92,13 +92,42 @@ function ContactPageContent() {
     event.preventDefault();
     setStatus("submitting");
 
-    const templateParams = {
-      name: formData.name,
+    const safeName = formData.name.trim() || "Unnamed Lead";
+    const safeCompany = formData.company.trim() || "Not provided";
+    const safeProjectDetails =
+      formData.projectDetails.trim() || "Not provided yet.";
+    const safeSelectedService =
+      formData.selectedService.trim() || DEFAULT_SERVICE_MESSAGE;
+
+    const studioSubject = `New inquiry — ${safeName} | ${safeSelectedService}`;
+    const clientSubject = `Thanks ${safeName}! We received your inquiry.`;
+
+    const studioDetails = [
+      `Name: ${safeName}`,
+      `Email: ${formData.email}`,
+      `Company: ${safeCompany}`,
+      `Selected Service / Budget: ${safeSelectedService}`,
+      `Project Details: ${safeProjectDetails}`,
+    ].join("\n");
+
+    const studioTemplateParams = {
+      subject: studioSubject,
+      client_name: safeName,
+      client_email: formData.email,
       email: formData.email,
-      company: formData.company || "Not provided",
-      selectedService: formData.selectedService,
-      projectDetails: formData.projectDetails || "Not provided",
-      // Ye variables thank you template mein bhi use honge (agar wahan {{name}} etc. hai)
+      client_company: safeCompany,
+      selected_service: safeSelectedService,
+      project_details: safeProjectDetails,
+      full_details: studioDetails,
+    };
+
+    const clientTemplateParams = {
+      subject: clientSubject,
+      client_name: safeName,
+      client_email: formData.email,
+      email: formData.email,
+      selected_service: safeSelectedService,
+      project_details: safeProjectDetails,
     };
 
     try {
@@ -108,14 +137,14 @@ function ContactPageContent() {
         emailjs.send(
           EMAILJS_SERVICE_ID,
           EMAILJS_STUDIO_TEMPLATE_ID,
-          templateParams,
+          studioTemplateParams,
           EMAILJS_PUBLIC_KEY
         ),
         // 2. Client ko auto thank you email
         emailjs.send(
           EMAILJS_SERVICE_ID,
           EMAILJS_THANKYOU_TEMPLATE_ID,
-          templateParams,
+          clientTemplateParams,
           EMAILJS_PUBLIC_KEY
         ),
       ]);
