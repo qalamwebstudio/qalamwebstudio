@@ -253,7 +253,7 @@ export const Hero = () => {
                 </div>
 
                 {/* Mobile Image */}
-                <div className="mt-[140px]  relative block md:hidden w-[240px] h-[150px] overflow-hidden rounded-lg">
+                <div className="mt-[100px]  relative block md:hidden w-[240px] h-[150px] overflow-hidden rounded-lg">
                     <Image
                         src="/4t2.png"
                         alt="4T Logo"
