@@ -24,22 +24,23 @@ const coreTeam: CoreTeamMember[] = [
   {
     id: 2,
     name: "Madhukar",
-    role: "CTO & Lead Frontend Engineer — Owns frontend architecture, scalable system design, API integration & performance",
+    role: "Co-Founder & CTO — Owns frontend architecture, scalable system design, API integration & performance",
     image: "/madhukar.png",
   },
   {
     id: 3,
     name: "Virpal",
-    role: "Head of AI/ML — Builds intelligent systems with machine learning models & automation workflows",
+    role: "Chief AI Officer (CAIO) — Leads AI strategy, machine learning architecture, and intelligent automation systems",
     image: "/virpal.png",
   },
   {
     id: 4,
     name: "Takshil",
-    role: "CMO & COO — Drives marketing strategy, brand growth, operations, and execution alignment",
+    role: "Chief Marketing Officer (CMO) & Chief Operations Officer (COO) — Drives marketing strategy, brand growth, and operational execution",
     image: "/takshil.png",
   },
 ];
+
 
 type CardInfoProps = {
   member: CoreTeamMember;
