@@ -18,29 +18,28 @@ const coreTeam: CoreTeamMember[] = [
   {
     id: 1,
     name: "Sarbaz",
-    role: "System Architect Designs high-scale backend systems with robust, secure API architecture",
+    role: "Founder & CEO — Leads company vision, strategy, decision-making, and scalable system architecture",
     image: "/sarbaz.jpg",
   },
   {
     id: 2,
     name: "Madhukar",
-    role: "Lead Frontend Engineer ,scalable system design, API integration & performance architecture",
+    role: "CTO & Lead Frontend Engineer — Owns frontend architecture, scalable system design, API integration & performance",
     image: "/madhukar.png",
   },
   {
     id: 3,
     name: "Virpal",
-    role: "AI/ML Engineer Builds intelligent systems with machine learning models & automation workflows",
+    role: "Head of AI/ML — Builds intelligent systems with machine learning models & automation workflows",
     image: "/virpal.png",
   },
   {
     id: 4,
     name: "Takshil",
-    role: "Creative Director Crafts powerful brand strategies with premium visual identity systems",
+    role: "CMO & COO — Drives marketing strategy, brand growth, operations, and execution alignment",
     image: "/takshil.png",
   },
 ];
-
 
 type CardInfoProps = {
   member: CoreTeamMember;
