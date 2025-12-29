@@ -1,5 +1,6 @@
 'use client';
 import React, { Suspense, useMemo, useState, useEffect, useRef } from "react";
+
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 import { useLocomotiveScroll } from "@/hooks/useLocomotiveScroll";
@@ -14,6 +15,45 @@ import { Connect } from "@/page/Connect";
 import { Footer } from "@/page/Footer";
 
 type TabId = (typeof workLibraryTabs)[number]["id"];
+
+const tabMessaging: Record<
+  TabId,
+  {
+    title: string;
+    description: string;
+  }
+> = {
+  all: {
+    title: "Every project, launch, and system we've shipped recently.",
+    description:
+      "Browse work by track and see how our delivery squads handle web, mobile, desktop, automation, and branding missions. Each card outlines stack, scope, and the measurable impact.",
+  },
+  website: {
+    title: "High-converting websites crafted for real businesses.",
+    description:
+      "Explore company sites, landing funnels, and marketing hubs where performance, storytelling, and SEO-backed delivery drove measurable impact.",
+  },
+  mobileApp: {
+    title: "Mobile apps engineered for daily use and growth.",
+    description:
+      "From social utility to on-demand services, see React Native and native-first builds that pair smooth UX with realtime functionality.",
+  },
+  desktopBusiness: {
+    title: "Desktop & business software that powers operations.",
+    description:
+      "Offline-first desktop tools, ERPs, and automation stacks built for finance, retail, and ops teams who need reliability and control.",
+  },
+  brandingMarketing: {
+    title: "Branding, UI/UX, and marketing systems with intent.",
+    description:
+      "Identity kits, design systems, and campaign-ready assets that give founders and growth teams a unified visual language.",
+  },
+  startupKit: {
+    title: "Startup kits and MVPs ready for investor demos.",
+    description:
+      "See turnkey product foundations—admin portals, multi-tenant SaaS shells, and white-label kits that helped teams launch faster.",
+  },
+};
 
 // LibraryCard remains same
 const LibraryCard = ({ project }: { project: WorkLibraryProject }) => (
@@ -57,10 +97,12 @@ const LibraryCard = ({ project }: { project: WorkLibraryProject }) => (
         <p className="text-sm font-medium text-emerald-600">
           Impact: {project.stats.impact}
         </p>
-        <button className="inline-flex items-center gap-2 rounded-full border border-[#212121] bg-[#212121] px-5 py-2 text-sm font-semibold text-white transition-colors duration-300 hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black whitespace-nowrap shrink-0 min-w-[140px] justify-center">
-          View project
-          <ArrowUpRight className="h-4 w-4" />
-        </button>
+        {project.category === "website" && (
+          <button className="inline-flex items-center gap-2 rounded-full border border-[#212121] bg-[#212121] px-5 py-2 text-sm font-semibold text-white transition-colors duration-300 hover:bg-black focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-black whitespace-nowrap shrink-0 min-w-[140px] justify-center">
+            View project
+            <ArrowUpRight className="h-4 w-4" />
+          </button>
+        )}
       </div>
     </div>
   </article>
@@ -151,18 +193,18 @@ function WorkLibraryContent() {
   return (
     <main ref={scrollContainerRef} className="min-h-screen text-[#212121]">
       <Navbar />
+
       <section className="px-6 pt-28 pb-12 md:px-16 lg:px-24 font-Neue">
         <p className="uppercase text-xs font-semibold tracking-[0.55em] text-emerald-600">
           Work Library
         </p>
         <h1 className="mt-4 text-4xl md:text-6xl font-bold leading-tight">
-          Every project, launch, and system we&apos;ve shipped recently.
+          {tabMessaging[activeTab].title}
         </h1>
         <p className="mt-4 max-w-3xl text-base md:text-lg text-[#212121]/80">
-          Browse work by track and see how our delivery squads handle web,
-          mobile, desktop, automation, and branding missions. Each card outlines
-          stack, scope, and the measurable impact.
+          {tabMessaging[activeTab].description}
         </p>
+
         <div className="mt-10 flex flex-wrap gap-3">
           {workLibraryTabs.map((tab) => {
             const isActive = activeTab === tab.id;

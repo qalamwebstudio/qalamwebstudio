@@ -393,11 +393,11 @@ const pricingData: Record<PricingCategoryKey, PricingCategory> = {
 const libraryTabByPricing: Record<PricingCategoryKey, WorkLibraryCategory> = {
   mobileApps: "mobileApp",
   websiteDevelopment: "website",
-  desktopSoftware: "desktopApp",
+  desktopSoftware: "desktopBusiness",
   redesign: "website",
   brandMarketing: "brandingMarketing",
   startupKit: "startupKit",
-  whiteLabel: "customBusiness",
+  whiteLabel: "desktopBusiness",
 };
 
 // Memoized CheckIcon to prevent unnecessary re-renders

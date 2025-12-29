@@ -8,39 +8,48 @@ const EyesFollowCursor: React.FC = () => {
     useEffect(() => {
         let animationFrameId: number;
 
+        const updateEyes = (targetX: number, targetY: number) => {
+            eyeRefs.current.forEach((_, index) => {
+                const eyeEl = eyeRefs.current[index];
+                const pupilEl = pupilRefs.current[index];
+                const reflectEl = reflectionRefs.current[index];
+                if (!eyeEl || !pupilEl || !reflectEl) return;
+
+                const eyeRect = eyeEl.getBoundingClientRect();
+                const centerX = eyeRect.left + eyeRect.width / 2;
+                const centerY = eyeRect.top + eyeRect.height / 2;
+                const dx = targetX - centerX;
+                const dy = targetY - centerY;
+                const angle = Math.atan2(dy, dx);
+
+                // 🟤 Move pupil inside eye
+                const pupilDistance = 25;
+                const pupilX = Math.cos(angle) * pupilDistance;
+                const pupilY = Math.sin(angle) * pupilDistance;
+                pupilEl.style.transform = `translate(${pupilX}px, ${pupilY}px)`;
+
+                // ⚪ Move white reflection inside pupil (like how pupil moves in eye)
+                const reflectionDistance = 6; // keep small so it stays within pupil
+                const reflectionX = Math.cos(angle) * reflectionDistance;
+                const reflectionY = Math.sin(angle) * reflectionDistance;
+                reflectEl.style.transform = `translate(${reflectionX}px, ${reflectionY}px)`;
+            });
+        };
+
         const handleMouseMove = (e: MouseEvent) => {
             if (animationFrameId) cancelAnimationFrame(animationFrameId);
 
             animationFrameId = requestAnimationFrame(() => {
-                eyeRefs.current.forEach((eye, index) => {
-                    const eyeEl = eyeRefs.current[index];
-                    const pupilEl = pupilRefs.current[index];
-                    const reflectEl = reflectionRefs.current[index];
-                    if (!eyeEl || !pupilEl || !reflectEl) return;
-
-                    const eyeRect = eyeEl.getBoundingClientRect();
-                    const centerX = eyeRect.left + eyeRect.width / 2;
-                    const centerY = eyeRect.top + eyeRect.height / 2;
-                    const dx = e.clientX - centerX;
-                    const dy = e.clientY - centerY;
-                    const angle = Math.atan2(dy, dx);
-
-                    // 🟤 Move pupil inside eye
-                    const pupilDistance = 25;
-                    const pupilX = Math.cos(angle) * pupilDistance;
-                    const pupilY = Math.sin(angle) * pupilDistance;
-                    pupilEl.style.transform = `translate(${pupilX}px, ${pupilY}px)`;
-
-                    // ⚪ Move white reflection inside pupil (like how pupil moves in eye)
-                    const reflectionDistance = 6; // keep small so it stays within pupil
-                    const reflectionX = Math.cos(angle) * reflectionDistance;
-                    const reflectionY = Math.sin(angle) * reflectionDistance;
-                    reflectEl.style.transform = `translate(${reflectionX}px, ${reflectionY}px)`;
-                });
+                updateEyes(e.clientX, e.clientY);
             });
         };
 
         document.addEventListener('mousemove', handleMouseMove);
+        if (typeof window !== 'undefined') {
+            const defaultTargetX = window.innerWidth * 0.2; // mimic reference image (eyes looking left-down)
+            const defaultTargetY = window.innerHeight * 0.6;
+            updateEyes(defaultTargetX, defaultTargetY);
+        }
         return () => {
             document.removeEventListener('mousemove', handleMouseMove);
             cancelAnimationFrame(animationFrameId);

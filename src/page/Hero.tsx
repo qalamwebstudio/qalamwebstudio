@@ -3,10 +3,16 @@
 import { useLayoutEffect, useRef } from "react";
 import { gsap } from "gsap";
 import {  FaInstagram, FaLinkedinIn, FaTwitter } from "react-icons/fa";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 type HeadingLine = {
     text: string;
     hasImage: boolean;
+    secondaryText?: {
+        text: string;
+        className: string;
+    };
 };
 const headingLines: HeadingLine[] = [
     {text: "Engineering Your", hasImage: false},
@@ -20,8 +26,6 @@ const socialLinks = [
     {icon: FaTwitter, url: "https://twitter.com/yourprofile", color: "text-sky-500"},
 ];
 
-import { useRouter } from "next/navigation";
-
 let heroAnimationPlayed = false;
 
 export const Hero = () => {
@@ -30,6 +34,8 @@ export const Hero = () => {
     const charRefs = useRef<HTMLSpanElement[]>([]);
     const socialRefs = useRef<HTMLAnchorElement[]>([]);
     const footerRefs = useRef<HTMLElement[]>([]);
+    const secondLineTextRef = useRef<HTMLSpanElement>(null);
+    const secondLineIconRef = useRef<HTMLDivElement>(null);
     const hasAnimated = useRef(heroAnimationPlayed);
 
     charRefs.current = [];
@@ -37,15 +43,9 @@ export const Hero = () => {
     footerRefs.current = [];
 
     useLayoutEffect(() => {
-        if (
-            hasAnimated.current ||
-            !headingContainerRef.current ||
-            !charRefs.current.length
-        )
-            return;
-        hasAnimated.current = true;
-        heroAnimationPlayed = true;
+        if (!headingContainerRef.current || !charRefs.current.length) return;
 
+        const runAnimation = !hasAnimated.current;
         const ctx = gsap.context(() => {
             const hiddenTargets = [
                 ...charRefs.current,
@@ -60,9 +60,56 @@ export const Hero = () => {
                 opacity: 0,
             });
 
+            const secondLineText = secondLineTextRef.current;
+            const secondLineIcon = secondLineIconRef.current;
+
+            const computeShift = () => {
+                if (typeof window === "undefined") return 0;
+                const isMdUp = window.matchMedia("(min-width: 768px)").matches;
+                const isLgUp = window.matchMedia("(min-width: 1024px)").matches;
+                return isLgUp ? 180 : isMdUp ? 140 : 0;
+            };
+
+            const applyFinalState = () => {
+                gsap.set(hiddenTargets, { yPercent: 0, opacity: 1 });
+                const xShift = computeShift();
+                if (secondLineText) {
+                    gsap.set(secondLineText, { x: xShift });
+                }
+                if (secondLineIcon) {
+                    gsap.set(secondLineIcon, { autoAlpha: 1, scale: 1 });
+                }
+            };
+
+            if (!runAnimation) {
+                applyFinalState();
+                return;
+            }
+
+            gsap.set(hiddenTargets, {
+                yPercent: 100,
+                opacity: 0,
+            });
+
+            if (secondLineText) {
+                gsap.set(secondLineText, { x: 0 });
+            }
+
+            if (secondLineIcon) {
+                gsap.set(secondLineIcon, {
+                    autoAlpha: 0,
+                    scale: 0.9,
+                    transformOrigin: "50% 50%",
+                });
+            }
+
             const tl = gsap.timeline({
                 defaults: { ease: "power3.out" },
             });
+
+            // Calculate when second line animation completes
+            const secondLineCharCount = headingLines[1].text.length;
+            const secondLineDelay = secondLineCharCount * 0.02; // stagger delay per character
 
             tl.to(charRefs.current.filter(Boolean), {
                 yPercent: 0,
@@ -90,6 +137,42 @@ export const Hero = () => {
                     },
                     "-=0.7"
                 );
+
+            if (secondLineText && secondLineIcon) {
+                const xShift = computeShift();
+
+                if (xShift > 0) {
+                    tl.to(
+                        secondLineText,
+                        {
+                            x: xShift,
+                            duration: 0.6,
+                            ease: "power2.out",
+                        },
+                        `+=${secondLineDelay}`
+                    ).to(
+                        secondLineIcon,
+                        {
+                            autoAlpha: 1,
+                            scale: 1,
+                            duration: 0.45,
+                            ease: "back.out(1.7)",
+                        },
+                        ">-0.05"
+                    );
+                } else {
+                    tl.to(secondLineIcon, {
+                        autoAlpha: 1,
+                        duration: 0.4,
+                        ease: "power1.out",
+                    }, `+=${secondLineDelay}`);
+                }
+            }
+
+            tl.call(() => {
+                hasAnimated.current = true;
+                heroAnimationPlayed = true;
+            });
         }, headingContainerRef);
 
         return () => ctx.revert();
@@ -99,51 +182,86 @@ export const Hero = () => {
         <section data-scroll data-scroll-speed="-.2" className="relative w-full h-screen text-[#212121] flex flex-col  ">
             {/* Top content */}
             <div className="w-full flex flex-col justify-start items-start p-6 pt-10 mt-14 md:pt-20 md:px-10 lg:px-14">
-                <div
+                <div 
                     ref={headingContainerRef}
-                    data-scroll
-                    data-scroll-speed=".2"
-                    className="font-FoundersGrotesk font-bold text-left space-y-4"
+                    className="font-FoundersGrotesk font-bold text-left"
                 >
                     {(() => {
                         let charCounter = -1;
-                        return headingLines.map((line, lineIdx) => (
+                        return headingLines.map((line, index) => (
                             <h1
-                                key={lineIdx}
+                                key={index}
                                 className={`text-[55px] md:text-[100px] lg:text-[139px] uppercase tracking-normal lg:tracking-wider leading-[50px] md:leading-[70px] lg:leading-[108px]
                 ${line.hasImage
-                                    ? 'flex leading-[50px] md:leading-[70px] lg:leading-[70px]'
-                                    : 'leading-none whitespace-nowrap'} overflow-hidden`}
+                                ? 'relative flex leading-[50px] md:leading-[70px] lg:leading-[70px]'
+                                : 'leading-none whitespace-nowrap'}`}
                             >
-                                {line.text.split("").map((char, charIdx) => {
-                                    const displayChar = char === " " ? "\u00A0" : char;
-                                    charCounter += 1;
-                                    const currentIndex = charCounter;
-                                    return (
+                                {line.hasImage && (
+                                    <div
+                                        ref={secondLineIconRef}
+                                        className="rounded-lg absolute left-0 top-[13px] md:top-[10px] lg:top-[15px] overflow-hidden hidden md:block w-[130px] h-[60px] lg:w-[180px] lg:h-[89px]">
+                                        <Image
+                                            src="/code.svg"
+                                            alt="Code Logo"
+                                            fill
+                                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                                            className="object-cover"
+                                            loading="lazy"
+                                        />
+                                    </div>
+                                )}
+                                {line.secondaryText ? (
+                                    <span className="relative inline-block">
+                                        <span>{line.text}</span>
                                         <span
-                                            key={`${lineIdx}-${charIdx}`}
-                                            className="inline-flex overflow-hidden"
-                                        >
-                                            <span
-                                                ref={(el) => {
-                                                    if (el) {
-                                                        charRefs.current[currentIndex] = el;
-                                                    }
-                                                }}
-                                                className="inline-block will-change-transform"
-                                            >
-                                                {displayChar}
-                                            </span>
+                                            className={`absolute top-full right-0 mt-2 md:static md:mt-0 md:ml-4 inline-block leading-0 ${line.secondaryText.className}`}>
+                                            {line.secondaryText.text}
                                         </span>
-                                    );
-                                })}
+                                    </span>
+                                ) : (
+                                    <span
+                                        ref={index === 1 ? secondLineTextRef : undefined}
+                                        className="inline-block"
+                                    >
+                                        {line.text.split("").map((char, charIdx) => {
+                                            const displayChar = char === " " ? "\u00A0" : char;
+                                            charCounter += 1;
+                                            const currentIndex = charCounter;
+                                            return (
+                                                <span
+                                                    key={`${index}-${charIdx}`}
+                                                    className="inline-flex overflow-hidden"
+                                                >
+                                                    <span
+                                                        ref={(el) => {
+                                                            if (el) {
+                                                                charRefs.current[currentIndex] = el;
+                                                            }
+                                                        }}
+                                                        className="inline-block will-change-transform"
+                                                    >
+                                                        {displayChar}
+                                                    </span>
+                                                </span>
+                                            );
+                                        })}
+                                    </span>
+                                )}
                             </h1>
                         ));
                     })()}
                 </div>
+
                 {/* Mobile Image */}
                 <div className="mt-[40px] relative block md:hidden w-[240px] h-[140px] overflow-hidden rounded-lg">
-
+                    <Image
+                        src="/code.svg"
+                        alt="Code Logo"
+                        fill
+                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                        className="object-cover"
+                        loading="lazy"
+                    />
                 </div>
             </div>
 
