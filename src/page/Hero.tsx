@@ -201,7 +201,7 @@ export const Hero = () => {
                                         ref={secondLineIconRef}
                                         className="rounded-lg absolute left-0 top-[13px] md:top-[10px] lg:top-[15px] overflow-hidden hidden md:block w-[130px] h-[60px] lg:w-[180px] lg:h-[89px]">
                                         <Image
-                                            src="/code.svg"
+                                            src="/4t2.png"
                                             alt="Code Logo"
                                             fill
                                             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
