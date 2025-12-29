@@ -255,7 +255,7 @@ export const Hero = () => {
                 {/* Mobile Image */}
                 <div className="mt-[40px] relative block md:hidden w-[240px] h-[140px] overflow-hidden rounded-lg">
                     <Image
-                        src="/code.svg"
+                        src="/4t2.svg"
                         alt="Code Logo"
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
