@@ -273,10 +273,10 @@ export const Navbar = () => {
             <div className="mt-24">
               <p className="text-gray-400 mb-2">S:</p>
               <div className="flex flex-col gap-2 text-blue-400 underline">
-                <a href="#" className="hover:text-blue-300">Instagram</a>
-                <a href="#" className="hover:text-blue-300">Behance</a>
-                <a href="#" className="hover:text-blue-300">Facebook</a>
-                <a href="#" className="hover:text-blue-300">LinkedIn</a>
+                <a href="https://www.instagram.com/qalamweb.studio?igsh=cXRvazZzajd6ZGJv&utm_source=qr" className="hover:text-blue-300">Instagram</a>
+                <a href="https://www.linkedin.com/company/qalam-web-studio/" className="hover:text-blue-300">LinkedIn</a>
+                <a href="https://wa.me/918141875116" className="hover:text-green-700">WhatsApp</a>
+                <a href="https://www.behance.net/qalamwebstudio" className="hover:text-blue-300">Behance</a>
               </div>
             </div>
           </div>

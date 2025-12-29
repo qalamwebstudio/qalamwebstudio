@@ -336,8 +336,6 @@ export const Hero = () => {
                            </span>
                     </button>
                 </span>
-
-
             </div>
 
             {/* Scroll down text */}
