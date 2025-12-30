@@ -3,16 +3,16 @@ import gsap from "gsap";
 
 const testimonials = [
   {
-    text: "This service exceeded my expectations. Highly recommended! Extra line: Great experience overall.",
-    initials: "AS",
-    name: "Amit Sharma",
-    EmailID: "amit.sharma@email.com",
+    text: "QalamWebStudio delivered the Immersive Photography Portfolio with buttery-smooth 3D transitions and optimized media. The site now feels cinematic and converts more portfolio inquiries.",
+    initials: "IP",
+    name: "PATEL TIRTH MANHARBHAI",
+    EmailID: "hello@immersivephoto.com",
   },
   {
-    text: "Professional and prompt support throughout the project. Extra line: They solved my problem quickly.",
-    initials: "PV",
-    name: "Priya Verma",
-    EmailID: "priya.verma@email.com",
+    text: "For RedSky Placement & Security, the team shipped a trust-first website with clear service flows and fast performance. Our inbound client inquiries and credibility both went up.",
+    initials: "RS",
+    name: "JITENDRAKUMAR",
+    EmailID: "contact@redskysecurity.com",
   },
   {
     text: "The team delivered a beautiful and functional website. Extra line: Clean code and great design.",
