@@ -188,7 +188,7 @@ export const Ourwork = () => {
     >
       <div className="w-full">
         <h1 className="text-[40px] md:text-[48px] lg:text-[52px] py-4">
-          Our Projects
+          Our Work
         </h1>
       </div>
       <div className="w-full h-[1px] bg-gray-400 mb-8"></div>
