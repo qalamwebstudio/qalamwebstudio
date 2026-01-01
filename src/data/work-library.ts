@@ -4,7 +4,7 @@ export type WorkLibraryCategory =
   | 'website'
   | 'mobileApp'
   | 'desktopBusiness'
-  | 'brandingMarketing'
+  | 'Graphicdesign'
   | 'startupKit';
 
 export type WorkLibraryProject = {
@@ -28,7 +28,7 @@ export const workLibraryTabs: { id: 'all' | WorkLibraryCategory; name: string }[
     { id: 'website', name: 'Website' },
     { id: 'mobileApp', name: 'Mobile App' },
     { id: 'desktopBusiness', name: 'Desktop & Business Software' },
-    { id: 'brandingMarketing', name: 'Branding , UI/UX & Marketing ' },
+    { id: 'Graphicdesign', name: 'Graphic design' },
     { id: 'startupKit', name: 'Startup Kit' },
   ];
 
@@ -136,26 +136,7 @@ export const workLibraryProjects: WorkLibraryProject[] = [
       impact: 'Higher client inquiries',
     },
   },
-  {
-    id: 'desktop-ledger',
-    title: 'LedgerPro Desktop Suite',
-    stack: 'Electron • SQLite • Rust workers',
-    summary:
-      'Cross-platform ledger and inventory tool for 45 franchise stores with role-based access and synced auditing.',
-    deliverables: [
-      'Offline-first data layer',
-      'Thermal print integrations',
-      'Auto-update pipeline',
-    ],
-    heroImage:
-      'https://images.unsplash.com/photo-1498050108023-c5249f4df085?auto=format&fit=crop&w=1600&q=80',
-    category: 'desktopBusiness',
-    stats: {
-      timeline: '12 weeks',
-      scope: 'Windows + macOS',
-      impact: '4h/day saved',
-    },
-  },
+  
   {
     id: 'retailai-erp',
     title: 'RetailAi – Mall-Scale ERP & Operations Suite',
@@ -177,27 +158,6 @@ export const workLibraryProjects: WorkLibraryProject[] = [
       impact: 'Unified control across large retail operations',
     },
   },
-
-  {
-    id: 'automation-hatch',
-    title: 'Hatch Fulfillment Automation',
-    stack: 'NestJS • Temporal • RabbitMQ',
-    summary:
-      'Workflow orchestration for D2C warehouses covering pick-pack, QC, invoicing, and logistics reconciliation.',
-    deliverables: [
-      'Event-driven microservices',
-      'Admin alert cockpit',
-      'Vendor integration kit',
-    ],
-    heroImage:
-      'https://images.unsplash.com/photo-1489515217757-5fd1be406fef?auto=format&fit=crop&w=1600&q=80',
-    category: 'desktopBusiness',
-    stats: {
-      timeline: '16 weeks',
-      scope: '7 integrations',
-      impact: '-58% manual touches',
-    },
-  },
   {
     id: 'gunifrinds-campus',
     title: 'GuniFrinds – Campus Random Video Connect App',
@@ -211,7 +171,7 @@ export const workLibraryProjects: WorkLibraryProject[] = [
       'User reporting & basic moderation system',
     ],
     heroImage:
-      'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=1600&q=80',
+      'https://drive.google.com/uc?export=view&id=18PG7-hfxgbKN_xbwssTpV6Y6V--rCIxh',
     category: 'mobileApp',
     stats: {
       timeline: '6 weeks',
@@ -231,8 +191,8 @@ export const workLibraryProjects: WorkLibraryProject[] = [
       'Campaign toolkit',
     ],
     heroImage:
-      'https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?auto=format&fit=crop&w=1600&q=80',
-    category: 'brandingMarketing',
+      'https://drive.google.com/uc?export=view&id=1ckZl78el18RaF75UXxgONchP22mhBTbF',
+    category: 'Graphicdesign',
     stats: {
       timeline: '5 weeks',
       scope: '40 deliverables',
@@ -251,8 +211,8 @@ export const workLibraryProjects: WorkLibraryProject[] = [
       'Component library',
     ],
     heroImage:
-      'https://images.unsplash.com/photo-1515378791036-0648a3ef77b2?auto=format&fit=crop&w=1600&q=80',
-    category: 'brandingMarketing',
+      'https://drive.google.com/uc?export=view&id=1eWtO_FxZJTV8ISHBE1Tmjy53dxW9gcfz',
+    category: 'Graphicdesign',
     stats: {
       timeline: '7 weeks',
       scope: '20 component types',
@@ -271,7 +231,7 @@ export const workLibraryProjects: WorkLibraryProject[] = [
       'Maintenance playbook',
     ],
     heroImage:
-      'https://images.unsplash.com/photo-1474631245212-32dc3c8310c6?auto=format&fit=crop&w=1600&q=80',
+      'https://drive.google.com/uc?export=view&id=1ya9K-Sr-68SCNodfNXUA9_3e33SR5SSa',
     category: 'startupKit',
     stats: {
       timeline: '9 weeks',

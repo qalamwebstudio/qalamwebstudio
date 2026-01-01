@@ -48,8 +48,8 @@ const projects: ShowcaseProject[] = [
   },
   {
     id: 3,
-    label: "UI/UX DESIGN",
-    title: "UI/UX Case Studies",
+    label: "GRAPHIC DESIGN",
+    title: "Graphic Case Studies",
     description:
       "Design-focused projects showcasing user flows, wireframes, and scalable interface systems for digital products.",
     image: "https://drive.google.com/uc?export=view&id=1qTQ7Sc3mjri3k6_Xc73n-1FSBOmSyEWW",
@@ -58,7 +58,7 @@ const projects: ShowcaseProject[] = [
       "Design systems",
       "Prototype case studies",
     ],
-libraryTab: "brandingMarketing",
+libraryTab: "Graphicdesign",
   },
   {
     id: 4,
@@ -104,34 +104,6 @@ libraryTab: "brandingMarketing",
   },
   {
     id: 7,
-    label: "LOGO & BRANDING",
-    title: "Branding Projects",
-    description:
-      "Brand identity projects created for startups and businesses to establish a clear and consistent visual presence.",
-    image: "https://drive.google.com/uc?export=view&id=1sgahjyE-e-jC8SS8DZ19B01eiSBd5TXC",
-    details: [
-      "Logo design",
-      "Brand identity systems",
-      "Visual guidelines",
-    ],
- libraryTab: "brandingMarketing",
-  },
-  {
-    id: 8,
-    label: "BRAND CARDS & MARKETING",
-    title: "Marketing & Print Projects",
-    description:
-      "Offline and marketing design projects including print materials and promotional assets for businesses.",
-    image: "https://drive.google.com/uc?export=view&id=1PT2hMkfBrYXLnj-quux07YIhuQxU6arT",
-    details: [
-      "Business cards",
-      "Print collaterals",
-      "Marketing creatives",
-    ],
-libraryTab: "brandingMarketing",
-  },
-  {
-    id: 9,
     label: "WHITE-LABEL SERVICES",
     title: "White-Label Projects",
     description:

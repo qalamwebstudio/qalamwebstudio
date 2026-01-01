@@ -23,7 +23,7 @@ type PricingCategoryKey =
   | "mobileApps"
   | "desktopSoftware"
   | "redesign"
-  | "brandMarketing"
+  | "Graphicdesign"
   | "startupKit"
   | "whiteLabel";
 
@@ -37,7 +37,7 @@ const tabs: PricingTab[] = [
   { id: "websiteDevelopment", name: "Websites" },
   { id: "desktopSoftware", name: "Desktop Software" },
   { id: "redesign", name: "Website Redesign" },
-  { id: "brandMarketing", name: "Brand & Marketing" },
+  { id: "Graphicdesign", name: "Graphic design" },
   { id: "startupKit", name: "Startup Kit" },
   { id: "whiteLabel", name: "White Label" },
 ];
@@ -331,7 +331,7 @@ const pricingData: Record<PricingCategoryKey, PricingCategory> = {
   },
 
 
-  brandMarketing: {
+  Graphicdesign: {
     title: "Branding & Marketing",
     description:
       "Identity, collateral, and campaign assets crafted to keep your brand consistent everywhere.",
@@ -395,7 +395,7 @@ const libraryTabByPricing: Record<PricingCategoryKey, WorkLibraryCategory> = {
   websiteDevelopment: "website",
   desktopSoftware: "desktopBusiness",
   redesign: "website",
-  brandMarketing: "brandingMarketing",
+  Graphicdesign: "Graphicdesign",
   startupKit: "startupKit",
   whiteLabel: "desktopBusiness",
 };

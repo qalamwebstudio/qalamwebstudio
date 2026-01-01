@@ -65,6 +65,7 @@ export const metadata: Metadata = {
   },
   icons: {
     icon: [
+      { url: '/logo.jpeg', sizes: '16x16 32x32', type: 'image/jpeg' },
       { url: '/logo.jpeg', sizes: '32x32', type: 'image/jpeg' },
       { url: '/logo.jpeg', sizes: '16x16', type: 'image/jpeg' },
     ],
@@ -76,6 +77,12 @@ export const metadata: Metadata = {
       {
         rel: 'icon',
         url: '/logo.jpeg',
+        type: 'image/jpeg',
+      },
+      {
+        rel: 'icon',
+        url: '/logo.jpeg',
+        type: 'image/jpeg',
       },
     ],
   },
@@ -90,8 +97,11 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="icon" href="/logo.jpeg" type="image/jpeg" />
+        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
         <link rel="shortcut icon" href="/logo.jpeg" type="image/jpeg" />
         <link rel="apple-touch-icon" href="/logo.jpeg" />
+        <meta name="msapplication-TileImage" content="/logo.jpeg" />
+        <meta name="theme-color" content="#ffffff" />
       </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased scrollbar-hide`}

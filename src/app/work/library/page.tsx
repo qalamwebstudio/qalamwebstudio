@@ -41,7 +41,7 @@ const tabMessaging: Record<
     description:
       "Offline-first desktop tools, ERPs, and automation stacks built for finance, retail, and ops teams who need reliability and control.",
   },
-  brandingMarketing: {
+  Graphicdesign: {
     title: "Branding, UI/UX, and marketing systems with intent.",
     description:
       "Identity kits, design systems, and campaign-ready assets that give founders and growth teams a unified visual language.",
