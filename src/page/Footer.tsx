@@ -85,8 +85,8 @@ const FooterComponent = () => {
           <div className="flex flex-col space-y-4 px-4">
             <h2 className="text-xl font-semibold">Contact Us</h2>
             <address className="text-gray-600 not-italic">
-              123 Startup Lane<br />
-              siddhpur City, IN 384151
+              Ahmedabad, Gujarat,<br />
+               India 380001
             </address>
             <p className="text-gray-600">
               Email: <a href=" QalamWebStudio@gmail.com" className="hover:text-emerald-700 transition-colors duration-200">QalamWebStudio@gmail.com</a>
