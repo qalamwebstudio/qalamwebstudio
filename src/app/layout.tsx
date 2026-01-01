@@ -63,6 +63,22 @@ export const metadata: Metadata = {
     description: 'Empowering startups and growing businesses with cutting-edge web development, mobile apps, and digital solutions.',
     images: ['/logo.jpeg'],
   },
+  icons: {
+    icon: [
+      { url: '/logo.jpeg', sizes: '32x32', type: 'image/jpeg' },
+      { url: '/logo.jpeg', sizes: '16x16', type: 'image/jpeg' },
+    ],
+    shortcut: '/logo.jpeg',
+    apple: [
+      { url: '/logo.jpeg', sizes: '180x180', type: 'image/jpeg' },
+    ],
+    other: [
+      {
+        rel: 'icon',
+        url: '/logo.jpeg',
+      },
+    ],
+  },
 };
 
 export default function RootLayout({
@@ -72,6 +88,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <link rel="icon" href="/logo.jpeg" type="image/jpeg" />
+        <link rel="shortcut icon" href="/logo.jpeg" type="image/jpeg" />
+        <link rel="apple-touch-icon" href="/logo.jpeg" />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased scrollbar-hide`}
       >

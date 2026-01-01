@@ -60,13 +60,13 @@ export function validateLogoUrlConsistency(
 /**
  * Extracts logo URLs from metadata configuration
  */
-export function extractLogoUrls(metadata: any): {
+export function extractLogoUrls(metadata: Record<string, unknown>): {
   openGraphUrl: string | null;
   twitterUrl: string | null;
   structuredDataUrl: string | null;
 } {
-  const openGraphUrl = metadata.openGraph?.images?.[0]?.url || null;
-  const twitterUrl = metadata.twitter?.images?.[0] || null;
+  const openGraphUrl = (metadata as { openGraph?: { images?: Array<{ url?: string }> } }).openGraph?.images?.[0]?.url || null;
+  const twitterUrl = (metadata as { twitter?: { images?: string[] } }).twitter?.images?.[0] || null;
   
   // For structured data, we need to parse it from the script content
   // This would typically be done by examining the actual rendered script

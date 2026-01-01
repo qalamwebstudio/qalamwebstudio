@@ -143,7 +143,7 @@ class URLConsistencyTestSuite {
       try {
         const stats = fs.statSync(logoPath);
         fileSize = stats.size;
-      } catch (error) {
+      } catch {
         // File exists but can't read stats
       }
     }
