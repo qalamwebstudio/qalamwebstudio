@@ -4,7 +4,7 @@ import Link from 'next/link'
 // Memoized social links component
 const SocialLinks = React.memo(() => {
   const socialLinks = useMemo(() => [
-    { href: "https://www.instagram.com/qalamweb.studio?igsh=cXRvazZzajd6ZGJv&utm_source=qr", label: "Instagram" },
+    { href: "https://www.instagram.com/qalamwebstudio?igsh=cXRvazZzajd6ZGJv&utm_source=qr", label: "Instagram" },
     { href: "https://behance.net", label: "Behance" },
     { href: "https://www.linkedin.com/company/qalam-web-studio/", label: "LinkedIn" },
     { href: "https://wa.me/918141875116", label: "WhatsApp" },
@@ -89,7 +89,7 @@ const FooterComponent = () => {
                India 380001
             </address>
             <p className="text-gray-600">
-              Email: <a href=" QalamWebStudio@gmail.com" className="hover:text-emerald-700 transition-colors duration-200">QalamWebStudio@gmail.com</a>
+              Email: <a href="mailto:QalamWebStudio@gmail.com" className="hover:text-emerald-700 transition-colors duration-200">QalamWebStudio@gmail.com</a>
             </p>
           </div>
 
