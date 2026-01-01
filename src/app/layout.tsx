@@ -97,7 +97,6 @@ export default function RootLayout({
     <html lang="en">
       <head>
         <link rel="icon" href="/logo.jpeg" type="image/jpeg" />
-        <link rel="icon" href="/favicon.ico" type="image/x-icon" />
         <link rel="shortcut icon" href="/logo.jpeg" type="image/jpeg" />
         <link rel="apple-touch-icon" href="/logo.jpeg" />
         <meta name="msapplication-TileImage" content="/logo.jpeg" />
