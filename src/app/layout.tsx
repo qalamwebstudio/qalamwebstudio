@@ -47,11 +47,21 @@ export const metadata: Metadata = {
     title: 'QalamWebStudio - IT Services & Digital Solutions',
     description: 'Empowering startups and growing businesses with cutting-edge web development, mobile apps, and digital solutions.',
     siteName: 'QalamWebStudio',
+    images: [
+      {
+        url: '/logo.jpeg',
+        width: 1200,
+        height: 630,
+        alt: 'QalamWebStudio Logo',
+        type: 'image/jpeg',
+      }
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: 'QalamWebStudio - IT Services & Digital Solutions',
     description: 'Empowering startups and growing businesses with cutting-edge web development, mobile apps, and digital solutions.',
+    images: ['/logo.jpeg'],
   },
 };
 
@@ -75,7 +85,7 @@ export default function RootLayout({
             "@type": "Organization",
             name: "QalamWebStudio",
             url: "https://qalamwebstudio.online",
-            logo: "https://qalamwebstudio.online/logo.png",
+            logo: "https://qalamwebstudio.online/logo.jpeg",
             sameAs: [
               "https://www.instagram.com/qalamweb.studio",
               "https://www.linkedin.com/company/qalam-web-studio/",

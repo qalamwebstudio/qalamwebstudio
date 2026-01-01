@@ -64,9 +64,6 @@ const LibraryCard = ({ project }: { project: WorkLibraryProject }) => (
         className="object-cover transition-transform duration-500 group-hover:scale-105"
         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
       />
-      <div className="absolute left-5 top-5 rounded-full bg-white/90 px-4 py-1 text-[11px] font-semibold uppercase tracking-[0.35em] text-[#212121]">
-        {project.stack}
-      </div>
     </div>
     <div className="flex flex-1 flex-col gap-5 px-6 pb-6">
       <div>
