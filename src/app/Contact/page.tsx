@@ -292,7 +292,7 @@ function ContactPageContent() {
                     type="tel"
                     value={formData.phone}
                     onChange={handleFieldChange("phone")}
-                    placeholder="+91 98765 43210"
+                    placeholder="+91 1234567890"
                     className="mt-2 w-full rounded-2xl border border-emerald-100/80 bg-white/80 px-4 py-3 text-base text-slate-800 placeholder:text-slate-500 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-100"
                   />
                 </div>
