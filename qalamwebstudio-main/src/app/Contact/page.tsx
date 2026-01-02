@@ -1,0 +1,389 @@
+'use client';
+
+import { Suspense, useEffect, useRef, useState } from "react";
+import type { ChangeEvent, FormEvent } from "react";
+import { useSearchParams } from "next/navigation";
+import { useLocomotiveScroll } from "@/hooks/useLocomotiveScroll";
+import emailjs from "@emailjs/browser";
+import { Navbar } from "@/components/Navbar";
+import { Connect } from "@/page/Connect";
+import { Footer } from "@/page/Footer";
+
+const contactChannels = [
+  {
+    label: "Email",
+    value: "QalamWebStudio@gmail.com",
+    helper: "Expect a response within 24 hours.",
+  },
+  {
+    label: "Phone / WhatsApp",
+    value: "+91 8141875116",
+    helper: "Call us 10 AM – 8 PM IST for new engagements.",
+  },
+  {
+    label: "Studio HQ",
+    value: "Ahmedabad, Gujarat, India 380001",
+    helper: "Drop by with a prior appointment. We're located in the heart of Ahmedabad.",
+  },
+];
+
+const DEFAULT_SERVICE_MESSAGE =
+  "Visit our pricing section to select a specific service and get instant quotes!";
+
+// Hard-coded credentials (as per your details)
+const EMAILJS_SERVICE_ID = "service_2vx7i9p";
+const EMAILJS_STUDIO_TEMPLATE_ID = "template_8l2cqke";     // Tumhare liye inquiry email
+const EMAILJS_THANKYOU_TEMPLATE_ID = "template_pgt5yil";   // Client ko auto thank you
+const EMAILJS_PUBLIC_KEY = "OKaD_gWVKz2kbR6Wb";
+
+function ContactPageContent() {
+  const searchParams = useSearchParams();
+  const scrollContainerRef = useRef<HTMLElement | null>(null);
+  const selectedServiceRef = useRef<HTMLTextAreaElement | null>(null);
+  const seededService = searchParams?.get("service") ?? "";
+  const seededBudget = searchParams?.get("budget") ?? "";
+  const seedValue = seededService
+    ? `${decodeURIComponent(seededService)}${
+        seededBudget ? ` — ${decodeURIComponent(seededBudget)}` : ""
+      }`
+    : "";
+  const hasSeed = Boolean(seedValue);
+
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    company: "",
+    selectedService: seedValue || DEFAULT_SERVICE_MESSAGE,
+    projectDetails: "",
+  });
+  const [status, setStatus] = useState<
+    "idle" | "submitting" | "success" | "error"
+  >("idle");
+
+  useLocomotiveScroll(scrollContainerRef);
+
+  useEffect(() => {
+    setFormData((prev) => ({
+      ...prev,
+      selectedService: seedValue || DEFAULT_SERVICE_MESSAGE,
+    }));
+  }, [seedValue]);
+
+  useEffect(() => {
+    if (!selectedServiceRef.current) return;
+    const textarea = selectedServiceRef.current;
+    textarea.style.height = "auto";
+    textarea.style.height = `${textarea.scrollHeight}px`;
+  }, [formData.selectedService]);
+
+  const handleFieldChange =
+    (field: keyof typeof formData) =>
+    (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+      setFormData((prev) => ({
+        ...prev,
+        [field]: event.target.value,
+      }));
+      if (status === "success") {
+        setStatus("idle");
+      }
+    };
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setStatus("submitting");
+
+    const safeName = formData.name.trim() || "Unnamed Lead";
+    const safeCompany = formData.company.trim() || "Not provided";
+    const safePhone = formData.phone.trim() || "Not provided";
+    const safeProjectDetails =
+      formData.projectDetails.trim() || "Not provided yet.";
+
+    const safeSelectedService =
+      formData.selectedService.trim() || DEFAULT_SERVICE_MESSAGE;
+
+    const studioSubject = `New inquiry — ${safeName} | ${safeSelectedService}`;
+    const clientSubject = `Thanks ${safeName}! We received your inquiry.`;
+
+    const studioDetails = [
+      `Name: ${safeName}`,
+      `Email: ${formData.email}`,
+      `Company: ${safeCompany}`,
+      `Phone: ${safePhone}`,
+      `Selected Service / Budget: ${safeSelectedService}`,
+      `Project Details: ${safeProjectDetails}`,
+    ].join("\n");
+
+    const studioTemplateParams = {
+      subject: studioSubject,
+      client_name: safeName,
+      client_email: formData.email,
+      email: formData.email,
+      client_company: safeCompany,
+      client_phone: safePhone,
+      selected_service: safeSelectedService,
+      project_details: safeProjectDetails,
+      full_details: studioDetails,
+    };
+
+    const clientTemplateParams = {
+      subject: clientSubject,
+      client_name: safeName,
+      client_email: formData.email,
+      email: formData.email,
+      selected_service: safeSelectedService,
+      project_details: safeProjectDetails,
+    };
+
+    try {
+      // Dono emails ek saath bhej rahe hain
+      await Promise.all([
+        // 1. Studio ko inquiry email
+        emailjs.send(
+          EMAILJS_SERVICE_ID,
+          EMAILJS_STUDIO_TEMPLATE_ID,
+          studioTemplateParams,
+          EMAILJS_PUBLIC_KEY
+        ),
+        // 2. Client ko auto thank you email
+        emailjs.send(
+          EMAILJS_SERVICE_ID,
+          EMAILJS_THANKYOU_TEMPLATE_ID,
+          clientTemplateParams,
+          EMAILJS_PUBLIC_KEY
+        ),
+      ]);
+
+      setStatus("success");
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        company: "",
+        selectedService: DEFAULT_SERVICE_MESSAGE,
+        projectDetails: "",
+      });
+    } catch (error) {
+      console.error("Failed to send emails via EmailJS:", error);
+      setStatus("error");
+    }
+  };
+
+  return (
+    <main 
+      ref={scrollContainerRef}
+      className="relative min-h-screen w-full overflow-x-hidden text-[#212121] font-Neue"
+    >
+      <div className="relative z-10">
+        <Navbar />
+
+        <section className="pt-32 pb-16 px-6 md:px-16 lg:px-24">
+          <p className="uppercase text-lg tracking-[0.45em] text-emerald-600 mb-6">
+            Contact
+          </p>
+          <h1 className="text-4xl md:text-8xl font-bold leading-tight max-w-7xl">
+            Tell us about the product, brand, or launch you&apos;re planning.
+          </h1>
+          <p className="mt-6 max-w-3xl text-lg text-slate-600">
+            We collaborate with founders and marketing teams worldwide. Choose the
+            channel that works for you and we&apos;ll set up a workshop within 48
+            hours.
+          </p>
+        </section>
+
+        <section className="pb-20 px-4 md:px-16 lg:px-24">
+          <div className="mx-auto grid gap-6 md:grid-cols-3">
+            {contactChannels.map((channel) => (
+              <article
+                key={channel.label}
+                className="group relative overflow-hidden rounded-[28px] border border-emerald-50 bg-gradient-to-br from-white via-white to-emerald-50 p-6 "
+              >
+                <div className="pl-4">
+                  <p className="text-xs font-semibold uppercase tracking-[0.45em] text-emerald-600 mb-3">
+                    {channel.label}
+                  </p>
+                  <p className="text-2xl font-semibold text-[#111] leading-tight break-words">
+                    {channel.value}
+                  </p>
+                  <p className="mt-3 text-sm text-slate-500 leading-relaxed">
+                    {channel.helper}
+                  </p>
+                </div>
+              </article>
+            ))}
+          </div>
+        </section>
+
+        <section id="contact-form" className="pb-20 px-4 md:px-16 lg:px-24">
+          <div className="rounded-[36px] border border-white/50 bg-gradient-to-br from-white via-white to-emerald-50 shadow-[0_35px_120px_rgba(15,23,42,0.15)] backdrop-blur-xl p-3 md:p-12 ">
+            <div className="grid gap-12 lg:grid-cols-[1.05fr_0.95fr]">
+              <div className="space-y-6 p-6">
+                <p className="uppercase text-sm tracking-[0.45em] text-emerald-600">
+                  Project Intake
+                </p>
+                <h2 className="text-3xl md:text-4xl font-bold leading-tight">
+                  Share the essentials, and we&apos;ll craft a tailored roadmap in under
+                  48 hours.
+                </h2>
+                <p className="text-lg text-slate-600">
+                  We pair your inputs with our pricing intelligence to send you a
+                  detailed scope, milestones, and payment schedule. The more context you
+                  give, the faster we can start building.
+                </p>
+                <div className="grid gap-3">
+                  <div className="flex items-center gap-3 rounded-2xl border border-slate-100 px-4 py-3 text-sm text-slate-600">
+                    <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-emerald-50 font-semibold text-emerald-700">
+                      1
+                    </span>
+                    Review pricing & pick a plan that matches your ambition.
+                  </div>
+                  <div className="flex items-center gap-3 rounded-2xl border border-slate-100 px-4 py-3 text-sm text-slate-600">
+                    <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-emerald-50 font-semibold text-emerald-700">
+                      2
+                    </span>
+                    Tell us about your team, timelines, and success metrics.
+                  </div>
+                  <div className="flex items-center gap-3 rounded-2xl border border-slate-100 px-4 py-3 text-sm text-slate-600">
+                    <span className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-emerald-50 font-semibold text-emerald-700">
+                      3
+                    </span>
+                    Receive a custom proposal plus a kickoff slot within two days.
+                  </div>
+                </div>
+              </div>
+
+              <form
+                onSubmit={handleSubmit}
+                className="rounded-[28px] border border-white/50 bg-white/65 p-6 md:p-8 space-y-6 shadow-[inset_0_0_30px_rgba(255,255,255,0.25)] backdrop-blur-xl"
+              >
+                <div>
+                  <label className="block text-sm font-semibold uppercase tracking-[0.35em] text-slate-500">
+                    Your Name
+                  </label>
+                  <input
+                    type="text"
+                    required
+                    value={formData.name}
+                    onChange={handleFieldChange("name")}
+                    placeholder="e.g. Your Name"
+                    className="mt-2 w-full rounded-2xl border border-emerald-100/80 bg-white/80 px-4 py-3 text-base text-slate-800 placeholder:text-slate-500 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-100"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold uppercase tracking-[0.35em] text-slate-500">
+                    Email Address
+                  </label>
+                  <input
+                    type="email"
+                    required
+                    value={formData.email}
+                    onChange={handleFieldChange("email")}
+                    placeholder="you@company.com"
+                    className="mt-2 w-full rounded-2xl border border-emerald-100/80 bg-white/80 px-4 py-3 text-base text-slate-800 placeholder:text-slate-500 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-100"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold uppercase tracking-[0.35em] text-slate-500">
+                    Phone Number
+                  </label>
+                  <input
+                    type="tel"
+                    value={formData.phone}
+                    onChange={handleFieldChange("phone")}
+                    placeholder="+91 1234567890"
+                    className="mt-2 w-full rounded-2xl border border-emerald-100/80 bg-white/80 px-4 py-3 text-base text-slate-800 placeholder:text-slate-500 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-100"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold uppercase tracking-[0.35em] text-slate-500">
+                    Company Name
+                  </label>
+                  <input
+                    type="text"
+                    value={formData.company}
+                    onChange={handleFieldChange("company")}
+                    placeholder="Brand, startup, or team name"
+                    className="mt-2 w-full rounded-2xl border border-emerald-100/80 bg-white/80 px-4 py-3 text-base text-slate-800 placeholder:text-slate-500 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-100"
+                  />
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold uppercase tracking-[0.35em] text-slate-500 mb-3">
+                    Selected Service &amp; Budget
+                  </label>
+                  <div className="rounded-[28px] border border-white/40 bg-white/65 px-5 py-4 backdrop-blur-xl">
+                    <div className="flex gap-4">
+                      <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-emerald-50 text-xl font-semibold text-emerald-700">
+                        ₹
+                      </div>
+                      <div className="flex-1 space-y-2">
+                        <textarea
+                          ref={selectedServiceRef}
+                          value={formData.selectedService}
+                          onChange={handleFieldChange("selectedService")}
+                          rows={1}
+                          className="w-full resize-none overflow-hidden border border-transparent bg-transparent text-lg font-semibold leading-relaxed text-slate-900 placeholder:text-slate-500 focus:border-none focus:outline-none focus:ring-0"
+                        />
+                        <p className="text-sm text-slate-500">
+                          {hasSeed
+                            ? "We pre-filled this from your selected plan. Adjust the amount or naming if you need something more tailored."
+                            : "Once you choose a plan, we’ll drop its title and quote right here for faster approvals."}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div>
+                  <label className="block text-sm font-semibold uppercase tracking-[0.35em] text-slate-500">
+                    Tell us about your project
+                  </label>
+                  <textarea
+                    rows={4}
+                    value={formData.projectDetails}
+                    onChange={handleFieldChange("projectDetails")}
+                    placeholder="Share goals, timelines, platforms, existing assets, or anything else you want us to know."
+                    className="mt-2 w-full rounded-3xl border border-emerald-100/80 bg-white/80 px-4 py-3 text-base text-slate-800 placeholder:text-slate-500 focus:border-emerald-500 focus:outline-none focus:ring-2 focus:ring-emerald-100"
+                  />
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={status === "submitting"}
+                  className="w-full rounded-3xl bg-emerald-600 px-6 py-4 text-lg font-semibold uppercase tracking-[0.3em] text-white transition-all duration-200 hover:bg-emerald-500 disabled:opacity-60"
+                >
+                  {status === "submitting" ? "Sending..." : "Send request"}
+                </button>
+
+                {status === "success" && (
+                  <p className="text-center text-sm font-medium text-emerald-600">
+                    Thanks! We&apos;ve received your request and sent you a confirmation email. We&apos;ll get back within 48 hours.
+                  </p>
+                )}
+                {status === "error" && (
+                  <p className="text-center text-sm font-medium text-red-500">
+                    Something went wrong. Please try again or email us directly at QalamWebStudio@gmail.com
+                  </p>
+                )}
+              </form>
+            </div>
+          </div>
+        </section>
+
+        <Connect />
+        <Footer />
+      </div>
+    </main>
+  );
+}
+
+export default function ContactPage() {
+  return (
+    <Suspense fallback={<div className="min-h-screen bg-white" />}>
+      <ContactPageContent />
+    </Suspense>
+  );
+}
