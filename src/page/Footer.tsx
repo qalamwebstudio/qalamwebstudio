@@ -5,7 +5,7 @@ import Link from 'next/link'
 const SocialLinks = React.memo(() => {
   const socialLinks = useMemo(() => [
     { href: "https://www.instagram.com/qalamwebstudio?igsh=cXRvazZzajd6ZGJv&utm_source=qr", label: "Instagram" },
-    { href: "https://behance.net", label: "Behance" },
+    { href: "_*https://www.behance.net/qalamwebstudio", label: "Behance" },
     { href: "https://www.linkedin.com/company/qalam-web-studio/", label: "LinkedIn" },
     { href: "https://wa.me/918141875116", label: "WhatsApp" },
   ], []);
