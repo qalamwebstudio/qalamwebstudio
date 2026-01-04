@@ -345,7 +345,7 @@ const pricingData: Record<PricingCategoryKey, PricingCategory> = {
     plans: [
       {
         name: "Logo Design",
-        price: "₹2,000 – ₹5,000",
+        price: "₹1,500 – ₹5,000",
         details: [
           "Custom logo concepts based on brand understanding",
           "Multiple revisions for final refinement",
