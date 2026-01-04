@@ -21,7 +21,7 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   metadataBase: new URL("https://qalamwebstudio.online"),
   title: "QalamWebStudio - IT Services & Digital Solutions",
-  description: "Empowering startups and growing businesses with cutting-edge web development, mobile apps, and digital solutions. Transform your ideas into scalable digital products.",
+  description: "Empowering startups and growing businesses with cutting-edge web development, mobile apps, and digital solutions. Transform ideas into scalable products.",
   keywords: ["web development", "mobile app development"," Desktop Software. development"," Business custom Software development"," Startup kit", "Logo & branding", "Brand cards & marketing", "White-label services", "IT services", "digital solutions", "startup", "business"],
   authors: [{ name: "QalamWebStudio Team" }],
   creator: "QalamWebStudio",
