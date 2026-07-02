@@ -18,25 +18,25 @@ const coreTeam: CoreTeamMember[] = [
   {
     id: 1,
     name: "Sarbaz Malek",
-    role: "Founder & CEO — Leads company vision, strategy, decision-making, and scalable system architecture and Graphic designer",
+    role: ", strategy, decision-making, and scalable system architecture and Graphic designer",
     image: "/sarbaz.jpg",
   },
   {
     id: 2,
     name: "Parihar Madhukar",
-    role: "Co-Founder & CTO — Owns frontend architecture, scalable system design, API integration & performance",
+    role: "Owns frontend architecture, scalable system design, API integration & performance",
     image: "/madhukar.png",
   },
   {
     id: 3,
     name: "Virpal Sinh",
-    role: "Chief AI Officer (CAIO) — Leads AI strategy, machine learning architecture, and intelligent automation systems",
+    role: "Leads AI strategy, machine learning architecture, and intelligent automation systems",
     image: "/virpal.png",
   },
   {
     id: 4,
     name: "Taxil Prajapati",
-    role: "Chief Marketing Officer (CMO) & Chief Operations Officer (COO) — Drives marketing strategy, brand growth, and operational execution",
+    role: "Drives marketing strategy, brand growth, and operational execution",
     image: "/takshil.png",
   },
 ];
